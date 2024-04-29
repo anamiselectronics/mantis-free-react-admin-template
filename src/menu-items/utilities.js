@@ -22,37 +22,51 @@ const icons = {
 
 const utilities = {
   id: 'utilities',
-  title: 'Utilities',
+  title: 'امکانات',
   type: 'group',
   children: [
     {
       id: 'util-typography',
-      title: 'Typography',
+      title: 'گزارش گیری',
       type: 'item',
       url: '/typography',
       icon: icons.FontSizeOutlined
     },
     {
       id: 'util-color',
-      title: 'Color',
+      title: 'آمار',
       type: 'item',
       url: '/color',
       icon: icons.BgColorsOutlined
     },
     {
       id: 'util-shadow',
-      title: 'Shadow',
+      title: 'نمایش زنده',
       type: 'item',
       url: '/shadow',
       icon: icons.BarcodeOutlined
     },
     {
       id: 'ant-icons',
-      title: 'Ant Icons',
+      title: 'مدیریت دوربین',
       type: 'item',
       url: '/icons/ant',
       icon: icons.AntDesignOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'util-shadow',
+      title: 'مدیریت کاربران',
+      type: 'item',
+      url: '/shadow',
+      icon: icons.BarcodeOutlined
+    },
+    {
+      id: 'util-shadow',
+      title: 'مدیریت افراد مجاز',
+      type: 'item',
+      url: '/shadow',
+      icon: icons.BarcodeOutlined
     }
   ]
 };

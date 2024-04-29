@@ -65,6 +65,9 @@ const Typography = (fontFamily) => ({
   },
   button: {
     textTransform: 'capitalize'
+  },
+  direction: {
+    direction: 'rtl'
   }
 });
 

@@ -33,6 +33,8 @@ const MainDrawer = ({ open, handleDrawerToggle, window }) => {
         </MiniDrawerStyled>
       ) : (
         <Drawer
+          backgroundColor="black"
+          dir="rtl"
           container={container}
           variant="temporary"
           open={open}

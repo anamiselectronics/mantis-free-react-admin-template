@@ -31,7 +31,7 @@ export default function ThemeCustomization({ children }) {
           xl: 1536
         }
       },
-      direction: 'ltr',
+      direction: 'rtl',
       mixins: {
         toolbar: {
           minHeight: 60,
