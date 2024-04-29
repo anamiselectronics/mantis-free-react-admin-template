@@ -16,14 +16,14 @@ const support = {
   children: [
     {
       id: 'sample-page',
-      title: 'Sample Page',
+      title: 'درباره ما',
       type: 'item',
       url: '/sample-page',
       icon: icons.ChromeOutlined
     },
     {
       id: 'documentation',
-      title: 'Documentation',
+      title: 'درباره ما',
       type: 'item',
       url: 'https://codedthemes.gitbook.io/mantis/',
       icon: icons.QuestionOutlined,

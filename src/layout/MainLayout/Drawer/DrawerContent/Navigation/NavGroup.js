@@ -17,12 +17,12 @@ const NavGroup = ({ item }) => {
     switch (menuItem.type) {
       case 'collapse':
         return (
-          <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }}>
+          <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }} dir="rtl">
             collapse - only available in paid version
           </Typography>
         );
       case 'item':
-        return <NavItem key={menuItem.id} item={menuItem} level={1} />;
+        return <NavItem key={menuItem.id} item={menuItem} level={5} />;
       default:
         return (
           <Typography key={menuItem.id} variant="h6" color="error" align="center">

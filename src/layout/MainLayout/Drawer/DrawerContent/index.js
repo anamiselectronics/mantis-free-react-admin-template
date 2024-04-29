@@ -10,7 +10,8 @@ const DrawerContent = () => (
     sx={{
       '& .simplebar-content': {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        
       }
     }}
   >
