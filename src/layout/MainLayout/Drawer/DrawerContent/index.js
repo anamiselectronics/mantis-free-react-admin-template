@@ -11,10 +11,12 @@ const DrawerContent = () => (
       '& .simplebar-content': {
         display: 'flex',
         flexDirection: 'column',
-        
+        position: 'relative',
+        direction: "rtl"
       }
     }}
   >
+    <span>hello</span>
     <Navigation />
     <NavCard />
   </SimpleBar>

@@ -14,13 +14,15 @@ const RootStyle = styled(BrowserView)({
   height: '100%',
   overflow: 'hidden',
   backgroundColor: 'pink',
-  // direction: 'rtl',
-  alignItem: 'right'
+  position: 'relative',
+  direction: 'rtl'
 });
 
 // scroll bar wrapper
 const SimpleBarStyle = styled(SimpleBar)(({ theme }) => ({
   maxHeight: '100%',
+  position: 'relative',
+  direction: 'rtl',
   '& .simplebar-scrollbar': {
     '&:before': {
       backgroundColor: alpha(theme.palette.grey[500], 0.48)
@@ -45,13 +47,14 @@ const SimpleBarStyle = styled(SimpleBar)(({ theme }) => ({
 export default function SimpleBarScroll({ children, sx, ...other }) {
   return (
     <>
-      <RootStyle dir="rtl">
-        <SimpleBarStyle timeout={500} clickOnTrack={false} sx={sx} {...other} dir="rtl">
+      <RootStyle>
+        <span>hi</span>
+        <SimpleBarStyle timeout={500} clickOnTrack={false} sx={sx} {...other}>
           {children}
         </SimpleBarStyle>
       </RootStyle>
       <MobileView>
-        <Box sx={{ overflowX: 'auto', ...sx }} {...other} dir="rtl">
+        <Box sx={{ overflowX: 'auto', ...sx }} {...other}>
           {children}
         </Box>
       </MobileView>
