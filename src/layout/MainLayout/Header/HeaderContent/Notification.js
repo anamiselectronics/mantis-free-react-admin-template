@@ -39,7 +39,7 @@ const actionSX = {
   ml: 1,
   top: 'auto',
   right: 'auto',
-  alignSelf: 'flex-start',
+  alignSelf: 'flex-end',
 
   transform: 'none'
 };

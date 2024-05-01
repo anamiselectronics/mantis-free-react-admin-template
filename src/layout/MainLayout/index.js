@@ -45,7 +45,8 @@ const MainLayout = () => {
   }, [drawerOpen]);
 
   return (
-    <Box sx={{ display: 'flex', width: '100%', direction: 'rtl' }} backgroundColor="blue">
+    //صفحه بدنه و تنظیمات آن
+    <Box sx={{ display: 'flex', width: '100%', direction: 'rtl' }}>
       <Header open={open} handleDrawerToggle={handleDrawerToggle} />
       <Drawer open={open} handleDrawerToggle={handleDrawerToggle} />
       <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 2, sm: 3 } }}>
