@@ -6,7 +6,9 @@ import { Stack, Chip } from '@mui/material';
 
 // project import
 import DrawerHeaderStyled from './DrawerHeaderStyled';
-import Logo from 'components/Logo';
+import Logo from 'components/Logo/logo.png';
+
+
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -17,11 +19,12 @@ const DrawerHeader = ({ open }) => {
     // only available in paid version
     <DrawerHeaderStyled theme={theme} open={open}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <Logo />
+        {/* <Logo /> */}
+        <img src={Logo} alt='Logo' style={{height:'36px', width:'36px', marginRight:'7px'}} />
         <Chip
-          label={process.env.REACT_APP_VERSION}
+          label="گمبروتک"
           size="small"
-          sx={{ height: 16, '& .MuiChip-label': { fontSize: '0.625rem', py: 0.25 } }}
+          sx={{ height: 20, '& .MuiChip-label': { fontSize: '1rem', py:1 , fontWeight:600} }}
           component="a"
           href="https://github.com/codedthemes/mantis-free-react-admin-template"
           target="_blank"
