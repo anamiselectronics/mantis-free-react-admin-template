@@ -55,7 +55,7 @@ const blue = {
 };
 
 const Tab = styled(BaseTab)`
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: Vazirmatn;
   color: white;
   cursor: pointer;
   font-size: 0.875rem;
@@ -92,12 +92,13 @@ const Tab = styled(BaseTab)`
 
 const TabPanel = styled(BaseTabPanel)`
   width: 100%;
-  font-family: 'IBM Plex Sans', sans-serif;
+ 
   font-size: 0.875rem;
 `;
 
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
+  font-family: Vazirmatn;
   min-width: 400px;
   background-color: ${blue[500]};
   border-radius: 12px;
@@ -106,7 +107,7 @@ const TabsList = styled(BaseTabsList)(
   align-items: center;
   justify-content: center;
   align-content: space-between;
-  box-shadow: 0px 4px 6px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
+  box-shadow: 0px 4px 6px ${theme.palette.mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
   `
 );
 

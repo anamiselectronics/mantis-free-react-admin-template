@@ -95,7 +95,7 @@ const NavItem = ({ item, level }) => {
               width: 36,
               height: 36,
               alignItems: 'center',
-              justifyContent: 'centerri',
+              justifyContent: 'center',
               '&:hover': {
                 bgcolor: 'secondary.lighter'
               }

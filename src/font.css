@@ -1,0 +1,80 @@
+/* ----------------------------- Vazirmatn ----------------------------- */
+@font-face {
+    font-family: Vazirmatn;
+    font-style: light;
+    font-weight: 300;
+    src: url("./font/Vazirmatn-Light.ttf")
+        format("embedded-opentype");
+    
+ }
+
+ @font-face {
+    font-family: Vazirmatn;
+    font-style: normal;
+    font-weight: 400;
+    src: url("./font/Vazirmatn-Regular.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: thin;
+    font-weight: 100;
+    src: url("./font/Vazirmatn-Thin.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: extraLight;
+    font-weight: 200;
+    src: url("./font/Vazirmatn-ExtraLight.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    src: url("./font/Vazirmatn-Black.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: Bold;
+    font-weight: 700;
+    src: url("./font/Vazirmatn-Bold.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: extraBold;
+    font-weight: 800;
+    src: url("./font/Vazirmatn-ExtraBold.ttf")
+        format("embedded-opentype");
+      
+  }
+
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: medium;
+    font-weight: 500;
+    src: url("./font/Vazirmatn-Medium.ttf")
+        format("embedded-opentype");
+      
+  }
+  
+  @font-face {
+    font-family: Vazirmatn;
+    font-style: semiBold;
+    font-weight: 600;
+    src: url("./font/Vazirmatn-SemiBold.ttf")
+        format("embedded-opentype");
+      
+  }
+ 
