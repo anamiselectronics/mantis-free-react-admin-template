@@ -5,15 +5,25 @@ import { TabsList as BaseTabsList } from '@mui/base/TabsList';
 import { TabPanel as BaseTabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
-// project import
-// import ComponentSkeleton from './ComponentSkeleton';
 
 //asset
-// import { UserOutlined } from '@ant-design/icons';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import { AccessAlarm, ThreeDRotation, AccountBalanceWalletOutlined  } from '@mui/icons-material';
 
-// ==============================|| COMPONENTS - TYPOGRAPHY ||============================== //
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import {
+  RepeatOneOutlined,
+  QueryBuilderOutlined,
+  CorporateFare,
+  ImportExportOutlined,
+  CasesOutlined,
+  CallSplitOutlined,
+  MoneyOutlined,
+  EmojiTransportationOutlined,
+  SpeedOutlined,
+  DirectionsCarOutlined,
+  ReportGmailerrorred
+} from '@mui/icons-material';
+
+// ==============================|| TabList - SearchPage ||============================== //
 
 const ComponentTypography = () => {
   return (
@@ -21,30 +31,70 @@ const ComponentTypography = () => {
       <TabsList>
         <Tab value={1}>
           <ListItemDecorator>
-            <AccountBalanceWalletOutlined />
+            <CorporateFare sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           سامانه
         </Tab>
         <Tab value={2}>
           <ListItemDecorator>
-            <ThreeDRotation sx={{ fontSize: 30, paddingLeft: 0.5 }} />
+            <QueryBuilderOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           تاریخ و ساعت
         </Tab>
         <Tab value={3}>
           <ListItemDecorator>
-            <AccessAlarm />
+            <ImportExportOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           جهت
         </Tab>
-        <Tab value={4}>شماره خط</Tab>
-        <Tab value={5}>امکانات</Tab>
-        <Tab value={6}>دیگر</Tab>
-        <Tab value={7}>پلاک</Tab>
-        <Tab value={8}>استان</Tab>
-        <Tab value={9}>سرعت</Tab>
-        <Tab value={10}>خودرو</Tab>
-        <Tab value={11}>تخلف</Tab>
+        <Tab value={4}>
+          <ListItemDecorator>
+            <RepeatOneOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          شماره خط
+        </Tab>
+        <Tab value={5}>
+          <ListItemDecorator>
+            <CasesOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          امکانات
+        </Tab>
+        <Tab value={6}>
+          <ListItemDecorator>
+            <CallSplitOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          دیگر
+        </Tab>
+        <Tab value={7}>
+          <ListItemDecorator>
+            <MoneyOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          پلاک
+        </Tab>
+        <Tab value={8}>
+          <ListItemDecorator>
+            <EmojiTransportationOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          استان
+        </Tab>
+        <Tab value={9}>
+          <ListItemDecorator>
+            <SpeedOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          سرعت
+        </Tab>
+        <Tab value={10}>
+          <ListItemDecorator>
+            <DirectionsCarOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          خودرو
+        </Tab>
+        <Tab value={11}>
+          <ListItemDecorator>
+            <ReportGmailerrorred sx={{ fontSize: 25, paddingLeft: 0.4 }} />
+          </ListItemDecorator>
+          تخلف
+        </Tab>
       </TabsList>
       <TabPanel value={1}>First page</TabPanel>
       <TabPanel value={2}>Second page</TabPanel>
@@ -82,8 +132,8 @@ const Tab = styled(BaseTab)`
   font-weight: bold;
   background-color: transparent;
   width: 100%;
-  line-height: 1.5;
-  padding: 8px 12px;
+  line-height: 2;
+  padding: 8px 5px;
   margin: 6px;
   border: none;
   border-radius: 8px;
