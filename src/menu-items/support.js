@@ -1,10 +1,10 @@
 // assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined, UserOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-  ChromeOutlined,
-  QuestionOutlined
+  UsergroupAddOutlined,
+  UserOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -16,19 +16,19 @@ const support = {
   children: [
     {
       id: 'sample-page',
-      title: 'درباره ما',
+      title: 'مدیریت کاربران',
       type: 'item',
       url: '/sample-page',
-      icon: icons.ChromeOutlined
+      icon: icons.UsergroupAddOutlined
     },
     {
       id: 'documentation',
-      title: 'درباره ما',
+      title: 'افراد مجاز',
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/',
-      icon: icons.QuestionOutlined,
-      external: true,
-      target: true
+      url: '/sample-page',
+      icon: icons.UserOutlined
+      // external: true,
+      // target: true
     }
   ]
 };

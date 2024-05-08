@@ -8,8 +8,6 @@ import { Stack, Chip } from '@mui/material';
 import DrawerHeaderStyled from './DrawerHeaderStyled';
 import Logo from 'components/Logo/logo.png';
 
-
-
 // ==============================|| DRAWER HEADER ||============================== //
 
 const DrawerHeader = ({ open }) => {
@@ -20,11 +18,11 @@ const DrawerHeader = ({ open }) => {
     <DrawerHeaderStyled theme={theme} open={open}>
       <Stack direction="row" spacing={1} alignItems="center">
         {/* <Logo /> */}
-        <img src={Logo} alt='Logo' style={{height:'36px', width:'36px', marginRight:'7px'}} />
+        <img src={Logo} alt="Logo" style={{ height: '36px', width: '36px', marginRight: '7px' }} />
         <Chip
           label="گمبروتک"
           size="small"
-          sx={{ height: 20, '& .MuiChip-label': { fontSize: '1rem', py:1 , fontWeight:600} }}
+          sx={{ height: 20, '& .MuiChip-label': { fontSize: '1rem', py: 1, fontWeight: 600 } }}
           component="a"
           href="https://github.com/codedthemes/mantis-free-react-admin-template"
           target="_blank"

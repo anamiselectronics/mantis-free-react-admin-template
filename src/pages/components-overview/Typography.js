@@ -8,15 +8,35 @@ import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 // project import
 // import ComponentSkeleton from './ComponentSkeleton';
 
+//asset
+// import { UserOutlined } from '@ant-design/icons';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import { AccessAlarm, ThreeDRotation, AccountBalanceWalletOutlined  } from '@mui/icons-material';
+
 // ==============================|| COMPONENTS - TYPOGRAPHY ||============================== //
 
 const ComponentTypography = () => {
   return (
     <Tabs defaultValue={1}>
       <TabsList>
-        <Tab value={1}>سامانه</Tab>
-        <Tab value={2}>تاریخ و ساعت</Tab>
-        <Tab value={3}>جهت</Tab>
+        <Tab value={1}>
+          <ListItemDecorator>
+            <AccountBalanceWalletOutlined />
+          </ListItemDecorator>
+          سامانه
+        </Tab>
+        <Tab value={2}>
+          <ListItemDecorator>
+            <ThreeDRotation sx={{ fontSize: 30, paddingLeft: 0.5 }} />
+          </ListItemDecorator>
+          تاریخ و ساعت
+        </Tab>
+        <Tab value={3}>
+          <ListItemDecorator>
+            <AccessAlarm />
+          </ListItemDecorator>
+          جهت
+        </Tab>
         <Tab value={4}>شماره خط</Tab>
         <Tab value={5}>امکانات</Tab>
         <Tab value={6}>دیگر</Tab>
@@ -69,6 +89,8 @@ const Tab = styled(BaseTab)`
   border-radius: 8px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 
   &:hover {
     background-color: ${blue[400]};
@@ -92,8 +114,9 @@ const Tab = styled(BaseTab)`
 
 const TabPanel = styled(BaseTabPanel)`
   width: 100%;
- 
   font-size: 0.875rem;
+  overflow-x: auto; /* Add horizontal scrolling */
+  white-space: nowrap; /* Prevent text wrapping */
 `;
 
 const TabsList = styled(BaseTabsList)(
@@ -104,10 +127,10 @@ const TabsList = styled(BaseTabsList)(
   border-radius: 12px;
   margin-bottom: 16px;
   display: flex;
+  justify-content:center;
   align-items: center;
-  justify-content: center;
-  align-content: space-between;
   box-shadow: 0px 4px 6px ${theme.palette.mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
+  white-space: nowrap;
   `
 );
 

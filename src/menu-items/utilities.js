@@ -2,17 +2,17 @@
 import {
   AppstoreAddOutlined,
   AntDesignOutlined,
-  BarcodeOutlined,
-  BgColorsOutlined,
-  FontSizeOutlined,
+  PlaySquareOutlined,
+  ProjectOutlined,
+  BarChartOutlined,
   LoadingOutlined
 } from '@ant-design/icons';
 
 // icons
 const icons = {
-  FontSizeOutlined,
-  BgColorsOutlined,
-  BarcodeOutlined,
+  BarChartOutlined,
+  ProjectOutlined,
+  PlaySquareOutlined,
   AntDesignOutlined,
   LoadingOutlined,
   AppstoreAddOutlined
@@ -22,7 +22,7 @@ const icons = {
 
 const utilities = {
   id: 'utilities',
-  title: 'امکانات',
+  title: 'Utilities',
   type: 'group',
   children: [
     {
@@ -30,21 +30,21 @@ const utilities = {
       title: 'گزارش گیری',
       type: 'item',
       url: '/typography',
-      icon: icons.FontSizeOutlined
+      icon: icons.BarChartOutlined
     },
     {
       id: 'util-color',
       title: 'آمار',
       type: 'item',
       url: '/color',
-      icon: icons.BgColorsOutlined
+      icon: icons.ProjectOutlined
     },
     {
       id: 'util-shadow',
       title: 'نمایش زنده',
       type: 'item',
       url: '/shadow',
-      icon: icons.BarcodeOutlined
+      icon: icons.PlaySquareOutlined
     },
     {
       id: 'ant-icons',
@@ -53,20 +53,6 @@ const utilities = {
       url: '/icons/ant',
       icon: icons.AntDesignOutlined,
       breadcrumbs: false
-    },
-    {
-      id: 'util-shadow',
-      title: 'مدیریت کاربران',
-      type: 'item',
-      url: '/shadow',
-      icon: icons.BarcodeOutlined
-    },
-    {
-      id: 'util-shadow',
-      title: 'مدیریت افراد مجاز',
-      type: 'item',
-      url: '/shadow',
-      icon: icons.BarcodeOutlined
     }
   ]
 };
