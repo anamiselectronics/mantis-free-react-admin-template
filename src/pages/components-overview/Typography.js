@@ -23,12 +23,16 @@ import {
   ReportGmailerrorred
 } from '@mui/icons-material';
 
+//Import Component
+import TimeDate from 'pages/reportPages/timeDate';
+
+
 // ==============================|| TabList - SearchPage ||============================== //
 
 const ComponentTypography = () => {
   return (
     <Tabs defaultValue={1}>
-      <TabsList>
+      <TabsList container>
         <Tab value={1}>
           <ListItemDecorator>
             <CorporateFare sx={{ fontSize: 25, paddingLeft: 0.4 }} />
@@ -97,7 +101,9 @@ const ComponentTypography = () => {
         </Tab>
       </TabsList>
       <TabPanel value={1}>First page</TabPanel>
-      <TabPanel value={2}>Second page</TabPanel>
+      <TabPanel value={2}>
+        <TimeDate />
+      </TabPanel>
       <TabPanel value={3}>Third page</TabPanel>
       <TabPanel value={4}>Four page</TabPanel>
       <TabPanel value={5}>Five page</TabPanel>
@@ -165,13 +171,14 @@ const Tab = styled(BaseTab)`
 const TabPanel = styled(BaseTabPanel)`
   width: 100%;
   font-size: 0.875rem;
-  overflow-x: auto; /* Add horizontal scrolling */
   white-space: nowrap; /* Prevent text wrapping */
+  over-flow: hidden;
 `;
 
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
   font-family: Vazirmatn;
+  font-size: 0.875rem;
   min-width: 400px;
   background-color: ${blue[500]};
   border-radius: 12px;
