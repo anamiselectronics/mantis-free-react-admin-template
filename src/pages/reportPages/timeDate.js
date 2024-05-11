@@ -7,8 +7,8 @@ import DatePicker from './datePicker';
 
 function TimeDate() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
+    <Box sx={{ flexGrow: 1 }} xs={12}>
+      <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
         <Grid item xs={12} sm={6} disableEqualOverflow="true">
           <Box
             item
@@ -34,7 +34,7 @@ function TimeDate() {
             <DatePicker />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6} disableEqualOverflow="true">
+        {/* <Grid item xs={12} sm={6} disableEqualOverflow="true">
           <Box
             item
             xs={12}
@@ -56,7 +56,7 @@ function TimeDate() {
               }
             }}
           ></Box>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );
