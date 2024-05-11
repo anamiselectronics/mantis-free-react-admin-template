@@ -25,14 +25,15 @@ import {
 
 //Import Component
 import TimeDate from 'pages/reportPages/timeDate';
-
+import Direction from 'pages/reportPages/direction';
+import System from 'pages/reportPages/system';
 
 // ==============================|| TabList - SearchPage ||============================== //
 
 const ComponentTypography = () => {
   return (
-    <Tabs defaultValue={1}>
-      <TabsList container>
+    <Tabs defaultValue={1} container>
+      <TabsList container xs={12}>
         <Tab value={1}>
           <ListItemDecorator>
             <CorporateFare sx={{ fontSize: 25, paddingLeft: 0.4 }} />
@@ -100,11 +101,15 @@ const ComponentTypography = () => {
           تخلف
         </Tab>
       </TabsList>
-      <TabPanel value={1}>First page</TabPanel>
+      <TabPanel value={1}>
+        <System />
+      </TabPanel>
       <TabPanel value={2}>
         <TimeDate />
       </TabPanel>
-      <TabPanel value={3}>Third page</TabPanel>
+      <TabPanel value={3}>
+        <Direction />
+      </TabPanel>
       <TabPanel value={4}>Four page</TabPanel>
       <TabPanel value={5}>Five page</TabPanel>
       <TabPanel value={6}>Six page</TabPanel>
