@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import { Typography } from '@mui/material';
 
-function Direction() {
+function LineNumber() {
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
@@ -28,12 +28,12 @@ function Direction() {
               }
             }}
           >
-            <FormGroup>
+            <FormGroup row>
               <FormControlLabel
                 control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
                 label={
                   <Typography variant="h5" color="secondary.600">
-                    بالا به پایین
+                    1
                   </Typography>
                 }
               />
@@ -41,7 +41,39 @@ function Direction() {
                 control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
                 label={
                   <Typography variant="h5" color="secondary.600">
-                    بالا به پایین
+                    2
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
+                label={
+                  <Typography variant="h5" color="secondary.600">
+                    3
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
+                label={
+                  <Typography variant="h5" color="secondary.600">
+                    4
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
+                label={
+                  <Typography variant="h5" color="secondary.600">
+                    5
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />}
+                label={
+                  <Typography variant="h5" color="secondary.600">
+                    6
                   </Typography>
                 }
               />
@@ -53,4 +85,4 @@ function Direction() {
   );
 }
 
-export default Direction;
+export default LineNumber;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 
 function System() {
   return (
@@ -26,7 +27,9 @@ function System() {
                 bgcolor: 'primary.200'
               }
             }}
-          ></Box>
+          >
+            <Typography variant="h4" color='secondary.600'>به سامانه پلاک خوانی هوشمند خوش آمدید</Typography>
+          </Box>
         </Grid>
       </Grid>
     </Box>

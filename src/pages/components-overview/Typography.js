@@ -27,6 +27,8 @@ import {
 import TimeDate from 'pages/reportPages/timeDate';
 import Direction from 'pages/reportPages/direction';
 import System from 'pages/reportPages/system';
+import LineNumber from 'pages/reportPages/lineNumber';
+import Possibilities from 'pages/reportPages/possibilities';
 
 // ==============================|| TabList - SearchPage ||============================== //
 
@@ -110,8 +112,12 @@ const ComponentTypography = () => {
       <TabPanel value={3}>
         <Direction />
       </TabPanel>
-      <TabPanel value={4}>Four page</TabPanel>
-      <TabPanel value={5}>Five page</TabPanel>
+      <TabPanel value={4}>
+        <LineNumber />
+      </TabPanel>
+      <TabPanel value={5}>
+        <Possibilities />
+      </TabPanel>
       <TabPanel value={6}>Six page</TabPanel>
       <TabPanel value={7}>Seven page</TabPanel>
       <TabPanel value={8}>Eight page</TabPanel>
