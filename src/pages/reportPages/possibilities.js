@@ -2,13 +2,14 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 
 //Child
-import PosiibilitySection1 from './posiibilitySection1';
+import PosiibilitySection1 from './posibilitySection1';
+import PosiibilitySection2 from './posibilitySection2';
 
 function Possibilities() {
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
-        <Grid item xs={12} sm={6} disableEqualOverflow="true">
+        <Grid item xs={12} sm={6}>
           <Box
             item
             xs={12}
@@ -56,7 +57,9 @@ function Possibilities() {
                 bgcolor: 'primary.200'
               }
             }}
-          ></Box>
+          >
+            <PosiibilitySection2/>
+          </Box>
         </Grid>
       </Grid>
     </Box>
