@@ -5,10 +5,24 @@ import { FormControl, FormHelperText, OutlinedInput, TextField, Divider } from '
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import MaskedInput from 'react-text-mask';
+import plate from '../../assets/images/pages/plate.png';
 
 export default function PosibilitySection2() {
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <MaskedInput
+        guide={true}
+        mask={[' ', /\d/, ' ', /\d/, ' ', ' ', /[ا-ی]/, ' ', ' ', /\d/, ' ', /\d/, ' ', /\d/, ' ']}
+        style={{
+          fontSize: '1.5rem',
+          backgroundImage: `url(${plate})`,
+          objectFit: 'fill',
+          height: '30%'
+        }}
+        height={40}
+        showMask
+        autoFocus
+      />
       <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
         <OutlinedInput
           id="outlined-adornment-weight"
@@ -27,6 +41,7 @@ export default function PosibilitySection2() {
                 size="small"
                 inputProps={{ maxLength: 2 }}
                 sx={{ alignItem: 'left', width: '40%' }}
+                inputComponent={MaskedInput}
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             </InputAdornment>
@@ -36,15 +51,9 @@ export default function PosibilitySection2() {
             'aria-label': 'weight',
             maxLength: 6
           }}
+          sx={{backgroundImage: `url(${plate})`,}}
         />
-        <MaskedInput
-          guide={true}
-          mask={[ ' ', /\d/, ' ', /\d/, ' ', ' ', /[ا-ی]/, ' ', ' ', /\d/, ' ', /\d/, ' ', /\d/, ' ']}
-          style={{ fontSize: '1.5rem' }}
-          showMask
-          autoFocus
-          dir=""
-        />
+
         <FormHelperText id="outlined-weight-helper-text">پلاک ملی</FormHelperText>
       </FormControl>
     </Box>
