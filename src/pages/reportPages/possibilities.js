@@ -14,7 +14,7 @@ function Possibilities() {
             item
             xs={12}
             sm={6}
-            height={250}
+            minHeight={{ xs: 'auto', sm: 250 }}
             my={4}
             display="grid"
             alignItems="center"
@@ -41,7 +41,7 @@ function Possibilities() {
             item
             xs={12}
             sm={6}
-            height={200}
+            minHeight={{ xs: 'auto', sm: 200 }}
             my={4}
             display="grid"
             alignItems="center"

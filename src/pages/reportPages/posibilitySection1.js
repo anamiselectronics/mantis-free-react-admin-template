@@ -61,14 +61,14 @@ function PosiibilitySection1() {
               <Divider sx={style} />
 
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} spacing={2}> 
+                <Grid item xs={6} sm={6}> 
                   <FormGroup variant="h2" color="secondary.600" style={{ marginTop: '-20px' }}>
                     <FormControlLabel control={<Switch defaultChecked size="small" />} label="مشخص" size="small" />
                     <FormControlLabel control={<Switch size="small" />} label="دقیق" />
                     <FormControlLabel control={<Switch size="small" />} label="موجود" size="small" />
                   </FormGroup>
                 </Grid>
-                <Grid item xs={12} sm={6} spacing={2}>
+                <Grid item xs={6} sm={6}>
                   <FormGroup variant="h2" color="secondary.600" style={{ marginTop: '-20px' }}>
                     <FormControlLabel control={<Switch size="small" />} label="پلاک تکراری" size="small" />
                     <FormControlLabel control={<Switch size="small" />} label="مخدوش" size="small" />
