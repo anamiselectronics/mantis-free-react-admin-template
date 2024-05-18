@@ -8,56 +8,90 @@ import MaskedInput from 'react-text-mask';
 import plate from '../../assets/images/pages/plate.png';
 
 export default function PosibilitySection2() {
+  const convertToPersian = (input, cursorPosition) => {
+    // Define mappings for English characters to Farsi characters
+    const charMap = {
+      a: 'ا',
+      b: 'ب',
+      c: 'س',
+      d: 'د'
+      // Add more mappings as needed...
+    }; // Replace English characters with Farsi characters
+    const convertedValue = input.replace(/[a-z]/gi, (match) => charMap[match.toLowerCase()] || match);
+
+    // Restore cursor position
+    const newPosition = cursorPosition + (convertedValue.length - input.length);
+    return { value: convertedValue, position: newPosition };
+  };
+
+  // State to hold input value and cursor position
+  const [inputValue, setInputValue] = React.useState('');
+  const [cursorPosition, setCursorPosition] = React.useState(0);
+
+  const handleInputChange = (e) => {
+    const newPosition = e.target.selectionStart;
+    const converted = convertToPersian(e.target.value, newPosition);
+    setInputValue(converted.value);
+    setCursorPosition(converted.position);
+  };
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
-      <Grid item xs={6} sm={6}>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <MaskedInput
-            guide={true}
-            mask={[
-              ' ',
-              ' ',
-              /\d/,
-              ' ',
-              /\d/,
-              ' ',
-              ' ',
-              ' ',
-              ' ',
-              /\d/,
-              ' ',
-              /\d/,
-              ' ',
-              /\d/,
-              ' ',
-              ' ',
-              /[ا-یA-Z]/,
-              ' ',
-              ' ',
-              /\d/,
-              ' ',
-              /\d/,
-              ' ',
-              ' '
-            ]}
-            style={{
-              fontSize: '1.5rem',
-              backgroundImage: `url(${plate})`,
-              objectFit: 'fill',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              minHeight: '9vh',
-              minWidth: '20vw',
-              direction: 'rtl',
-              textAlign: 'right',
-              paddingRight: '6px',
-              marginRight: '8vw'
-            }}
-            showMask
-            autoFocus
-          />
-        </FormControl>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12} sm={8} md={6} lg={4}>
+          <FormControl variant="outlined" style={{width:'16rem'}}>
+            <MaskedInput
+              guide={true}
+              mask={[
+                // ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                /[ا-یa-z]/,
+                ' ',
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                ' ',
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                ' '
+              ]}
+              style={{
+                unicodeBidi: 'bidi-override',
+                fontSize: '1.5rem',
+                backgroundImage: `url(${plate})`,
+                objectFit: 'fill',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                minHeight: '9vh',
+                direction: 'ltr',
+                textAlign: 'center',
+                paddingLeft: '4vw'
+              }}
+              showMask
+              autoFocus
+              value={inputValue}
+              onChange={handleInputChange}
+              inputRef={(input) => {
+                if (input && cursorPosition !== null) {
+                  input.selectionStart = input.selectionEnd = cursorPosition;
+                }
+              }}
+            />
+          </FormControl>
+        </Grid>
       </Grid>
       {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
         <OutlinedInput

@@ -31,7 +31,7 @@ function Possibilities() {
               }
             }}
           >
-            <PosiibilitySection1/>
+            <PosiibilitySection1 />
           </Box>
         </Grid>
       </Grid>
@@ -58,7 +58,7 @@ function Possibilities() {
               }
             }}
           >
-            <PosiibilitySection2/>
+            <PosiibilitySection2 />
           </Box>
         </Grid>
       </Grid>
