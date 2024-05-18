@@ -28,6 +28,8 @@ function PosiibilitySection1() {
       <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
         <Grid item xs={12} sm={6} disableEqualOverflow="true">
           <FormGroup row spacing={5} style={styleForm}>
+
+            {/* adjust type of plate's car selection  */}
             <Box contanier my={2} gap={4} p={2} sx={styleBox}>
               <Typography variant="h5" color="secondary.600">
                 نوع پلاک
@@ -56,12 +58,13 @@ function PosiibilitySection1() {
                 />
               </FormGroup>
             </Box>
+            
+            {/* Identification the status of the license plates */}
             <Box contanier my={2} alignItems="right" gap={4} p={2} sx={styleBox} disableEqualOverflow>
               <Typography>وضعیت پلاک</Typography>
               <Divider sx={style} />
-
               <Grid container spacing={2}>
-                <Grid item xs={6} sm={6}> 
+                <Grid item xs={6} sm={6}>
                   <FormGroup variant="h2" color="secondary.600" style={{ marginTop: '-20px' }}>
                     <FormControlLabel control={<Switch defaultChecked size="small" />} label="مشخص" size="small" />
                     <FormControlLabel control={<Switch size="small" />} label="دقیق" />
