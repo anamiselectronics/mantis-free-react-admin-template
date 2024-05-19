@@ -14,13 +14,10 @@ import {
   QueryBuilderOutlined,
   CorporateFare,
   ImportExportOutlined,
-  CasesOutlined,
-  CallSplitOutlined,
   MoneyOutlined,
   EmojiTransportationOutlined,
   SpeedOutlined,
   DirectionsCarOutlined,
-  ReportGmailerrorred
 } from '@mui/icons-material';
 
 //Import Component
@@ -62,45 +59,27 @@ const ComponentTypography = () => {
         </Tab>
         <Tab value={5}>
           <ListItemDecorator>
-            <CasesOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
-          </ListItemDecorator>
-          امکانات
-        </Tab>
-        <Tab value={6}>
-          <ListItemDecorator>
-            <CallSplitOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
-          </ListItemDecorator>
-          دیگر
-        </Tab>
-        <Tab value={7}>
-          <ListItemDecorator>
             <MoneyOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           پلاک
         </Tab>
-        <Tab value={8}>
+        <Tab value={6}>
           <ListItemDecorator>
             <EmojiTransportationOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           استان
         </Tab>
-        <Tab value={9}>
+        <Tab value={7}>
           <ListItemDecorator>
             <SpeedOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           سرعت
         </Tab>
-        <Tab value={10}>
+        <Tab value={8}>
           <ListItemDecorator>
             <DirectionsCarOutlined sx={{ fontSize: 25, paddingLeft: 0.4 }} />
           </ListItemDecorator>
           خودرو
-        </Tab>
-        <Tab value={11}>
-          <ListItemDecorator>
-            <ReportGmailerrorred sx={{ fontSize: 25, paddingLeft: 0.4 }} />
-          </ListItemDecorator>
-          تخلف
         </Tab>
       </TabsList>
       <TabPanel value={1}>

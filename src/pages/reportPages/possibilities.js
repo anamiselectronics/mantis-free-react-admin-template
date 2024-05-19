@@ -1,64 +1,104 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery } from '@mui/material';
 
 //Child
 import PosiibilitySection1 from './posibilitySection1';
-import PosiibilitySection2 from './posibilitySection2';
+import Cartag from './carTag';
+import OldTransitTag from './oldTransitTag';
+
+import { useTheme } from '@mui/material/styles';
+
+const styleBox1 = (theme) => ({
+  border: '2px solid',
+  borderColor: theme.palette.primary[200],
+  borderRadius: '10px',
+  bgcolor: theme.palette.primary[200],
+  boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
+  '&:hover': {
+    bgcolor: theme.palette.primary[200]
+  }
+});
+
+const styleBox2 = (theme) => ({
+  border: '2px solid',
+  borderColor: theme.palette.primary[200],
+  borderRadius: '10px',
+  bgcolor: theme.palette.primary[200],
+  boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
+  '&:hover': {
+    bgcolor: theme.palette.primary[200]
+  }
+});
+
+const styleBox3 = (theme) => ({
+  border: '2px solid #f7f7f8',
+  boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
+  borderRadius: '10px',
+  bgcolor: theme.palette.primary[200],
+  // display: 'flex',
+  // flexDirection: 'row',
+  // alignItem: 'center',
+  // justifyContent: 'space-around',
+  '&:hover': {
+    bgcolor: theme.palette.primary[200]
+  }
+});
 
 function Possibilities() {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
-      <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
+      <Grid xs={12} spacing={2}>
         <Grid item xs={12} sm={6}>
           <Box
             item
             xs={12}
             sm={6}
-            minHeight={{ xs: 'auto', sm: 250 }}
-            my={4}
-            display="grid"
-            alignItems="center"
-            gap={2}
-            p={2}
             sx={{
-              border: '2px solid',
-              borderColor: 'primary.200',
-              borderRadius: '10px',
-              bgcolor: 'primary.200',
-              boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
-              '&:hover': {
-                bgcolor: 'primary.200'
-              }
+              minHeight: { xs: 'auto', sm: 250 },
+              my: 4,
+              display: 'grid',
+              alignItems: 'center',
+              gap: 2,
+              p: 2,
+              ...styleBox1(theme)
             }}
           >
             <PosiibilitySection1 />
           </Box>
         </Grid>
       </Grid>
-      <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
-        <Grid item xs={12} sm={6} disableEqualOverflow="true">
+      <Grid xs={12} spacing={2}>
+        <Grid item xs={12} sm={6}>
           <Box
             item
             xs={12}
             sm={6}
-            minHeight={{ xs: 'auto', sm: 200 }}
-            my={4}
-            display="grid"
-            alignItems="center"
-            gap={2}
-            p={2}
             sx={{
-              border: '2px solid',
-              borderColor: 'primary.200',
-              borderRadius: '10px',
-              bgcolor: 'primary.200',
-              boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
-              '&:hover': {
-                bgcolor: 'primary.200'
-              }
+              minHeight: { xs: 'auto', sm: 200 },
+              my: 4,
+              display: 'grid',
+              alignItems: 'center',
+              gap: 2,
+              p: 2,
+              ...styleBox2(theme)
             }}
           >
-            <PosiibilitySection2 />
+            <Box
+             sx={{
+              minHeight: { xs: 'auto', sm: 50 },
+              display: 'flex',
+              flexDirection: isSmallScreen ? 'column' : 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              p: 2,
+              ...styleBox3(theme),
+            }}
+            >
+              <Cartag />
+              <OldTransitTag />
+            </Box>
           </Box>
         </Grid>
       </Grid>
