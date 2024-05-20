@@ -28,7 +28,7 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   paddingLeft: '4vw',
-  width: '16.5rem',
+  width: '16.5rem'
 };
 
 export default function Cartag() {

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox } from '@mui/material';
 
 import MaskedInput from 'react-text-mask';
-import oldTransit from '../../assets/images/pages/oldTransit.png';
+import newTransitplate from '../../assets/images/pages/newTransitPlate.png';
 
 const styleBox = {
   height: '150px',
@@ -18,7 +18,7 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontSize: '1.5rem',
-  backgroundImage: `url(${oldTransit})`,
+  backgroundImage: `url(${newTransitplate})`,
   objectFit: 'fill',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
@@ -29,10 +29,10 @@ const styleMask = {
   borderRadius: '5px',
   border: '2px solid gray',
   paddingLeft: '3vw',
-  width: '16.5rem'
+  width: '16.5rem',
 };
 
-export default function OldTransitTag() {
+export default function NewTransitTag() {
   const convertToPersian = (input, cursorPosition) => {
     // Define mappings for English characters to Farsi characters
     const charMap = {
@@ -85,7 +85,7 @@ export default function OldTransitTag() {
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleBox}>
       <FormControl variant="outlined" style={{ width: '16rem' }}>
         <FormLabel component="legend" sx={{ color: 'primary.dark', fontWeight: 'bold' }}>
-          پلاک ترانزیت قدیمی
+          پلاک ترانزیت جدید
         </FormLabel>
         <MaskedInput
           guide={true}
@@ -95,6 +95,8 @@ export default function OldTransitTag() {
             /\d/,
             ' ',
             ' ',
+            ' ',
+            /[ا-یa-z]/,
             ' ',
             /[ا-یa-z]/,
             ' ',
@@ -108,12 +110,6 @@ export default function OldTransitTag() {
             ' ',
             /\d/,
             ' ',
-            ' ',
-            ' ',
-            ' ',
-            /\d/,
-            ' ',
-            /\d/,
             ' ',
             ' ',
             ' '

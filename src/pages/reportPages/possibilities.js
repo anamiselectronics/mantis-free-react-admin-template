@@ -5,6 +5,8 @@ import { Box, Grid, useMediaQuery } from '@mui/material';
 import PosiibilitySection1 from './posibilitySection1';
 import Cartag from './carTag';
 import OldTransitTag from './oldTransitTag';
+import NewTransitTag from './newTransitTag';
+import MotorcycleTag from './motorcycleTag';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -35,10 +37,6 @@ const styleBox3 = (theme) => ({
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
   borderRadius: '10px',
   bgcolor: theme.palette.primary[200],
-  // display: 'flex',
-  // flexDirection: 'row',
-  // alignItem: 'center',
-  // justifyContent: 'space-around',
   '&:hover': {
     bgcolor: theme.palette.primary[200]
   }
@@ -76,7 +74,7 @@ function Possibilities() {
             xs={12}
             sm={6}
             sx={{
-              minHeight: { xs: 'auto', sm: 200 },
+              minHeight: { xs: 'auto', sm: 'auto' },
               my: 4,
               display: 'grid',
               alignItems: 'center',
@@ -86,18 +84,46 @@ function Possibilities() {
             }}
           >
             <Box
-             sx={{
-              minHeight: { xs: 'auto', sm: 50 },
-              display: 'flex',
-              flexDirection: isSmallScreen ? 'column' : 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              p: 2,
-              ...styleBox3(theme),
-            }}
+              sx={{
+                minHeight: { xs: 'auto', sm: 'auto' },
+                display: 'flex',
+                flexDirection: isSmallScreen ? 'column' : 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                p: 2,
+                ...styleBox3(theme)
+              }}
             >
-              <Cartag />
-              <OldTransitTag />
+              <Grid container spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <Cartag />
+                  <OldTransitTag />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <NewTransitTag />
+                  <MotorcycleTag />
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Grid>
