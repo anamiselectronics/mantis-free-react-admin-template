@@ -20,14 +20,14 @@ const styleMask = {
   fontSize: '1.5rem',
   backgroundImage: `url(${oldTransit})`,
   objectFit: 'fill',
-  backgroundSize: 'cover',
+  backgroundSize: '100% 100%',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   minHeight: '9vh',
   direction: 'ltr',
   textAlign: 'center',
   borderRadius: '5px',
-  border: '2px solid gray',
+  border: '2px solid',
   paddingLeft: '3vw',
   width: '16.5rem'
 };

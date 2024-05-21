@@ -9,8 +9,11 @@ import NewTransitTag from './newTransitTag';
 import MotorcycleTag from './motorcycleTag';
 
 import { useTheme } from '@mui/material/styles';
+import FreeZonePlate from './freeZonePlate';
 
 const styleBox1 = (theme) => ({
+  display: 'grid',
+  alignItems: 'center',
   border: '2px solid',
   borderColor: theme.palette.primary[200],
   borderRadius: '10px',
@@ -22,17 +25,6 @@ const styleBox1 = (theme) => ({
 });
 
 const styleBox2 = (theme) => ({
-  border: '2px solid',
-  borderColor: theme.palette.primary[200],
-  borderRadius: '10px',
-  bgcolor: theme.palette.primary[200],
-  boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
-  '&:hover': {
-    bgcolor: theme.palette.primary[200]
-  }
-});
-
-const styleBox3 = (theme) => ({
   border: '2px solid #f7f7f8',
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
   borderRadius: '10px',
@@ -41,6 +33,13 @@ const styleBox3 = (theme) => ({
     bgcolor: theme.palette.primary[200]
   }
 });
+
+const gridStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
 
 function Possibilities() {
   const theme = useTheme();
@@ -56,8 +55,6 @@ function Possibilities() {
             sx={{
               minHeight: { xs: 'auto', sm: 250 },
               my: 4,
-              display: 'grid',
-              alignItems: 'center',
               gap: 2,
               p: 2,
               ...styleBox1(theme)
@@ -76,11 +73,9 @@ function Possibilities() {
             sx={{
               minHeight: { xs: 'auto', sm: 'auto' },
               my: 4,
-              display: 'grid',
-              alignItems: 'center',
               gap: 2,
               p: 2,
-              ...styleBox2(theme)
+              ...styleBox1(theme)
             }}
           >
             <Box
@@ -91,36 +86,18 @@ function Possibilities() {
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 p: 2,
-                ...styleBox3(theme)
+                ...styleBox2(theme)
               }}
             >
               <Grid container spacing={2}>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
+                <Grid item xs={12} sm={6} style={gridStyle}>
                   <Cartag />
                   <OldTransitTag />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
                   <NewTransitTag />
+                </Grid>
+                <Grid item xs={12} sm={6} style={gridStyle}>
+                  <FreeZonePlate />
+
                   <MotorcycleTag />
                 </Grid>
               </Grid>
