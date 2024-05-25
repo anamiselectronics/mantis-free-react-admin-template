@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox } from '@mui/material';
+import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox, Box } from '@mui/material';
 
 import MaskedInput from 'react-text-mask';
 import oldTransit from '../../assets/images/pages/oldTransit.png';

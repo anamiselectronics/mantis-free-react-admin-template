@@ -1,8 +1,21 @@
 import React from 'react';
-import { Box, Grid, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Box, Grid, FormGroup, FormControlLabel, Checkbox, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
+// Style
+const BoxStyle = (theme) => ({
+  border: '2px solid',
+  borderColor: theme.palette.primary[200],
+  borderRadius: '10px',
+  bgcolor: theme.palette.primary[200],
+  boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
+  '&:hover': {
+    bgcolor: 'primary.200'
+  }
+});
 
 function LineNumber() {
+  const theme = useTheme();
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
@@ -18,14 +31,7 @@ function LineNumber() {
             gap={2}
             p={2}
             sx={{
-              border: '2px solid',
-              borderColor: 'primary.200',
-              borderRadius: '10px',
-              bgcolor: 'primary.200',
-              boxShadow: '0px 2px 18px 0px rgba(0,0,0,0.3)',
-              '&:hover': {
-                bgcolor: 'primary.200'
-              }
+              ...BoxStyle(theme)
             }}
           >
             <FormGroup row>

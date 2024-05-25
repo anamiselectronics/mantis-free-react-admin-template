@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, useMediaQuery } from '@mui/material';
 
 //Child
-import PosiibilitySection1 from './posibilitySection1';
+import PlateSection1 from './plateSection1';
 import Cartag from './carTag';
 import OldTransitTag from './oldTransitTag';
 import NewTransitTag from './newTransitTag';
@@ -41,7 +41,7 @@ const gridStyle = {
   justifyContent: 'center'
 };
 
-function Possibilities() {
+function Plate() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
@@ -60,7 +60,7 @@ function Possibilities() {
               ...styleBox1(theme)
             }}
           >
-            <PosiibilitySection1 />
+            <PlateSection1 />
           </Box>
         </Grid>
       </Grid>
@@ -109,4 +109,4 @@ function Possibilities() {
   );
 }
 
-export default Possibilities;
+export default Plate;

@@ -17,15 +17,18 @@ import {
   MoneyOutlined,
   EmojiTransportationOutlined,
   SpeedOutlined,
-  DirectionsCarOutlined,
+  DirectionsCarOutlined
 } from '@mui/icons-material';
 
 //Import Component
 import TimeDate from 'pages/reportPages/timeDate';
 import Direction from 'pages/reportPages/direction';
-import System from 'pages/reportPages/system';
 import LineNumber from 'pages/reportPages/lineNumber';
-import Possibilities from 'pages/reportPages/possibilities';
+import Camera from 'pages/reportPages/camera';
+import State from 'pages/reportPages/state';
+import Speed from 'pages/reportPages/speed';
+import Plate from 'pages/reportPages/plate';
+import CarsType from 'pages/reportPages/carsType';
 
 // ==============================|| TabList - SearchPage ||============================== //
 
@@ -83,7 +86,7 @@ const ComponentTypography = () => {
         </Tab>
       </TabsList>
       <TabPanel value={1}>
-        <System />
+        <Camera />
       </TabPanel>
       <TabPanel value={2}>
         <TimeDate />
@@ -95,14 +98,17 @@ const ComponentTypography = () => {
         <LineNumber />
       </TabPanel>
       <TabPanel value={5}>
-        <Possibilities />
+        <Plate />
       </TabPanel>
-      <TabPanel value={6}>Six page</TabPanel>
-      <TabPanel value={7}>Seven page</TabPanel>
-      <TabPanel value={8}>Eight page</TabPanel>
-      <TabPanel value={9}>Nine page</TabPanel>
-      <TabPanel value={10}>Ten page</TabPanel>
-      <TabPanel value={11}>Eleven page</TabPanel>
+      <TabPanel value={6}>
+        <State />
+      </TabPanel>
+      <TabPanel value={7}>
+        <Speed />
+      </TabPanel>
+      <TabPanel value={8}>
+        <CarsType />
+      </TabPanel>
     </Tabs>
   );
 };
@@ -127,14 +133,14 @@ const Tab = styled(BaseTab)`
   font-size: 0.875rem;
   font-weight: bold;
   background-color: transparent;
-  width: 100%;
+  width: auto;
   line-height: 2;
   padding: 8px 5px;
   margin: 6px;
   border: none;
   border-radius: 8px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   white-space: nowrap;
 
@@ -172,12 +178,31 @@ const TabsList = styled(BaseTabsList)(
   min-width: 400px;
   background-color: ${blue[500]};
   border-radius: 12px;
-  margin-bottom: 16px;
   display: flex;
-  justify-content:center;
+  flex-wrap: wrap;
+  justify-content:space-around;
   align-items: center;
   box-shadow: 0px 4px 6px ${theme.palette.mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
   white-space: nowrap;
+
+  @media (max-width: 1200px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    justify-content:center;
+
+  }
+
+  @media (max-width: 576px) {
+    font-size: 0.65rem;
+    justify-content:center;
+  }
   `
 );
 

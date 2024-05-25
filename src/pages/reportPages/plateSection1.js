@@ -22,7 +22,7 @@ const style = {
   width: '350px'
 };
 
-function PosiibilitySection1() {
+function PlateSection1() {
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2} justifyContent="space-around" alignItems="center" disableEqualOverflow="true">
@@ -87,4 +87,4 @@ function PosiibilitySection1() {
   );
 }
 
-export default PosiibilitySection1;
+export default PlateSection1;
