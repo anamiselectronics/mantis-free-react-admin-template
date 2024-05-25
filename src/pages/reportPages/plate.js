@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Grid, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import ScrollToTop from './scrollToTop';
 
 //Child
 import PlateSection1 from './plateSection1';
@@ -7,8 +9,6 @@ import Cartag from './carTag';
 import OldTransitTag from './oldTransitTag';
 import NewTransitTag from './newTransitTag';
 import MotorcycleTag from './motorcycleTag';
-
-import { useTheme } from '@mui/material/styles';
 import FreeZonePlate from './freeZonePlate';
 
 const styleBox1 = (theme) => ({
@@ -48,6 +48,7 @@ function Plate() {
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2}>
         <Grid item xs={12} sm={6}>
+          <ScrollToTop />
           <Box
             item
             xs={12}

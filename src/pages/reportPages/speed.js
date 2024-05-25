@@ -69,15 +69,15 @@ function Speed() {
             gap={2}
             p={2}
             sx={{
-              ...BoxStyle(theme)
+            ...BoxStyle(theme)
             }}
           >
             {/* use slider to select the speed */}
             <Typography varient="h5">
-              حداقل سرعت : 0 <hr style={{ border: 'none' }} />
+              حداقل سرعت : 0 <hr style={{ border: 'none'}} />
               حداکثر سرعت : 250
             </Typography>
-            <Box sx={{ width: 850 }}>
+            <Box sx={{ width: { xs: '100%', md: 850 } }}>
               <Slider
                 aria-label="Restricted values"
                 defaultValue={20}
