@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, Checkbox, FormControlLabel } from '@mui/material';
 
 function CarsModel() {
-  const [checked, setChecked] = React.useState(Array(25).fill(false));
+  const [checked, setChecked] = React.useState(Array(26).fill(false));
 
   const labels = [
     'اتوبوس',
@@ -40,7 +40,7 @@ function CarsModel() {
   };
 
   const handleParentChange = (event) => {
-    setChecked(Array(25).fill(event.target.checked));
+    setChecked(Array(26).fill(event.target.checked));
   };
 
   const itemsPerColumn = Math.ceil(checked.length / 3);
@@ -54,6 +54,7 @@ function CarsModel() {
             label="مدل خودرو"
             control={
               <Checkbox
+                size="small"
                 checked={checked.every(Boolean)}
                 indeterminate={checked.some(Boolean) && !checked.every(Boolean)}
                 onChange={handleParentChange}
@@ -70,7 +71,7 @@ function CarsModel() {
                   <FormControlLabel
                     key={labelIndex}
                     label={labels[labelIndex]}
-                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)} />}
+                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)}  size="small" />}
                     variant="h5"
                     color="secondary.600"
                   />

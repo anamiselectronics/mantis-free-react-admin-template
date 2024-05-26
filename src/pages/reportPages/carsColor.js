@@ -30,20 +30,21 @@ function Carcolor() {
                 checked={checked.every(Boolean)}
                 indeterminate={checked.some(Boolean) && !checked.every(Boolean)}
                 onChange={handleParentChange}
+                size="small"
               />
             }
           />
         </Grid>
         {columns.map((column, colIndex) => (
           <Grid item xs={12} sm={4} key={colIndex}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3}}>
               {column.map((isChecked, index) => {
                 const labelIndex = colIndex * itemsPerColumn + index;
                 return (
                   <FormControlLabel
                     key={labelIndex}
                     label={labels[labelIndex]}
-                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)} />}
+                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)} size="small" />}
                     variant="h5"
                     color="secondary.600"
                   />
