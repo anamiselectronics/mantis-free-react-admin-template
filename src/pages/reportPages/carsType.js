@@ -88,7 +88,7 @@ function CarsType() {
                       نوع خودرو
                     </Typography>
                     <Divider sx={style} />
-                    <FormGroup variant="h2" color="secondary.600" sx={{ textAlign:"right"}}>
+                    <FormGroup variant="h2" color="secondary.600" sx={{ textAlign: 'right' }}>
                       <FormControlLabel
                         control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />}
                         label={<Typography>سبک</Typography>}

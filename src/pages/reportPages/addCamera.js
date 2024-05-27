@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Grid, Checkbox, FormControlLabel } from '@mui/material';
 
-function Carcolor() {
-  const [checked, setChecked] = React.useState(Array(9).fill(false));
+function AddCamera() {
+  const [checked, setChecked] = React.useState(Array(9).fill(true));
 
-  const labels = ['سفید', 'سبز', 'زرد', 'آبی', 'قرمز', 'مشکی', 'نارنجی', 'نقره ای', 'سایر'];
+  const labels = ['9 دوربین', '8 دوربین', '7 دوربین', '6 دوربین', '5 دوربین', ' 4 دوربین', '3 دوربین', ' 2 دوربین', '1 دوربین'];
 
   const handleChange = (index) => (event) => {
     const newChecked = [...checked];
@@ -24,7 +24,7 @@ function Carcolor() {
       <Grid container spacing={2} justifyContent="space-around" alignItems="flex-start">
         <Grid item xs={12}>
           <FormControlLabel
-            label="همه رنگ ها"
+            label="همه دوربین ها"
             control={
               <Checkbox
                 checked={checked.every(Boolean)}
@@ -58,4 +58,4 @@ function Carcolor() {
   );
 }
 
-export default Carcolor;
+export default AddCamera;

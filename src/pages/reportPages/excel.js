@@ -38,8 +38,8 @@ const Excel = () => {
   };
 
   const showExcel = () => {
-    const newWindow = window.open('', '_blank', 'width=800,height=600');
-    if (newWindow) {
+    const newTab = window.open('', '_blank');
+    if (newTab) {
       const htmlContent = `
         <html>
           <head>
@@ -78,8 +78,9 @@ const Excel = () => {
           </body>
         </html>
       `;
-      newWindow.document.write(htmlContent);
-      newWindow.document.close();
+      newTab.document.open();
+      newTab.document.write(htmlContent);
+      newTab.document.close();
     }
   };
 
