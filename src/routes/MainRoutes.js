@@ -11,10 +11,12 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
 // render - utilities
-const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
+const Report = Loadable(lazy(() => import('pages/components-overview/Report')));
 const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
+
+const Excel = Loadable(lazy(() => import('pages/reportPages/excel')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -29,6 +31,15 @@ const MainRoutes = {
     {
       path: 'color',
       element: <Color />
+    },
+    {
+      path: 'reportPages',
+      children: [
+        {
+          path: 'excel',
+          element: <Excel />
+        }
+      ]
     },
     {
       path: 'dashboard',
@@ -48,8 +59,8 @@ const MainRoutes = {
       element: <Shadow />
     },
     {
-      path: 'typography',
-      element: <Typography />
+      path: 'report',
+      element: <Report />
     },
     {
       path: 'icons/ant',

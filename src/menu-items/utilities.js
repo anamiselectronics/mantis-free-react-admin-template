@@ -29,7 +29,7 @@ const utilities = {
       id: 'util-typography',
       title: 'گزارش گیری',
       type: 'item',
-      url: '/typography',
+      url: '/Report',
       icon: icons.BarChartOutlined
     },
     {

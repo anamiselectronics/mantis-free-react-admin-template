@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, Checkbox, FormControlLabel } from '@mui/material';
 
 function Carcolor() {
-  const [checked, setChecked] = React.useState(Array(8).fill(false));
+  const [checked, setChecked] = React.useState(Array(9).fill(false));
 
   const labels = ['سفید', 'سبز', 'زرد', 'آبی', 'قرمز', 'مشکی', 'نارنجی', 'نقره ای', 'سایر'];
 
@@ -13,7 +13,10 @@ function Carcolor() {
   };
 
   const handleParentChange = (event) => {
-    setChecked(Array(8).fill(event.target.checked));
+    setChecked(Array(9
+
+      
+    ).fill(event.target.checked));
   };
 
   const itemsPerColumn = Math.ceil(checked.length / 3);
@@ -37,7 +40,7 @@ function Carcolor() {
         </Grid>
         {columns.map((column, colIndex) => (
           <Grid item xs={12} sm={4} key={colIndex}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
               {column.map((isChecked, index) => {
                 const labelIndex = colIndex * itemsPerColumn + index;
                 return (

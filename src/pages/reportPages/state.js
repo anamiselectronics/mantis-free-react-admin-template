@@ -73,6 +73,7 @@ function State() {
             label="همه استان ها"
             control={
               <Checkbox
+                size="small"
                 checked={checked.every(Boolean)}
                 indeterminate={checked.some(Boolean) && !checked.every(Boolean)}
                 onChange={handleParentChange}
@@ -89,7 +90,7 @@ function State() {
                   <FormControlLabel
                     key={labelIndex}
                     label={labels[labelIndex]}
-                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)} />}
+                    control={<Checkbox checked={isChecked} onChange={handleChange(labelIndex)} size="small" />}
                     variant="h5" color="secondary.600"
                     />
                 );

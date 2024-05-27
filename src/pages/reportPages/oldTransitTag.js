@@ -26,7 +26,7 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   borderRadius: '5px',
-  border: '2px solid',
+  border: '2px solid ',
   paddingLeft: '3vw',
   width: '16.5rem'
 };

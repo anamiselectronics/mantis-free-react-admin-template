@@ -104,7 +104,7 @@ const ComponentColor = () => (
       <Grid item xs={12} sm={6} md={4}>
         <MainCard title="Success Color" codeHighlight>
           <Stack>
-            <ColorBox bgcolor="success.lighter" data={{ label: 'Green-1', color: '#f6ffed' }} title="success.lighter" dark />
+            <ColorBox bgcolor="success.lighter" data={{ label: 'Green-1', color: '#099700' }} title="success.lighter" dark />
             <ColorBox bgcolor="success.light" data={{ label: 'Green-4', color: '#95de64' }} title="success.light" dark />
             <ColorBox bgcolor="success.main" data={{ label: 'Green-6', color: '#52c41a' }} title="success.main" main />
             <ColorBox bgcolor="success.dark" data={{ label: 'Green-8', color: '#237804' }} title="success.dark" />

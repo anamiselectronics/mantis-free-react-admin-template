@@ -18,11 +18,11 @@ const styleBox = {
   width: '420px',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   borderRadius: '10px',
   border: '2px solid #f7f7f8',
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
-  padding: '16px', // Add padding to give some space inside the box
+  padding: '16px',
   boxSizing: 'border-box'
 };
 

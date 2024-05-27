@@ -23,7 +23,7 @@ const styleMask = {
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   borderRadius: '5px',
-  border: '2px solid',
+  border: '2px solid ',
   minHeight: '9vh',
   direction: 'ltr',
   textAlign: 'center',
