@@ -13,7 +13,8 @@ const styleBox = {
   border: '2px solid #f7f7f8',
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
   padding: '16px',
-  boxSizing: 'border-box'
+  marginRight: '15px',
+  width: 'min-content'
 };
 
 const style = {
@@ -22,8 +23,6 @@ const style = {
 };
 
 const BoxStyle = (theme) => ({
-  // display: 'flex',
-  // flexDirection: 'row',
   border: '2px solid',
   borderColor: theme.palette.primary[200],
   borderRadius: '10px',
@@ -45,8 +44,8 @@ function Camera() {
             sx={{
               minwidth: { xs: 'auto', sm: 'auto' },
               display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'baseline',
+              justifyContent: 'center',
+              alignItems: isSmallScreen ? 'flex-start' : 'baseline',
               flexDirection: isSmallScreen ? 'column' : 'row',
               my: 4,
               gap: 2,
@@ -54,19 +53,19 @@ function Camera() {
               ...BoxStyle(theme)
             }}
           >
-            <FormGroup row variant="h2" color="secondary.600" style={{ marginTop: '-20px' }}>
+            <FormGroup variant="h2" style={{ marginTop: '-10px', textAlign: 'center', marginLeft: '5px' }}>
               <FormControlLabel
                 control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />}
-                label={<Typography>انتخاب تمامی لوکیشن ها</Typography>}
+                label={<Typography color="secondary.600">انتخاب تمامی لوکیشن ها</Typography>}
               />
               <FormControlLabel
                 control={<Checkbox defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />}
-                label={<Typography> انتخاب تمامی دوربین ها </Typography>}
+                label={<Typography color="secondary.600"> انتخاب تمامی دوربین ها </Typography>}
               />
             </FormGroup>
-            <FormGroup row spacing={5} style={styleForm}>
+            <FormGroup spacing={5} style={styleForm}>
               {/* adjust type of plate's car selection  */}
-              <Box contanier my={2} gap={4} p={2} sx={styleBox}>
+              <Box contanier my={2} gap={2} p={0} sx={styleBox}>
                 <Typography variant="h5" color="secondary.600">
                   نام محل
                 </Typography>

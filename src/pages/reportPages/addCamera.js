@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Grid, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, Grid, Checkbox, FormControlLabel, useMediaQuery  } from '@mui/material';
+import { useTheme } from '@mui/system'; 
 
 function AddCamera() {
   const [checked, setChecked] = React.useState(Array(9).fill(true));
-
   const labels = ['9 دوربین', '8 دوربین', '7 دوربین', '6 دوربین', '5 دوربین', ' 4 دوربین', '3 دوربین', ' 2 دوربین', '1 دوربین'];
 
   const handleChange = (index) => (event) => {
@@ -15,9 +15,14 @@ function AddCamera() {
   const handleParentChange = (event) => {
     setChecked(Array(9).fill(event.target.checked));
   };
+  //divide to 3 column all data in box
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const itemsPerColumn = Math.ceil(checked.length / 3);
-  const columns = [0, 1, 2].map((col) => checked.slice(col * itemsPerColumn, (col + 1) * itemsPerColumn));
+  const columnsCount = isSmallScreen ? 1 : isMediumScreen ? 2 : 3;
+  const itemsPerColumn = Math.ceil(checked.length / columnsCount);
+  const columns = Array.from({ length: columnsCount }, (_, col) => checked.slice(col * itemsPerColumn, (col + 1) * itemsPerColumn));
 
   return (
     <Box my={4} xs={12}>
@@ -36,7 +41,7 @@ function AddCamera() {
           />
         </Grid>
         {columns.map((column, colIndex) => (
-          <Grid item xs={12} sm={4} key={colIndex}>
+          <Grid item xs={12} sm={columnsCount === 1 ? 12 : 6} md={4} key={colIndex}>
             <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
               {column.map((isChecked, index) => {
                 const labelIndex = colIndex * itemsPerColumn + index;
