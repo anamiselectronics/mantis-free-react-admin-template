@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, FormGroup, Typography, Divider, Grid, Checkbox, FormControlLabel, useMediaQuery } from '@mui/material';
 import AddCamera from './addCamera';
 import useTheme from '../../../node_modules/@mui/system/useTheme';
+import ScrollToTop from './scrollToTop';
 
 const styleForm = {
   justifyContent: 'space-around'
@@ -40,6 +41,7 @@ function Camera() {
     <Box sx={{ flexGrow: 1 }} xs={12}>
       <Grid xs={12} spacing={2} j>
         <Grid item xs={12} sm={6}>
+        <ScrollToTop />
           <Box
             sx={{
               minwidth: { xs: 'auto', sm: 'auto' },
