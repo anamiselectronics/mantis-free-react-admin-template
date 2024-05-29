@@ -92,11 +92,12 @@ const Statistics = ({ slot }) => {
     setSeries([
       {
         name: 'تردد',
-        data: slot === 'month' 
-          ? [110, 60, 150, 35, 60, 36, 26, 45, 65, 52, 53, 41] 
-          : slot === 'week' 
-            ? [11, 32, 45, 32, 34, 52, 41] 
-            : Array.from({ length: 24 }, () => Math.floor(Math.random() * 150))
+        data:
+          slot === 'month'
+            ? [110, 60, 150, 35, 60, 36, 26, 45, 65, 52, 53, 41]
+            : slot === 'week'
+              ? [11, 32, 45, 32, 34, 52, 41]
+              : Array.from({ length: 24 }, () => Math.floor(Math.random() * 150))
       }
     ]);
   }, [slot]);

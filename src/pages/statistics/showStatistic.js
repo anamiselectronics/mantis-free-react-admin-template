@@ -1,21 +1,14 @@
 import { useState } from 'react';
 // material-ui
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Typography
-} from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 
 import Statistics from './Statistics';
 import MainCard from 'components/MainCard';
 
-
 // ==============================||Statitics ||============================== //
 
 const ShowStatistics = () => {
-//   const [value, setValue] = useState('today');
+  //   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('week');
 
   return (
