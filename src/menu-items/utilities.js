@@ -34,9 +34,16 @@ const utilities = {
     },
     {
       id: 'util-color',
-      title: 'آمار',
+      title: 'رنگ',
       type: 'item',
       url: '/color',
+      icon: icons.ProjectOutlined
+    },
+    {
+      id: 'util-statistics',
+      title: 'آمار',
+      type: 'item',
+      url: '/showStatistics',
       icon: icons.ProjectOutlined
     },
     {

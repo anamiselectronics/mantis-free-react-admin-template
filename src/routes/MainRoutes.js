@@ -16,7 +16,11 @@ const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 
+// render - reportPages
 const Excel = Loadable(lazy(() => import('pages/reportPages/excel')));
+
+// render - statistics
+const ShowStatistics = Loadable(lazy(() => import('pages/statistics/showStatistic')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -27,6 +31,10 @@ const MainRoutes = {
     {
       path: '/',
       element: <DashboardDefault />
+    },
+    {
+      path: 'showStatistics',
+      element: <ShowStatistics />
     },
     {
       path: 'color',
