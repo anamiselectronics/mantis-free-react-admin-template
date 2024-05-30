@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox, Box } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import Box from '@mui/material/Box';
+import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox } from '@mui/material';
 import MaskedInput from 'react-text-mask';
 import oldTransit from '../../assets/images/pages/oldTransit.png';
 
@@ -32,7 +33,7 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   borderRadius: '5px',
-  border: '2px solid ',
+  border: '2px solid',
   paddingLeft: '3vw',
   width: '16.5rem'
 };
@@ -72,27 +73,38 @@ const convertToPersian = (input, cursorPosition) => {
 };
 
 export default function OldTransitTag() {
-  const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
+  const [inputs, setInputs] = useState([{ value: '', cursorPosition: 0 }]);
+  const inputRefs = useRef([]);
 
   const handleInputChange = (index, e) => {
+    const nullValue="_ _   _     _ _ _    _ _   ";
     const newPosition = e.target.selectionStart;
     const converted = convertToPersian(e.target.value, newPosition);
     const newInputs = [...inputs];
     newInputs[index] = { value: converted.value, cursorPosition: converted.position };
 
-    // Add new input if this is the last input and it's not empty
-    if (index === inputs.length - 1 && converted.value.length > 0) {
-      newInputs.push({ value: '', cursorPosition: 0 });
-    }
+    console.log('Current inputs:', newInputs); // Log current inputs
 
-    // Remove input if it becomes empty and it's not the first input
-    if (converted.value === '' && newInputs.length > 1 && index !== 0) {
+    // Add a new input if this is the last input and it's not empty
+    if (index === newInputs.length - 1 && converted.value.length > 0) {
+      console.log('Before add:', newInputs);
+      newInputs.push({ value: '', cursorPosition: 0 });
+      console.log('After add:', newInputs);
+    }
+    // Remove the input if its value becomes empty and it's not the initial input
+    console.log('ConvertedValue:', converted.value);
+    console.log('NewInputsLenth:', newInputs.length);
+    console.log('Index:', index);
+    
+    if (converted.value == nullValue && newInputs.length > 1 && index !== 0) {
+      console.log('Before remove:', newInputs);
       newInputs.splice(index, 1);
+      console.log('After remove:', newInputs);
+      setInputs(newInputs); // Update state after removing the input
     }
 
     setInputs(newInputs);
   };
-
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
       {inputs.map((input, index) => (
@@ -104,18 +116,39 @@ export default function OldTransitTag() {
             <MaskedInput
               guide={true}
               mask={[
-                /\d/, ' ', /\d/, ' ', ' ', ' ', /[ا-یa-z]/, ' ', ' ', ' ', ' ', ' ', 
-                /\d/, ' ', /\d/, ' ', /\d/, ' ', ' ', ' ', ' ', /\d/, ' ', /\d/, ' ', ' ', ' '
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                ' ',
+                /[ا-یa-z]/,
+                ' ',
+                ' ',
+                ' ',
+                ' ',
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                ' ',
+                ' ',
+                /\d/,
+                ' ',
+                /\d/,
+                ' ',
+                ' ',
+                ' '
               ]}
               style={styleMask}
               showMask
               value={input.value}
-              onChange={(e) => handleInputChange(index, e)}
-              inputRef={(inputElement) => {
-                if (inputElement && input.cursorPosition !== null) {
-                  inputElement.selectionStart = inputElement.selectionEnd = input.cursorPosition;
-                }
-              }}
+              onKeyDown={(e) => handleInputChange(index, e)}
+              ref={(el) => (inputRefs.current[index] = el)}
             />
           </FormControl>
           <FormControlLabel
