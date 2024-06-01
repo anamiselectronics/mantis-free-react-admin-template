@@ -4,6 +4,7 @@ import { FormControl, FormLabel, FormControlLabel, Typography, Checkbox } from '
 import MaskedInput from 'react-text-mask';
 import oldTransit from '../../assets/images/pages/oldTransit.png';
 
+
 const styleOuterBox = {
   display: 'flex',
   flexDirection: 'column',
@@ -77,7 +78,7 @@ export default function OldTransitTag() {
   const inputRefs = useRef([]);
 
   const handleInputChange = (index, e) => {
-    const nullValue="_ _   _     _ _ _    _ _   ";
+    const nullValue = '_ _   _     _ _ _    _ _   ';
     const newPosition = e.target.selectionStart;
     const converted = convertToPersian(e.target.value, newPosition);
     const newInputs = [...inputs];
@@ -95,8 +96,8 @@ export default function OldTransitTag() {
     console.log('ConvertedValue:', converted.value);
     console.log('NewInputsLenth:', newInputs.length);
     console.log('Index:', index);
-    
-    if (converted.value == nullValue && newInputs.length > 1 && index !== 0) {
+
+    if (converted.value == nullValue || newInputs[1].value == '' && newInputs.length > 1 && index !== 0) {
       console.log('Before remove:', newInputs);
       newInputs.splice(index, 1);
       console.log('After remove:', newInputs);
