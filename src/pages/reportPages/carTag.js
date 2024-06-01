@@ -83,13 +83,29 @@ export default function Cartag() {
   const inputRefs = React.useRef([]);
 
   const handleInputChange = (index, e) => {
+    const nullValue = '_ _  _  _ _ _    _ _   ';
     const newPosition = e.target.selectionStart;
     const converted = convertToPersian(e.target.value, newPosition);
     const newInputs = [...inputs];
-    newInputs[index] = { value: converted.value, cursorPosition: converted.position };
+    newInputs[index] = { value: converted.value, cursorPosition: converted.position }; 
+    console.log('Current inputs:', newInputs); // Log current inputs
 
-    if (index === inputs.length - 1 && converted.value.length > 0) {
+    // Add a new input if this is the last input and it's not empty
+    if (index === newInputs.length - 1 && converted.value.length > 0) {
+      console.log('Before add:', newInputs);
       newInputs.push({ value: '', cursorPosition: 0 });
+      console.log('After add:', newInputs);
+    }
+    // Remove the input if its value becomes empty and it's not the initial input
+    console.log('ConvertedValue:', converted.value);
+    console.log('NewInputsLenth:', newInputs.length);
+    console.log('Index:', index);
+
+    if (converted.value == nullValue || (newInputs[1].value == '' && newInputs.length > 1 && index !== 0)) {
+      console.log('Before remove:', newInputs);
+      newInputs.splice(index, 1);
+      console.log('After remove:', newInputs);
+      setInputs(newInputs); // Update state after removing the input
     }
 
     setInputs(newInputs);
