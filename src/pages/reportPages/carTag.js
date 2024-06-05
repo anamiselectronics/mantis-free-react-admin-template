@@ -35,7 +35,8 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   paddingLeft: '4vw',
-  width: '16.5rem'
+  width: '16.5rem',
+  caretColor: 'transparent' // disable coursor
 };
 
 const charMap = {
@@ -71,6 +72,11 @@ const charMap = {
   ';': 'ک',
   "'": 'گ',
   ',': 'و'
+};
+
+const charEngMap = {
+  ی: 'd',
+  س: 's'
 };
 
 const convertToPersian = (input, cursorPosition) => {
@@ -117,8 +123,11 @@ export default function Cartag() {
       setShiftHeldAtStart(isShiftHeld);
     }
 
-    if (shiftHeldAtStart || isShiftHeld) {
+    if (shiftHeldAtStart || (isShiftHeld && e.target.value == ((match) => charEngMap[match.toLowerCase()] || match))) {
       // Stay in shift mode, don't convert to Persian
+      console.log('shiftHeldAtStart', shiftHeldAtStart);
+      console.log('isShiftHeld', isShiftHeld);
+
       converted = { value: e.target.value, position: newPosition };
     } else {
       // Convert to Persian
@@ -137,6 +146,7 @@ export default function Cartag() {
     // Remove the input if its value becomes empty and it's not the initial input
     if (converted.value === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
       newInputs.splice(index, 1);
+      // setShiftHeldAtStart(false);
     }
 
     setInputs(newInputs);

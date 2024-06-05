@@ -39,7 +39,7 @@ function Camera() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Box sx={{ flexGrow: 1 }} xs={12}>
-      <Grid xs={12} spacing={2} j>
+      <Grid item xs={12}>
         <Grid item xs={12} sm={6}>
         <ScrollToTop />
           <Box
