@@ -213,7 +213,6 @@
 //   );
 // }
 
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
@@ -259,7 +258,7 @@ const charMap = {
   a: 'ش',
   b: 'ذ',
   c: 'ز',
-  d: 'D', // No conversion for 'd'
+  d: 'ی',
   q: 'ض',
   w: 'ص',
   e: 'ث',
@@ -270,7 +269,7 @@ const charMap = {
   i: 'ه',
   o: 'خ',
   p: 'ح',
-  s: 'S', // No conversion for 's'
+  s: 'س',
   f: 'ب',
   g: 'ل',
   h: 'ا',
@@ -290,26 +289,51 @@ const charMap = {
   ',': 'و'
 };
 
-const convertToPersian = (input) => {
+const convertToPersian = (input, isShiftHeld) => {
   return input.replace(/[a-z[\]\\;',]/gi, (match) => {
-    // Keep 'D' and 'S' as they are
-    if (match.toLowerCase() === 'd' || match.toLowerCase() === 's') {
+    if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
       return match.toUpperCase();
+    } else if (match === 'D' || match === 'S') {
+      return match; // Keep 'D' and 'S' as they are if previously typed with Shift
+    } else {
+      return charMap[match.toLowerCase()] || match;
     }
-    return charMap[match.toLowerCase()] || match;
   });
 };
 
 export default function Cartag() {
   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
+  const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const inputRefs = React.useRef([]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Shift') {
+        setIsShiftHeld(true);
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === 'Shift') {
+        setIsShiftHeld(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const handleInputChange = (index, e) => {
     const nullValue = '_ _  _  _ _ _    _ _   ';
     const newValue = e.target.value;
     const newPosition = e.target.selectionStart;
 
-    const convertedValue = convertToPersian(newValue);
+    const convertedValue = convertToPersian(newValue, isShiftHeld);
 
     const newInputs = [...inputs];
     newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
