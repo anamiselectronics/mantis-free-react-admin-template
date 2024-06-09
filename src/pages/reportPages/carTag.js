@@ -259,7 +259,7 @@ const charMap = {
   a: 'ش',
   b: 'ذ',
   c: 'ز',
-  d: 'ی',
+  d: 'D', // No conversion for 'd'
   q: 'ض',
   w: 'ص',
   e: 'ث',
@@ -270,7 +270,7 @@ const charMap = {
   i: 'ه',
   o: 'خ',
   p: 'ح',
-  s: 'س',
+  s: 'S', // No conversion for 's'
   f: 'ب',
   g: 'ل',
   h: 'ا',
@@ -292,9 +292,9 @@ const charMap = {
 
 const convertToPersian = (input) => {
   return input.replace(/[a-z[\]\\;',]/gi, (match) => {
-    if ((match === 'D' || match === 'd' || match === 'S' || match === 's') && !(window.isShiftHeld)) {
-      console.log(window.isShiftHeld);
-      return match;
+    // Keep 'D' and 'S' as they are
+    if (match.toLowerCase() === 'd' || match.toLowerCase() === 's') {
+      return match.toUpperCase();
     }
     return charMap[match.toLowerCase()] || match;
   });
@@ -302,41 +302,14 @@ const convertToPersian = (input) => {
 
 export default function Cartag() {
   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
-  const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const inputRefs = React.useRef([]);
-
-  React.useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Shift') {
-        setIsShiftHeld(true);
-      }
-    };
-
-    const handleKeyUp = (e) => {
-      if (e.key === 'Shift') {
-        setIsShiftHeld(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
 
   const handleInputChange = (index, e) => {
     const nullValue = '_ _  _  _ _ _    _ _   ';
     const newValue = e.target.value;
     const newPosition = e.target.selectionStart;
-    
-    let convertedValue = newValue;
 
-    if (!isShiftHeld) {
-      convertedValue = convertToPersian(newValue);
-    }
+    const convertedValue = convertToPersian(newValue);
 
     const newInputs = [...inputs];
     newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
