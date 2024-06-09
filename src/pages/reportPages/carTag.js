@@ -36,8 +36,10 @@
 //   textAlign: 'center',
 //   paddingLeft: '4vw',
 //   width: '16.5rem',
-//   caretColor: 'transparent' // disable coursor
+//   caretColor: 'transparent' // disable cursor
 // };
+
+
 
 // const charMap = {
 //   a: 'ش',
@@ -74,26 +76,27 @@
 //   ',': 'و'
 // };
 
-// const charEngMap = {
-//   ی: 'd',
-//   س: 's'
+// const convertToPersian = (input, isShiftHeld) => {
+//   return input.replace(/[a-z[\]\\;',]/gi, (match) => {
+//     if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
+//       return match.toUpperCase();
+//     } else if (match === 'D' || match === 'S') {
+//       return match; // Keep 'D' and 'S' as they are if previously typed with Shift
+//     } else {
+//       return charMap[match.toLowerCase()] || match;
+//     }
+//   });
 // };
 
-// const convertToPersian = (input, cursorPosition) => {
-//   const convertedValue = input.replace(/[a-z[\]\\;',]/gi, (match) => charMap[match.toLowerCase()] || match);
-//   const newPosition = cursorPosition + (convertedValue.length - input.length);
-//   return { value: convertedValue, position: newPosition };
-// };
+
 
 // export default function Cartag() {
 //   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
 //   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
-//   const [shiftHeldAtStart, setShiftHeldAtStart] = React.useState(false);
 //   const inputRefs = React.useRef([]);
 
 //   React.useEffect(() => {
 //     const handleKeyDown = (e) => {
-//       console.log('e.key', e.key);
 //       if (e.key === 'Shift') {
 //         setIsShiftHeld(true);
 //       }
@@ -116,43 +119,25 @@
 
 //   const handleInputChange = (index, e) => {
 //     const nullValue = '_ _  _  _ _ _    _ _   ';
+//     const newValue = e.target.value;
 //     const newPosition = e.target.selectionStart;
-//     let converted;
 
-//     // Check if Shift was held at the start of the input
-//     if (!shiftHeldAtStart) {
-//       setShiftHeldAtStart(isShiftHeld);
-//     }
+//     const convertedValue = convertToPersian(newValue, isShiftHeld);
 
-//     if (shiftHeldAtStart || (isShiftHeld && e.target.value === ((match) => charEngMap[match.toLowerCase()]))) {
-//       // Stay in shift mode, don't convert to Persian
-//       console.log('shiftHeldAtStart', shiftHeldAtStart);
-//       console.log('isShiftHeld', isShiftHeld);
+//     const newInputs = [...inputs];
+//     newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
 
-//       converted = { value: e.target.value, position: newPosition };
-//     }  
-
-//    else{
-//       // Convert to Persian
-//       converted = convertToPersian(e.target.value, newPosition);
-//     }
-//   const newInputs = [...inputs];
-//   newInputs[index] = { value: converted.value, cursorPosition: converted.position };
-
-//     // Add a new input if this is the last input and it's not empty
-//     if (index === newInputs.length - 1 && converted.value.length > 0) {
+//     if (index === newInputs.length - 1 && convertedValue.length > 0) {
 //       newInputs.push({ value: '', cursorPosition: 0 });
-//       setShiftHeldAtStart(false); // Reset shiftHeldAtStart when a new input is added
 //     }
 
-//     // Remove the input if its value becomes empty and it's not the initial input
-//     if (converted.value === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
+//     if (convertedValue === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
 //       newInputs.splice(index, 1);
-//       // setShiftHeldAtStart(false);
 //     }
 
 //     setInputs(newInputs);
 //   };
+
 
 //   return (
 //     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
@@ -162,6 +147,7 @@
 //             <FormLabel component="legend" sx={{ color: 'primary.dark', fontWeight: 'bold' }}>
 //               پلاک ملی
 //             </FormLabel>
+
 //             <MaskedInput
 //               guide={true}
 //               mask={[
@@ -202,6 +188,7 @@
 //                 }
 //               }}
 //             />
+             
 //           </FormControl>
 //           <FormControlLabel
 //             control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
@@ -301,6 +288,8 @@ const convertToPersian = (input, isShiftHeld) => {
   });
 };
 
+
+
 export default function Cartag() {
   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
@@ -349,6 +338,7 @@ export default function Cartag() {
     setInputs(newInputs);
   };
 
+
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
       {inputs.map((input, index) => (
@@ -357,6 +347,7 @@ export default function Cartag() {
             <FormLabel component="legend" sx={{ color: 'primary.dark', fontWeight: 'bold' }}>
               پلاک ملی
             </FormLabel>
+
             <MaskedInput
               guide={true}
               mask={[
@@ -397,6 +388,7 @@ export default function Cartag() {
                 }
               }}
             />
+             
           </FormControl>
           <FormControlLabel
             control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
