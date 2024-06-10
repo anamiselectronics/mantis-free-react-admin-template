@@ -198,7 +198,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import MaskedInput from 'react-text-mask';
-import plate from '../../assets/images/pages/plate.png';
+// import plate from '../../assets/images/pages/plate.png';
 
 const styleOuterBox = {
   display: 'flex',
@@ -220,7 +220,8 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontSize: '1.5rem',
-  backgroundImage: `url(${plate})`,
+  // backgroundImage: `url(${plate})`,
+  backgroundColor: '#fff',
   objectFit: 'fill',
   backgroundSize: '102% 110%',
   backgroundRepeat: 'no-repeat',
@@ -330,6 +331,21 @@ export default function Cartag() {
     setInputs(newInputs);
   };
 
+  // Determine background color based on the presence of 'D' in the input value
+  const getBackgroundColor = () => {
+    const currentInput = inputs[0]?.value.trim();
+    if ((currentInput && currentInput.includes('D')) || currentInput.includes('S')) {
+      return 'skyblue';
+    } else if (currentInput && currentInput.includes('ع')) {
+      return 'yellow';
+    }
+    return 'white'; // Default background color
+  };
+
+  const styleMaskWithCondition = {
+    ...styleMask,
+    backgroundColor: getBackgroundColor() // Use dynamic style
+  };
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
       {inputs.map((input, index) => (
@@ -366,9 +382,7 @@ export default function Cartag() {
                 ' ',
                 ' '
               ]}
-              style={{
-                ...styleMask
-              }}
+              style={styleMaskWithCondition} // Use dynamic style
               showMask
               value={input.value}
               onChange={(e) => handleInputChange(index, e)}
