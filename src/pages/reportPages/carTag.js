@@ -39,8 +39,6 @@
 //   caretColor: 'transparent' // disable cursor
 // };
 
-
-
 // const charMap = {
 //   a: 'ش',
 //   b: 'ذ',
@@ -87,8 +85,6 @@
 //     }
 //   });
 // };
-
-
 
 // export default function Cartag() {
 //   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
@@ -137,7 +133,6 @@
 
 //     setInputs(newInputs);
 //   };
-
 
 //   return (
 //     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
@@ -188,7 +183,7 @@
 //                 }
 //               }}
 //             />
-             
+
 //           </FormControl>
 //           <FormControlLabel
 //             control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
@@ -199,7 +194,6 @@
 //     </Box>
 //   );
 // }
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
@@ -288,8 +282,6 @@ const convertToPersian = (input, isShiftHeld) => {
   });
 };
 
-
-
 export default function Cartag() {
   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
@@ -338,7 +330,6 @@ export default function Cartag() {
     setInputs(newInputs);
   };
 
-
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
       {inputs.map((input, index) => (
@@ -375,7 +366,9 @@ export default function Cartag() {
                 ' ',
                 ' '
               ]}
-              style={styleMask}
+              style={{
+                ...styleMask
+              }}
               showMask
               value={input.value}
               onChange={(e) => handleInputChange(index, e)}
@@ -388,7 +381,6 @@ export default function Cartag() {
                 }
               }}
             />
-             
           </FormControl>
           <FormControlLabel
             control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
