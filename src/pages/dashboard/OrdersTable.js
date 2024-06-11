@@ -71,7 +71,7 @@ const headCells = [
   },
   {
     id: 'fat',
-    align: 'right',
+    align: 'left',
     disablePadding: false,
     label: 'Total Order'
   },
@@ -84,7 +84,7 @@ const headCells = [
   },
   {
     id: 'protein',
-    align: 'right',
+    align: 'left',
     disablePadding: false,
     label: 'Total Amount'
   }
@@ -205,9 +205,9 @@ export default function OrderTable() {
                       {row.trackingNo}
                     </Link>
                   </TableCell>
-                  <TableCell align="left">{row.name}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="left">
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.fat}</TableCell>
+                  <TableCell align="center">
                     <OrderStatus status={row.carbs} />
                   </TableCell>
                   <TableCell align="right">

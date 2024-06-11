@@ -47,6 +47,13 @@ const utilities = {
       icon: icons.ProjectOutlined
     },
     {
+      id: 'util-users',
+      title: 'مدیریت کاربران ',
+      type: 'item',
+      url: '/Users',
+      icon: icons.ProjectOutlined
+    },
+    {
       id: 'util-shadow',
       title: 'نمایش زنده',
       type: 'item',

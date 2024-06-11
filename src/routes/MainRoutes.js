@@ -22,6 +22,9 @@ const Excel = Loadable(lazy(() => import('pages/reportPages/excel')));
 // render - statistics
 const ShowStatistics = Loadable(lazy(() => import('pages/statistics/showStatistic')));
 
+// render - users
+const Users = Loadable(lazy(() => import('pages/users/Users')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -39,6 +42,10 @@ const MainRoutes = {
     {
       path: 'color',
       element: <Color />
+    },
+    {
+      path: 'users',
+      element: <Users />
     },
     {
       path: 'reportPages',

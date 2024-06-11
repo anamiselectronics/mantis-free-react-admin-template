@@ -199,6 +199,14 @@ import Box from '@mui/material/Box';
 import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import MaskedInput from 'react-text-mask';
 // import plate from '../../assets/images/pages/plate.png';
+//asset
+import A from 'assets/images/pages/A.png';
+import D from 'assets/images/pages/D.png';
+import F from 'assets/images/pages/F.png';
+import S from 'assets/images/pages/S.png';
+import Sh from 'assets/images/pages/Sh.png';
+import general from 'assets/images/pages/general.png';
+import plate from '../../assets/images/pages/plate.png';
 
 const styleOuterBox = {
   display: 'flex',
@@ -263,18 +271,25 @@ const charMap = {
   v: 'ر',
   n: 'د',
   m: 'ئ',
+  C: 'ژ',
   '[': 'ج',
   ']': 'چ',
-  '\\': 'ژ',
+  '\\': 'پ',
   ';': 'ک',
   "'": 'گ',
   ',': 'و'
+};
+
+const shiftCharMap = {
+  C: 'ژ' // Shift+c
 };
 
 const convertToPersian = (input, isShiftHeld) => {
   return input.replace(/[a-z[\]\\;',]/gi, (match) => {
     if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
       return match.toUpperCase();
+    } else if (isShiftHeld && shiftCharMap[match]) {
+      return shiftCharMap[match];
     } else if (match === 'D' || match === 'S') {
       return match; // Keep 'D' and 'S' as they are if previously typed with Shift
     } else {
@@ -332,19 +347,27 @@ export default function Cartag() {
   };
 
   // Determine background color based on the presence of 'D' in the input value
-  const getBackgroundColor = () => {
+  const getBackgroundImage = () => {
     const currentInput = inputs[0]?.value.trim();
     if ((currentInput && currentInput.includes('D')) || currentInput.includes('S')) {
-      return 'skyblue';
-    } else if (currentInput && currentInput.includes('ع')) {
-      return 'yellow';
+      return `url(${D})`;
+    } else if ((currentInput && currentInput.includes('ع')) || currentInput.includes('ک') || currentInput.includes('ت')) {
+      return `url(${general})`;
+    } else if (currentInput && currentInput.includes('ا')) {
+      return `url(${A})`;
+    } else if (currentInput && currentInput.includes('ش')) {
+      return `url(${Sh})`;
+    } else if ((currentInput && currentInput.includes('ف')) || currentInput.includes('ز')) {
+      return `url(${F})`;
+    } else if ((currentInput && currentInput.includes('ث')) || currentInput.includes('پ')) {
+      return `url(${S})`;
     }
-    return 'white'; // Default background color
+    return `url(${plate})`; // Default background color
   };
 
   const styleMaskWithCondition = {
     ...styleMask,
-    backgroundColor: getBackgroundColor() // Use dynamic style
+    backgroundImage: getBackgroundImage() // Use dynamic style
   };
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
