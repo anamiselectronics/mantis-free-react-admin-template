@@ -24,6 +24,7 @@ const ShowStatistics = Loadable(lazy(() => import('pages/statistics/showStatisti
 
 // render - users
 const Users = Loadable(lazy(() => import('pages/users/Users')));
+const AddUser = Loadable(lazy(() => import('pages/users/AddUser')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -45,7 +46,16 @@ const MainRoutes = {
     },
     {
       path: 'users',
-      element: <Users />
+      element: <Users />,
+    },
+    {
+      path: 'users',
+      children: [
+        {
+          path: 'add',
+          element: <AddUser />
+        }
+      ]
     },
     {
       path: 'reportPages',

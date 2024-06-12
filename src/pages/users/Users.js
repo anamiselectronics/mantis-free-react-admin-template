@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,25 +9,29 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import EnhancedSearch from './Search';
 import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
 // Style
 const headStyle = (theme) => ({
   backgroundColor: theme.palette.primary[200],
-    textAlign: 'center'
+  textAlign: 'center'
 });
 
 const columns = [
-  { id: 'id', label: 'ردیف', minWidth: 90, align: 'center'  },
-  { id: 'name', label: 'نام', minWidth: 150, align: 'center'  },
-  { id: 'family', label: 'نام خانوادگی', minWidth: 150, align: 'center'  },
-  { id: 'level', label: 'سطح دسترسی', minWidth: 150, align: 'center'  },
-  { id: 'sitution', label: 'وضعیت', minWidth: 150, align: 'center'  },
-  { id: 'edit', label: 'ویرایش', minWidth: 90, align: 'center'  },
-  { id: 'del', label: 'حذف', minWidth: 150, align: 'center'  }
+  { id: 'id', label: 'ردیف', minWidth: 90, align: 'center' },
+  { id: 'name', label: 'نام', minWidth: 150, align: 'center' },
+  { id: 'family', label: 'نام خانوادگی', minWidth: 150, align: 'center' },
+  { id: 'level', label: 'سطح دسترسی', minWidth: 150, align: 'center' },
+  { id: 'sitution', label: 'وضعیت', minWidth: 150, align: 'center' },
+  { id: 'edit', label: 'ویرایش', minWidth: 90, align: 'center' },
+  { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
 ];
 
 function createData(id, name, family, level, sitution) {
@@ -41,13 +46,14 @@ const rows = [
   createData('5', 'مریم', 'قاسمی', 'مشاهده کننده', 'غیرفعال')
 ];
 
-
 export default function Users() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('name');
+  const [filteredRows, setRows] = useState(rows);
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -74,6 +80,10 @@ export default function Users() {
     // Add your edit logic here
   };
 
+  const handleClick = () => {
+    navigate('/users/add');
+  }
+
   const sortComparator = (a, b, orderBy) => {
     if (a[orderBy] < b[orderBy]) {
       return -1;
@@ -84,13 +94,19 @@ export default function Users() {
     return 0;
   };
 
-  const sortedRows = rows.sort((a, b) => {
+  const sortedRows = filteredRows.sort((a, b) => {
     return order === 'asc' ? sortComparator(a, b, orderBy) : -sortComparator(a, b, orderBy);
   });
 
   return (
     <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}>
-      <TableContainer sx={{ maxHeight: 500, maxWidth: 950 }}>
+      <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
+        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage}  sx={{ width: '300px'}}/>
+        <Button variant="contained" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
+        عضو جدید
+      </Button>
+      </Box>
+      <TableContainer sx={{ maxHeight: 500, maxWidth: 960 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -122,7 +138,7 @@ export default function Users() {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <IconButton aria-label="edit" onClick={() => handleEdit(row.id)}>
-                            <EditIcon color='primary' />
+                            <EditIcon color="primary" />
                           </IconButton>
                         </TableCell>
                       );
@@ -130,10 +146,9 @@ export default function Users() {
                     if (column.id === 'del') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                             <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
-                            <DeleteIcon color='error'/>
+                          <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
+                            <DeleteIcon color="error" />
                           </IconButton>
-                         
                         </TableCell>
                       );
                     }
@@ -152,7 +167,7 @@ export default function Users() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={filteredRows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -50,7 +50,7 @@ const utilities = {
       id: 'util-users',
       title: 'مدیریت کاربران ',
       type: 'item',
-      url: '/Users',
+      url: '/users',
       icon: icons.ProjectOutlined
     },
     {
