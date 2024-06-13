@@ -3,6 +3,7 @@
 const Typography = (fontFamily) => ({
   htmlFontSize: 16,
   fontFamily,
+  // fontFamily: `'Vazirmatn', 'Public Sans', sans-serif`, // Include Vazir as the primary font
   fontWeightLight: 300,
   fontWeightRegular: 400,
   fontWeightMedium: 500,

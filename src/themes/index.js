@@ -17,8 +17,10 @@ export default function ThemeCustomization({ children }) {
   const theme = Palette('light', 'default');
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const themeTypography = Typography(`'Vazirmatn','Public Sans', sans-serif`);
+  const themeTypography = useMemo(() => Typography(`'Vazirmatn', 'Public Sans', sans-serif`));
   const themeCustomShadows = useMemo(() => CustomShadows(theme), [theme]);
+  // const themeTypography = Typography(`'Vazirmatn','Public Sans', sans-serif`);
+  // const themeCustomShadows = useMemo(() => CustomShadows(theme), [theme]);
 
   const themeOptions = useMemo(
     () => ({
