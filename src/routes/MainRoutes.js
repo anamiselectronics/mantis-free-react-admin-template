@@ -46,7 +46,7 @@ const MainRoutes = {
     },
     {
       path: 'users',
-      element: <Users />,
+      element: <Users />
     },
     {
       path: 'users',

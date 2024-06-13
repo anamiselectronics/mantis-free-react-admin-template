@@ -1,7 +1,7 @@
 // ==============================|| THEME CONFIG  ||============================== //
 
 const config = {
-  defaultPath: 'font.css',
+  defaultPath: '/font.css',
   fontFamily: `Vazirmatn,'Public Sans', sans-serif`,
   i18n: 'en',
   miniDrawer: false,

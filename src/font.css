@@ -1,10 +1,10 @@
-/* ----------------------------- Vazirmatn ----------------------------- */
+/* ----------------------------- Vazirmatn -----------------------------
 @font-face {
     font-family: Vazirmatn;
     font-style: light;
     font-weight: 300;
-    src: url("./font/Vazirmatn-Light.ttf")
-        format("embedded-opentype");
+    src: local('Vazirmatn Light'),url("./font/Vazirmatn-Light.ttf")
+        format('ttf');
     
  }
 
@@ -12,69 +12,145 @@
     font-family: Vazirmatn;
     font-style: normal;
     font-weight: 400;
-    src: url("./font/Vazirmatn-Regular.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn Regular'), url("./font/Vazirmatn-Regular.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    font-style: thin;
+    font-style: normal;
     font-weight: 100;
-    src: url("./font/Vazirmatn-Thin.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn Thin'), url("./font/Vazirmatn-Thin.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    font-style: extraLight;
+    font-style: normal;
     font-weight: 200;
-    src: url("./font/Vazirmatn-ExtraLight.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn ExtraLight '), url("./font/Vazirmatn-ExtraLight.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    src: url("./font/Vazirmatn-Black.ttf")
-        format("embedded-opentype");
+    font-style: normal;
+    font-weight: 200;
+    src:local('Vazirmatn Black '), url("./font/Vazirmatn-Black.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    font-style: Bold;
+    font-style: normal;
     font-weight: 700;
-    src: url("./font/Vazirmatn-Bold.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn Bold '), url("./font/Vazirmatn-Bold.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    font-style: extraBold;
+    font-style: normal;
     font-weight: 800;
-    src: url("./font/Vazirmatn-ExtraBold.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn ExtraBold '), url("./font/Vazirmatn-ExtraBold.ttf")
+        format('ttf');
       
   }
 
   @font-face {
     font-family: Vazirmatn;
-    font-style: medium;
+    font-style: normal;
     font-weight: 500;
-    src: url("./font/Vazirmatn-Medium.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn Medium '), url("./font/Vazirmatn-Medium.ttf")
+        format('ttf');
       
   }
   
   @font-face {
     font-family: Vazirmatn;
-    font-style: semiBold;
+    font-style: normal;
     font-weight: 600;
-    src: url("./font/Vazirmatn-SemiBold.ttf")
-        format("embedded-opentype");
+    src:local('Vazirmatn SemiBold '), url("./font/Vazirmatn-SemiBold.ttf")
+        format('ttf');
       
   }
- 
+  */
+
+  /* ----------------------------- Vazirmatn ----------------------------- */
+
+/* Vazirmatn Light */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Vazirmatn Light'), url("./font/Vazirmatn-Light.ttf") format('truetype');
+}
+
+/* Vazirmatn Regular */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Vazirmatn Regular'), url("./font/Vazirmatn-Regular.ttf") format('truetype');
+}
+
+/* Vazirmatn Thin */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Vazirmatn Thin'), url("./font/Vazirmatn-Thin.ttf") format('truetype');
+}
+
+/* Vazirmatn ExtraLight */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Vazirmatn ExtraLight'), url("./font/Vazirmatn-ExtraLight.ttf") format('truetype');
+}
+
+/* Vazirmatn Black */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 900; /* Adjusted to 900 for 'Black' weight */
+  src: local('Vazirmatn Black'), url("./font/Vazirmatn-Black.ttf") format('truetype');
+}
+
+/* Vazirmatn Bold */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Vazirmatn Bold'), url("./font/Vazirmatn-Bold.ttf") format('truetype');
+}
+
+/* Vazirmatn ExtraBold */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Vazirmatn ExtraBold'), url("./font/Vazirmatn-ExtraBold.ttf") format('truetype');
+}
+
+/* Vazirmatn Medium */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Vazirmatn Medium'), url("./font/Vazirmatn-Medium.ttf") format('truetype');
+}
+
+/* Vazirmatn SemiBold */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Vazirmatn SemiBold'), url("./font/Vazirmatn-SemiBold.ttf") format('truetype');
+}
