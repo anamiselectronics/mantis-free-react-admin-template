@@ -77,7 +77,7 @@ export default function Users() {
 
   const handleEdit = (id) => {
     console.log(`Edit row with id: ${id}`);
-    // Add your edit logic here
+    navigate('/users/edit');
   };
 
   const handleClick = () => {

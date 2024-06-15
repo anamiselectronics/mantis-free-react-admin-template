@@ -207,7 +207,7 @@ const legendStyle = {
   marginRight: '5px'
 };
 
-const AddUser = () => {
+const EditData = () => {
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -219,6 +219,7 @@ const AddUser = () => {
   });
 
   const navigate = useNavigate();
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -235,7 +236,7 @@ const AddUser = () => {
 
   return (
     <fieldset style={formBoxStyle}>
-      <legend style={legendStyle}>ثبت کاربر جدید</legend>
+      <legend style={legendStyle}> ویرایش اطلاعات کاربر </legend>
       <form onSubmit={handleSubmit}>
         <TextField
           label="نام"
@@ -348,4 +349,4 @@ const AddUser = () => {
   );
 }
 
-export default AddUser;
+export default EditData;

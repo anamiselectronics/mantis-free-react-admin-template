@@ -9,17 +9,17 @@ import './fonts.css';
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Vazirmatn, Arial, sans-serif',
-  },
+    fontFamily: 'Vazirmatn, Arial, sans-serif'
+  }
 });
 
 const App = () => (
   <ThemeProvider theme={theme}>
-  <ThemeCustomization>
-    <ScrollTop>
-      <Routes />
-    </ScrollTop>
-  </ThemeCustomization>
+    <ThemeCustomization>
+      <ScrollTop>
+        <Routes />
+      </ScrollTop>
+    </ThemeCustomization>
   </ThemeProvider>
 );
 
