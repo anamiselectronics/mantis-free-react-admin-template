@@ -25,7 +25,13 @@ const ShowStatistics = Loadable(lazy(() => import('pages/statistics/showStatisti
 // render - users
 const Users = Loadable(lazy(() => import('pages/users/Users')));
 const AddUser = Loadable(lazy(() => import('pages/users/AddUser')));
-const EditData = Loadable(lazy(() => import('pages/users/EditData')))
+const EditData = Loadable(lazy(() => import('pages/users/EditData')));
+
+// render - cameras
+const Cameras = Loadable(lazy(() => import('pages/cameras/Cameras')));
+const AddCamera = Loadable(lazy(() => import('pages/cameras/AddCamera')));
+const EditCamera = Loadable(lazy(() => import('pages/cameras/EditCamera')));
+
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -59,6 +65,23 @@ const MainRoutes = {
         {
           path: 'edit',
           element: <EditData />
+        }
+      ]
+    },
+    {
+      path: 'cameras',
+      element: <Cameras />
+    },
+    {
+      path: 'cameras',
+      children: [
+        {
+          path: 'add_camera',
+          element: <AddCamera />
+        },
+        {
+          path: 'edit_camera',
+          element: <EditCamera />
         }
       ]
     },

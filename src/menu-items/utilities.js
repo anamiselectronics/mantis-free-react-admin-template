@@ -64,7 +64,7 @@ const utilities = {
       id: 'ant-icons',
       title: 'مدیریت دوربین',
       type: 'item',
-      url: '/icons/ant',
+      url: '/camera',
       icon: icons.VideoCameraOutlined,
       breadcrumbs: false
     },

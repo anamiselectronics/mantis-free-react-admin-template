@@ -34,16 +34,16 @@ const columns = [
   { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
 ];
 
-function createData(id, name, family, level, sitution) {
-  return { id, name, family, level, sitution };
+function createData(id, name, string_url, rate, sitution) {
+  return { id, name, string_url, rate, sitution };
 }
 
 const rows = [
   createData('1', 'دوربین 2', 'sample/**', '5%', 'فعال'),
   createData('2', 'دوربین 3', 'sample/**', '6%', 'فعال'),
-  createData('3', 'دوربین2', 'sample/**', '8%', 'غیرفعال'),
-  createData('4', 'دوربین5', 'sample/**', '5%', 'فعال'),
-  createData('5', 'دوربین1', 'sample/**', '2%', 'غیرفعال')
+  createData('3', 'دوربین 2', 'sample/**', '8%', 'غیرفعال'),
+  createData('4', 'دوربین 5', 'sample/**', '5%', 'فعال'),
+  createData('5', 'دوربین 1', 'sample/**', '2%', 'غیرفعال')
 ];
 
 export default function Cameras() {
@@ -77,11 +77,11 @@ export default function Cameras() {
 
   const handleEdit = (id) => {
     console.log(`Edit row with id: ${id}`);
-    navigate('/users/edit');
+    navigate('/cameras/edit_camera');
   };
 
   const handleClick = () => {
-    navigate('/users/add');
+    navigate('/cameras/add_camera');
   }
 
   const sortComparator = (a, b, orderBy) => {

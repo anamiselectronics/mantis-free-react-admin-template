@@ -73,7 +73,7 @@ const EditData = () => {
 
   return (
     <fieldset style={formBoxStyle}>
-      <legend style={legendStyle}> ویرایش اطلاعات کاربر </legend>
+      <legend style={legendStyle}> ویرایش اطلاعات دوربین </legend>
       <form onSubmit={handleSubmit}>
         <TextField
           label="نام"
