@@ -5,7 +5,10 @@ import {
   PlaySquareOutlined,
   ProjectOutlined,
   BarChartOutlined,
-  LoadingOutlined
+  LoadingOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  LineChartOutlined 
 } from '@ant-design/icons';
 
 // icons
@@ -15,7 +18,11 @@ const icons = {
   PlaySquareOutlined,
   AntDesignOutlined,
   LoadingOutlined,
-  AppstoreAddOutlined
+  AppstoreAddOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  LineChartOutlined
+
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -32,26 +39,34 @@ const utilities = {
       url: '/Report',
       icon: icons.BarChartOutlined
     },
-    {
-      id: 'util-color',
-      title: 'رنگ',
-      type: 'item',
-      url: '/color',
-      icon: icons.ProjectOutlined
-    },
+    // {
+    //   id: 'util-color',
+    //   title: 'رنگ',
+    //   type: 'item',
+    //   url: '/color',
+    //   icon: icons.ProjectOutlined
+    // },
     {
       id: 'util-statistics',
       title: 'آمار',
       type: 'item',
       url: '/showStatistics',
-      icon: icons.ProjectOutlined
+      icon: icons.LineChartOutlined
     },
     {
       id: 'util-users',
       title: 'مدیریت کاربران ',
       type: 'item',
       url: '/users',
-      icon: icons.ProjectOutlined
+      icon: icons.UserOutlined 
+    },
+    {
+      id: 'ant-icons',
+      title: 'مدیریت دوربین',
+      type: 'item',
+      url: '/icons/ant',
+      icon: icons.VideoCameraOutlined,
+      breadcrumbs: false
     },
     {
       id: 'util-shadow',
@@ -59,14 +74,6 @@ const utilities = {
       type: 'item',
       url: '/shadow',
       icon: icons.PlaySquareOutlined
-    },
-    {
-      id: 'ant-icons',
-      title: 'مدیریت دوربین',
-      type: 'item',
-      url: '/icons/ant',
-      icon: icons.AntDesignOutlined,
-      breadcrumbs: false
     }
   ]
 };
