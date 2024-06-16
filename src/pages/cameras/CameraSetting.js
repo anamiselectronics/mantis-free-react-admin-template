@@ -46,10 +46,10 @@ const CameraSetting = () => {
   });
 
   const handleChange = (event) => {
-    const { name, checked, value } = event.target;
+    const { name, checked } = event.target;
     setFormData({
       ...formData,
-      [name]: name === 'VLC' ? checked : value // Use checked value directly for checkboxes
+      [name]: checked // Use checked directly for boolean checkboxes
     });
   };
 
@@ -136,7 +136,7 @@ const CameraSetting = () => {
           }}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', flexDirection: 'column', marginRight:'10px'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', flexDirection: 'column', marginRight: '10px' }}>
           <FormControl component="fieldset" margin="normal">
             <FormLabel component="legend" sx={{ textAlign: 'right', ...labelStyle }}>
               فعال سازی نواحی مورد علاقه
@@ -147,7 +147,7 @@ const CameraSetting = () => {
               <FormControlLabel control={<Checkbox checked={formData.ROI3} onChange={handleChange} name="ROI3" />} label="3 (ROI)" />
             </FormGroup>
           </FormControl>
-          <Divider orientation="vertical" flexItem sx={{border:'1px solid #bdbdbd'}}/>
+          <Divider orientation="vertical" flexItem sx={{ border: '1px solid #bdbdbd' }} />
           <FormControl component="fieldset" margin="normal">
             <FormLabel component="legend" sx={{ textAlign: 'right', ...labelStyle }}>
               استفاده از VLC
