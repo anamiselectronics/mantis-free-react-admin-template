@@ -1,9 +1,19 @@
 import React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { Tab, createTheme, ThemeProvider } from '@mui/material';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Box from '@mui/material/Box';
+
+//Icons
 import CameraEnhanceOutlinedIcon from '@mui/icons-material/CameraEnhanceOutlined';
-import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import ViewDayOutlinedIcon from '@mui/icons-material/ViewDayOutlined';
 import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
+
+//nested-component
+import CameraSetting from './CameraSetting';
+import TrafficJamSettings from './TrafficJamSettings';
+import AddLocation from './AddLocation';
 
 const formBoxStyle = {
   borderRadius: '10px',
@@ -14,18 +24,21 @@ const formBoxStyle = {
   backgroundColor: '#fff'
 };
 
-const legendStyle = {
-  textAlign: 'right',
-  color: '#fff',
-  fontSize: '1.1rem',
-  backgroundColor: '#1890ff',
-  borderRadius: '5px',
-  padding: '5px',
-  marginRight: '5px'
-};
+const theme = createTheme({
+  components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#959595', // Custom font color
+          fontFamily: 'Vazirmatn'
+        }
+      }
+    }
+  }
+});
 
 const AddCamera = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -33,44 +46,41 @@ const AddCamera = () => {
 
   return (
     <fieldset style={formBoxStyle}>
-      <legend style={legendStyle}>ثبت دوربین جدید</legend>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="icon label tabs example"
-        TabIndicatorProps={{ style: { backgroundColor: '#1890ff' } }} // Blue primary color for indicator
-      >
-        <Tab
-          icon={<CameraEnhanceOutlinedIcon />}
-          label="تنظیمات دوربین"
-          sx={{
-            color: value === 0 ? '#1890ff' : 'gray', // Blue for selected, gray for unselected
-            '&.Mui-selected': {
-              color: '#1890ff' // Blue for selected
-            }
-          }}
-        />
-        <Tab
-          icon={<BlockOutlinedIcon />}
-          label="تنظیمات راهبند"
-          sx={{
-            color: value === 1 ? '#1890ff' : 'gray', // Blue for selected, gray for unselected
-            '&.Mui-selected': {
-              color: '#1890ff' // Blue for selected
-            }
-          }}
-        />
-        <Tab
-          icon={<AddLocationOutlinedIcon />}
-          label="ثبت لوکیشن"
-          sx={{
-            color: value === 2 ? '#1890ff' : 'gray', // Blue for selected, gray for unselected
-            '&.Mui-selected': {
-              color: '#1890ff' // Blue for selected
-            }
-          }}
-        />
-      </Tabs>
+      <TabContext value={value}>
+        <ThemeProvider theme={theme}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={handleChange} aria-label="icon label tabs example">
+              <Tab
+                icon={<CameraEnhanceOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
+                iconPosition="start"
+                label="تنظیمات دوربین"
+                value="1"
+              />
+              <Tab
+                label="تنظیمات راهبند"
+                value="2"
+                icon={<ViewDayOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
+                iconPosition="start"
+              />
+              <Tab
+                label="ثبت لوکیشن"
+                value="3"
+                icon={<AddLocationOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
+                iconPosition="start"
+              />
+            </TabList>
+          </Box>
+        </ThemeProvider>
+        <TabPanel value="1">
+          <CameraSetting />
+        </TabPanel>
+        <TabPanel value="2">
+          <TrafficJamSettings />
+        </TabPanel>
+        <TabPanel value="3">
+          <AddLocation />
+        </TabPanel>
+      </TabContext>
     </fieldset>
   );
 };

@@ -39,13 +39,7 @@ const utilities = {
       url: '/Report',
       icon: icons.BarChartOutlined
     },
-    // {
-    //   id: 'util-color',
-    //   title: 'رنگ',
-    //   type: 'item',
-    //   url: '/color',
-    //   icon: icons.ProjectOutlined
-    // },
+   
     {
       id: 'util-statistics',
       title: 'آمار',
@@ -64,7 +58,7 @@ const utilities = {
       id: 'ant-icons',
       title: 'مدیریت دوربین',
       type: 'item',
-      url: '/camera',
+      url: '/cameras',
       icon: icons.VideoCameraOutlined,
       breadcrumbs: false
     },
@@ -74,6 +68,13 @@ const utilities = {
       type: 'item',
       url: '/shadow',
       icon: icons.PlaySquareOutlined
+    },
+    {
+      id: 'util-color',
+      title: 'رنگ',
+      type: 'item',
+      url: '/color',
+      icon: icons.ProjectOutlined
     }
   ]
 };

@@ -82,7 +82,7 @@ export default function Users() {
 
   const handleClick = () => {
     navigate('/users/add');
-  }
+  };
 
   const sortComparator = (a, b, orderBy) => {
     if (a[orderBy] < b[orderBy]) {
@@ -101,10 +101,10 @@ export default function Users() {
   return (
     <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}>
       <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
-        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage}  sx={{ width: '300px'}}/>
+        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '300px' }} />
         <Button variant="contained" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
-        عضو جدید
-      </Button>
+          عضو جدید
+        </Button>
       </Box>
       <TableContainer sx={{ maxHeight: 500, maxWidth: 960 }}>
         <Table stickyHeader aria-label="sticky table">
