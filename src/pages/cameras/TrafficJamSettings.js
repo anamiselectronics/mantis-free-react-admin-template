@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Box, Button, Checkbox, FormControlLabel, Select, MenuItem } from '@mui/material';
+import { Typography, Box, Button, Checkbox, FormControlLabel, Select, MenuItem, TextField, FormControl, InputLabel } from '@mui/material';
 
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 const formBoxStyle = {
   borderRadius: '10px',
   border: '3px solid #69B1FF',
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.4)',
-  height: 'fit-content',
   marginTop: '10px',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  padding: '20px'
 };
 
 const legendStyle = {
@@ -24,11 +22,10 @@ const legendStyle = {
 };
 
 const TrafficJamSetting = () => {
-  const numberOfCheckboxes = 4; // Define the number of checkboxes
+  const numberOfCheckboxes = 4;
 
-  // Initialize checked and selectValues arrays dynamically
-  const initialCheckedState = Array.from({ length: numberOfCheckboxes }, (_, index) => index === 0); // First checkbox is initially checked
-  const initialSelectValues = Array.from({ length: numberOfCheckboxes }, () => 'option1'); // All select values initially set to 'option1'
+  const initialCheckedState = Array.from({ length: numberOfCheckboxes }, (_, index) => index === 0);
+  const initialSelectValues = Array.from({ length: numberOfCheckboxes }, () => 'option1');
 
   const [parentChecked, setParentChecked] = useState(false);
   const [checked, setChecked] = useState(initialCheckedState);
@@ -59,7 +56,7 @@ const TrafficJamSetting = () => {
     <FormControlLabel
       key={index}
       control={
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <Checkbox checked={checked[index]} onChange={handleChildChange(index)} />
           <Typography>{`رله ${index + 1}`}</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -67,7 +64,7 @@ const TrafficJamSetting = () => {
             <Select
               labelId={`select-label-${index}`}
               id={`select-${index}`}
-              value={selectValues[index]} // Use empty string as initial value
+              value={selectValues[index]}
               onChange={(event) => {
                 const newSelectValues = [...selectValues];
                 newSelectValues[index] = event.target.value;
@@ -94,9 +91,10 @@ const TrafficJamSetting = () => {
     <fieldset style={formBoxStyle}>
       <legend style={legendStyle}>تنظیم کردن راهبند</legend>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
-          <div>
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <FormControlLabel
+              sx={{ mr: -10 }}
               label="فعال سازی"
               control={
                 <Checkbox
@@ -106,8 +104,23 @@ const TrafficJamSetting = () => {
                 />
               }
             />
-            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>{children}</Box>
-          </div>
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 0 }}>{children}</Box>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
+            {Array.from({ length: numberOfCheckboxes }).map((_, index) => (
+              <Box key={index} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 2 }}>
+                <label htmlFor={`filled-hidden-label-small-${index}`}>مدت وصل : ms</label>
+                <TextField
+                  hiddenLabel
+                  id={`filled-hidden-label-small-${index}`}
+                  defaultValue="0"
+                  variant="outlined"
+                  size="small"
+                  sx={{ marginRight: '10px' }}
+                />
+              </Box>
+            ))}
+          </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
           <Button type="submit" variant="contained" color="primary">
