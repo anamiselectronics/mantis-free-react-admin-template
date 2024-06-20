@@ -28,22 +28,23 @@ const columns = [
   { id: 'id', label: 'ردیف', minWidth: 90, align: 'center' },
   { id: 'name', label: 'نام', minWidth: 150, align: 'center' },
   { id: 'family', label: 'نام خانوادگی', minWidth: 150, align: 'center' },
-  { id: 'level', label: 'سطح دسترسی', minWidth: 150, align: 'center' },
+  { id: 'phone', label: 'شماره تماس', minWidth: 150, align: 'center' },
   { id: 'sitution', label: 'وضعیت', minWidth: 150, align: 'center' },
+  { id: 'description', label: 'توضیحات', minWidth: 150, align: 'center' },
   { id: 'edit', label: 'ویرایش', minWidth: 90, align: 'center' },
   { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
 ];
 
-function createData(id, name, family, level, sitution) {
-  return { id, name, family, level, sitution };
+function createData(id, name, family, phone , sitution, description) {
+  return { id, name, family, phone, sitution, description };
 }
 
 const rows = [
-  createData('1', 'امیر', 'محبی', 'مدیر', 'فعال'),
-  createData('2', 'سحر', 'رفیعی', 'مشاهده کننده', 'فعال'),
-  createData('3', 'اکبر', 'پژوهش', 'گزارش گیرنده', 'غیرفعال'),
-  createData('4', 'روناک', 'احمدی', 'گزارش گیرنده', 'فعال'),
-  createData('5', 'مریم', 'قاسمی', 'مشاهده کننده', 'غیرفعال')
+  createData('1', 'امیر', 'محبی', '09062532326', 'فعال'),
+  createData('2', 'سحر', 'رفیعی', '09145695885', 'فعال'),
+  createData('3', 'اکبر', 'پژوهش', '0992563631', 'غیرفعال'),
+  createData('4', 'روناک', 'احمدی', '09007851478', 'فعال'),
+  createData('5', 'مریم', 'قاسمی', '09187859845', 'غیرفعال')
 ];
 
 export default function Users() {
