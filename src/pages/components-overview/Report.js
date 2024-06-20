@@ -201,7 +201,7 @@ const TabsList = styled(BaseTabsList)(
   flex-wrap: wrap;
   justify-content:space-around;
   align-items: center;
-  border: 2px solid #69B1FF;
+  border: 1px solid #69B1FF;
   box-shadow: 0px 4px 6px ${theme.palette.mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
   white-space: nowrap;
    color: ${blue[500]};

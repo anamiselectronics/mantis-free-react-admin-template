@@ -1,86 +1,120 @@
-import React from 'react';
-import { Tab, createTheme, ThemeProvider } from '@mui/material';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
+import React, { useState } from 'react';
+import { Tab, Tabs, createTheme, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
 
-//Icons
+// Icons
 import CameraEnhanceOutlinedIcon from '@mui/icons-material/CameraEnhanceOutlined';
 import ViewDayOutlinedIcon from '@mui/icons-material/ViewDayOutlined';
 import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 
-//nested-component
+// Nested components
 import CameraSetting from './CameraSetting';
 import TrafficJamSettings from './TrafficJamSettings';
-import AddLocation from './AddLocation';
+import LocationSelector from './LocationSelector';
 
 const formBoxStyle = {
   borderRadius: '10px',
   border: '2px solid #69B1FF',
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.4)',
-  height: 'fit-content',
   marginTop: '10px',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '140vh', // Adjust the height as needed
 };
 
+const ScrollableBox = styled(Box)`
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  max-width: 90vw;
+`;
+
+// Create a custom theme with font overrides
 const theme = createTheme({
+  typography: {
+    fontFamily: 'Vazirmatn, Arial, sans-serif',
+    fontSize: 13 // Adjust the font size here (default is 13px)
+  },
   components: {
     MuiTab: {
       styleOverrides: {
         root: {
-          color: '#959595', // Custom font color
-          fontFamily: 'Vazirmatn'
-        }
-      }
-    }
-  }
+          color: '#959595',
+        },
+      },
+    },
+  },
+  palette: {
+    primary: {
+      main: '#096dd9',
+    },
+  },
 });
 
 const AddCamera = () => {
-  const [value, setValue] = React.useState('1');
+  const [openTabs, setOpenTabs] = useState(['1']);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleTabClick = (tabValue) => {
+    if (openTabs.includes(tabValue)) {
+      setOpenTabs(openTabs.filter((value) => value !== tabValue));
+    } else {
+      setOpenTabs([...openTabs, tabValue]);
+    }
   };
 
   return (
     <fieldset style={formBoxStyle}>
-      <TabContext value={value}>
-        <ThemeProvider theme={theme}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="icon label tabs example">
-              <Tab
-                icon={<CameraEnhanceOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
-                iconPosition="start"
-                label="تنظیمات دوربین"
-                value="1"
-              />
-              <Tab
-                label="تنظیمات راهبند"
-                value="2"
-                icon={<ViewDayOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
-                iconPosition="start"
-              />
-              <Tab
-                label="ثبت لوکیشن"
-                value="3"
-                icon={<AddLocationOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
-                iconPosition="start"
-              />
-            </TabList>
-          </Box>
-        </ThemeProvider>
-        <TabPanel value="1">
-          <CameraSetting />
-        </TabPanel>
-        <TabPanel value="2">
-          <TrafficJamSettings />
-        </TabPanel>
-        <TabPanel value="3">
-          <AddLocation />
-        </TabPanel>
-      </TabContext>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={openTabs.length === 0 ? false : openTabs[openTabs.length - 1]}
+            aria-label="icon label tabs example"
+            indicatorColor="primary" // Change indicator color to primary
+          >
+            <Tab
+              icon={<CameraEnhanceOutlinedIcon sx={{ marginRight: 1, fontSize: 40 }} />}
+              iconPosition="start"
+              label="تنظیمات دوربین"
+              value="1"
+              onClick={() => handleTabClick('1')}
+            />
+            <Tab
+              label="تنظیمات راهبند"
+              value="2"
+              icon={<ViewDayOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
+              iconPosition="start"
+              onClick={() => handleTabClick('2')}
+            />
+            <Tab
+              label="ثبت لوکیشن"
+              value="3"
+              icon={<AddLocationOutlinedIcon fontSize={'small'} sx={{ marginRight: 1 }} />}
+              iconPosition="start"
+              onClick={() => handleTabClick('3')}
+            />
+          </Tabs>
+        </Box>
+        <ScrollableBox>
+          {openTabs.includes('1') && (
+            <Box key="1" sx={{ padding: 1, width: '100%' }}>
+              <CameraSetting />
+            </Box>
+          )}
+          {openTabs.includes('2') && (
+            <Box key="2" sx={{ padding: 1, width: '100%' }}>
+              <TrafficJamSettings />
+            </Box>
+          )}
+          {openTabs.includes('3') && (
+            <Box key="3" sx={{ padding: 1, width: '100%' }}>
+              <LocationSelector />
+            </Box>
+          )}
+        </ScrollableBox>
+      </ThemeProvider>
     </fieldset>
   );
 };
