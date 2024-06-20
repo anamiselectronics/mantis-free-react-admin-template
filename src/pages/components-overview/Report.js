@@ -146,7 +146,7 @@ const blue = {
 
 const Tab = styled(BaseTab)`
   font-family: Vazirmatn;
-   color: ${blue[500]};
+   color: ${'#959595'};
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: bold;
@@ -195,7 +195,7 @@ const TabsList = styled(BaseTabsList)(
   font-family: Vazirmatn;
   font-size: 0.875rem;
   min-width: 400px;
-  background-color: ${'white'};
+  background-color: ${'#e6f4ff'};
   border-radius: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -204,29 +204,29 @@ const TabsList = styled(BaseTabsList)(
   border: 1px solid #69B1FF;
   box-shadow: 0px 4px 6px ${theme.palette.mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'rgba(0,0,0, 0.2)'};
   white-space: nowrap;
-   color: ${blue[500]};
+   color: ${'#595959'};
 
   @media (max-width: 1200px) {
     font-size: 0.8rem;
-     color: ${blue[500]};
+     color: ${'#595959'};
   }
 
   @media (max-width: 992px) {
     font-size: 0.75rem;
-     color: ${blue[500]};
+     color: ${'#595959'};
   }
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
     justify-content:center;
-     color: ${blue[500]};
+     color: ${'#595959'};
 
   }
 
   @media (max-width: 576px) {
     font-size: 0.65rem;
     justify-content:center;
-     color: ${blue[500]};
+     color: ${'#595959'};
   }
   `
 );

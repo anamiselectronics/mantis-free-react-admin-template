@@ -32,6 +32,10 @@ const Cameras = Loadable(lazy(() => import('pages/cameras/Cameras')));
 const AddCamera = Loadable(lazy(() => import('pages/cameras/AddCamera')));
 const EditCamera = Loadable(lazy(() => import('pages/cameras/EditCamera')));
 
+// render - Authorized Person
+const ShowAuthorizedPersons = Loadable(lazy(() => import('pages/authorizedPersons/ShowAuthorizedPersons')));
+const AddMember = Loadable(lazy(() => import('pages/authorizedPersons/AddNewMember')));
+const EditMember = Loadable(lazy(() => import('pages/authorizedPersons/EditMember')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -82,6 +86,23 @@ const MainRoutes = {
         {
           path: 'edit_camera',
           element: <EditCamera />
+        }
+      ]
+    },
+    {
+      path: 'authorizedPersons',
+      element: <ShowAuthorizedPersons />
+    },
+    {
+      path: 'authorizedPersons',
+      children: [
+        {
+          path: 'add-member',
+          element: <AddMember />
+        },
+        {
+          path: 'edit-memberInfo',
+          element: <EditMember />
         }
       ]
     },

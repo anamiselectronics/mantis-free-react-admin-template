@@ -8,7 +8,8 @@ import {
   LoadingOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  LineChartOutlined 
+  LineChartOutlined,
+  UsergroupAddOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -21,8 +22,8 @@ const icons = {
   AppstoreAddOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  LineChartOutlined
-
+  LineChartOutlined,
+  UsergroupAddOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -39,7 +40,6 @@ const utilities = {
       url: '/Report',
       icon: icons.BarChartOutlined
     },
-   
     {
       id: 'util-statistics',
       title: 'آمار',
@@ -52,15 +52,22 @@ const utilities = {
       title: 'مدیریت کاربران ',
       type: 'item',
       url: '/users',
-      icon: icons.UserOutlined 
+      icon: icons.UserOutlined
     },
     {
-      id: 'ant-icons',
+      id: 'util-cameras',
       title: 'مدیریت دوربین',
       type: 'item',
       url: '/cameras',
       icon: icons.VideoCameraOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'util-authorized-person',
+      title: 'افراد مجاز',
+      type: 'item',
+      url: '/authorizedPersons',
+      icon: icons.UsergroupAddOutlined
     },
     {
       id: 'util-shadow',
