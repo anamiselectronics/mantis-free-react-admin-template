@@ -61,7 +61,7 @@ const rows = [
   createData('5', 'مریم', 'قاسمی', '09187859845', 'غیرفعال')
 ];
 
-export default function Users() {
+export default function AuthorizedPersons() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState('asc');
