@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,6 +18,7 @@ import EnhancedSearch from './Search';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Switch from '@mui/material/Switch';
 import Modal from '@mui/material/Modal';
 
 // Style
@@ -35,19 +36,19 @@ const style = {
 
 const headStyle = (theme) => ({
   backgroundColor: theme.palette.primary[200],
-  textAlign: 'center'
+  textAlign: 'center',
 });
 
 const columns = [
   { id: 'id', label: 'ردیف', minWidth: 90, align: 'center' },
   { id: 'plateNumber', label: 'شماره پلاک', minWidth: 150, align: 'center' },
-  { id: 'sitution', label: 'وضعیت', minWidth: 150, align: 'center' },
+  { id: 'switch', label: 'وضعیت', minWidth: 150, align: 'center' },
   { id: 'edit', label: 'ویرایش', minWidth: 90, align: 'center' },
   { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
 ];
 
-function createData(id, plateNumber, sitution, description) {
-  return { id, plateNumber, sitution, description };
+function createData(id, plateNumber, description) {
+  return { id, plateNumber,description };
 }
 
 const rows = [
@@ -68,7 +69,7 @@ export default function AuthorizedPlates() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const theme = useTheme();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -85,6 +86,9 @@ export default function AuthorizedPlates() {
     setPage(0);
   };
 
+  //switch-Label
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
   // const handleDelete = (id) => {
   //   console.log(`Delete row with id: ${id}`);
 
@@ -92,11 +96,11 @@ export default function AuthorizedPlates() {
 
   const handleEdit = (id) => {
     console.log(`Edit row with id: ${id}`);
-    navigate('/authorizedPersons/edit-memberInfo');
+    // navigate('/authorizedPersons/edit-memberInfo');
   };
 
   const handleClick = () => {
-    navigate('/authorizedPersons/add-member');
+    // navigate('/authorizedPersons/add-member');
   };
 
   const sortComparator = (a, b, orderBy) => {
@@ -117,15 +121,15 @@ export default function AuthorizedPlates() {
     <>
       {/* <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}> */}
       <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
-        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '300px' }} />
-        <Button variant="contained" size="small" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
+        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '200px'  }} />
+        <Button variant="contained" size="small" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2}}>
           پلاک جدید
         </Button>
       </Box>
       <TableContainer sx={{ maxHeight: 500, maxWidth: 600 }}>
-        <Table stickyHeader aria-label="sticky table" sx={{ height: '300px' }}>
+        <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow >
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -165,6 +169,13 @@ export default function AuthorizedPlates() {
                           <IconButton aria-label="delete" onClick={() => handleOpen(row.id)}>
                             <DeleteIcon color="error" />
                           </IconButton>
+                        </TableCell>
+                      );
+                    }
+                    if (column.id === 'switch') {
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          <Switch {...label} defaultChecked size="small" />
                         </TableCell>
                       );
                     }
