@@ -17,8 +17,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import EnhancedSearch from './Search';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 // Style
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #959595',
+  boxShadow: 24,
+  p: 4
+};
+
 const headStyle = (theme) => ({
   backgroundColor: theme.palette.primary[200],
   textAlign: 'center'
@@ -35,7 +49,7 @@ const columns = [
   { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
 ];
 
-function createData(id, name, family, phone , sitution, description) {
+function createData(id, name, family, phone, sitution, description) {
   return { id, name, family, phone, sitution, description };
 }
 
@@ -53,6 +67,9 @@ export default function Users() {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [filteredRows, setRows] = useState(rows);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -71,10 +88,10 @@ export default function Users() {
     setPage(0);
   };
 
-  const handleDelete = (id) => {
-    console.log(`Delete row with id: ${id}`);
-    // Add your delete logic here
-  };
+  // const handleDelete = (id) => {
+  //   console.log(`Delete row with id: ${id}`);
+
+  // };
 
   const handleEdit = (id) => {
     console.log(`Edit row with id: ${id}`);
@@ -100,80 +117,97 @@ export default function Users() {
   });
 
   return (
-    <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}>
-      <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
-        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '300px' }} />
-        <Button variant="contained" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
-          افزودن فرد مجاز جدید
-        </Button>
-      </Box>
-      <TableContainer sx={{ maxHeight: 500, maxWidth: 960 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth, ...headStyle(theme) }}
-                  sortDirection={orderBy === column.id ? order : false}
-                >
-                  <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={orderBy === column.id ? order : 'asc'}
-                    onClick={(event) => handleRequestSort(event, column.id)}
+    <>
+      <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}>
+        <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
+          <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '300px' }} />
+          <Button variant="contained" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
+            افزودن فرد مجاز جدید
+          </Button>
+        </Box>
+        <TableContainer sx={{ maxHeight: 500, maxWidth: 960 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth, ...headStyle(theme) }}
+                    sortDirection={orderBy === column.id ? order : false}
                   >
-                    {column.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    if (column.id === 'edit') {
+                    <TableSortLabel
+                      active={orderBy === column.id}
+                      direction={orderBy === column.id ? order : 'asc'}
+                      onClick={(event) => handleRequestSort(event, column.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      if (column.id === 'edit') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            <IconButton aria-label="edit" onClick={() => handleEdit(row.id)}>
+                              <EditIcon color="primary" />
+                            </IconButton>
+                          </TableCell>
+                        );
+                      }
+                      if (column.id === 'del') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            <IconButton aria-label="delete" onClick={() => handleOpen(row.id)}>
+                              <DeleteIcon color="error" />
+                            </IconButton>
+                          </TableCell>
+                        );
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <IconButton aria-label="edit" onClick={() => handleEdit(row.id)}>
-                            <EditIcon color="primary" />
-                          </IconButton>
+                          {column.format && typeof value === 'number' ? column.format(value) : value}
                         </TableCell>
                       );
-                    }
-                    if (column.id === 'del') {
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
-                            <DeleteIcon color="error" />
-                          </IconButton>
-                        </TableCell>
-                      );
-                    }
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={filteredRows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={filteredRows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+
+      <div style={{ margin: '25%' }}>
+        {/* <Button onClick={handleOpen}>Open modal</Button> */}
+        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h5" component="h2" sx={{direction:'rtl'}}>
+            آیا از حذف کردن عضو مجاز مطمئن هستید؟
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+             <Button>حذف</Button>
+             <Button>انصراف</Button>
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
+    </>
   );
 }

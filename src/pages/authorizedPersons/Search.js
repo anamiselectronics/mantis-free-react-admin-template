@@ -8,7 +8,11 @@ function EnhancedSearch({ setPage, setRowsPerPage, setRows, originalRows, sx }) 
 
   const requestSearch = (searchedVal) => {
     const filteredRows = originalRows.filter((row) => {
-      return row.name.toLowerCase().includes(searchedVal.toLowerCase()) || row.family.toLowerCase().includes(searchedVal.toLowerCase()) || row.phone.toLowerCase().includes(searchedVal.toLowerCase());
+      return (
+        row.name.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.family.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.phone.toLowerCase().includes(searchedVal.toLowerCase())
+      );
     });
     setRows(filteredRows);
     setRowsPerPage(filteredRows.length);
