@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,12 +12,13 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import EnhancedSearch from './Search';
+import EnhancedSearch from './PlateSearch';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
 
 // Style
 const style = {
@@ -36,7 +35,7 @@ const style = {
 
 const headStyle = (theme) => ({
   backgroundColor: theme.palette.primary[200],
-  textAlign: 'center',
+  textAlign: 'center'
 });
 
 const columns = [
@@ -48,10 +47,10 @@ const columns = [
 ];
 
 function createData(id, plateNumber, description) {
-  return { id, plateNumber,description };
+  return { id, plateNumber, description };
 }
 
-const rows = [
+const rowsData = [
   createData('1', '262656', 'فعال'),
   createData('2', '895623', 'فعال'),
   createData('3', '748596', 'غیرفعال'),
@@ -64,12 +63,33 @@ export default function AuthorizedPlates() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
-  const [filteredRows, setRows] = useState(rows);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [rows, setRows] = useState(rowsData);
+  const [filteredRows, setFilteredRows] = useState(rowsData);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [editRow, setEditRow] = useState(null);
+  const [deleteRow, setDeleteRow] = useState(null);
+  const [newPlateNumber, setNewPlateNumber] = useState('');
   const theme = useTheme();
-  // const navigate = useNavigate();
+
+  const handleOpenEdit = (row) => {
+    setEditRow(row);
+    setNewPlateNumber(row.plateNumber);
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleOpenDelete = (row) => {
+    setDeleteRow(row);
+    setOpenDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -86,21 +106,22 @@ export default function AuthorizedPlates() {
     setPage(0);
   };
 
-  //switch-Label
-  const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
-  // const handleDelete = (id) => {
-  //   console.log(`Delete row with id: ${id}`);
-
-  // };
-
-  const handleEdit = (id) => {
-    console.log(`Edit row with id: ${id}`);
-    // navigate('/authorizedPersons/edit-memberInfo');
+  const handleEditChange = (event) => {
+    setNewPlateNumber(event.target.value);
   };
 
-  const handleClick = () => {
-    // navigate('/authorizedPersons/add-member');
+  const handleSaveEdit = () => {
+    const updatedRows = rows.map((row) => (row.id === editRow.id ? { ...row, plateNumber: newPlateNumber } : row));
+    setRows(updatedRows);
+    setFilteredRows(updatedRows);
+    handleCloseEdit();
+  };
+
+  const handleDelete = () => {
+    const updatedRows = rows.filter((row) => row.id !== deleteRow.id);
+    setRows(updatedRows);
+    setFilteredRows(updatedRows);
+    handleCloseDelete();
   };
 
   const sortComparator = (a, b, orderBy) => {
@@ -119,17 +140,22 @@ export default function AuthorizedPlates() {
 
   return (
     <>
-      {/* <Paper sx={{ minWidth: 'auto', overflow: 'auto' }}> */}
       <Box display="flex" justifyContent="flex-start" alignItems="center" p={2}>
-        <EnhancedSearch setRows={setRows} originalRows={rows} setRowsPerPage={setRowsPerPage} setPage={setPage} sx={{ width: '200px'  }} />
-        <Button variant="contained" size="small" onClick={handleClick} endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2}}>
+        <EnhancedSearch
+          setRows={setFilteredRows}
+          originalRows={rows}
+          setRowsPerPage={setRowsPerPage}
+          setPage={setPage}
+          sx={{ width: '200px' }}
+        />
+        <Button variant="contained" size="small" endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
           پلاک جدید
         </Button>
       </Box>
       <TableContainer sx={{ maxHeight: 500, maxWidth: 600 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow >
+            <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -157,7 +183,7 @@ export default function AuthorizedPlates() {
                     if (column.id === 'edit') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <IconButton aria-label="edit" onClick={() => handleEdit(row.id)}>
+                          <IconButton aria-label="edit" onClick={() => handleOpenEdit(row)}>
                             <EditIcon color="primary" />
                           </IconButton>
                         </TableCell>
@@ -166,7 +192,7 @@ export default function AuthorizedPlates() {
                     if (column.id === 'del') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <IconButton aria-label="delete" onClick={() => handleOpen(row.id)}>
+                          <IconButton aria-label="delete" onClick={() => handleOpenDelete(row)}>
                             <DeleteIcon color="error" />
                           </IconButton>
                         </TableCell>
@@ -175,7 +201,7 @@ export default function AuthorizedPlates() {
                     if (column.id === 'switch') {
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          <Switch {...label} defaultChecked size="small" />
+                          <Switch defaultChecked={row.description === 'فعال'} size="small" />
                         </TableCell>
                       );
                     }
@@ -200,22 +226,49 @@ export default function AuthorizedPlates() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      {/* </Paper> */}
 
-      <div style={{ margin: '25%' }}>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
-        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
-              آیا از حذف کردن عضو مجاز مطمئن هستید؟
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <Button>حذف</Button>
-              <Button>انصراف</Button>
-            </Typography>
+      {/* Edit Modal */}
+      <Modal open={openEdit} onClose={handleCloseEdit} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
+            ویرایش شماره پلاک
+          </Typography>
+          <TextField
+            id="edit-plate-number"
+            label="شماره پلاک"
+            variant="outlined"
+            value={newPlateNumber}
+            onChange={handleEditChange}
+            fullWidth
+            sx={{ mt: 2, mb: 2 }}
+          />
+          <Button variant="contained" color="primary" onClick={handleSaveEdit} sx={{ mr: 1 }}>
+            ذخیره
+          </Button>
+          <Button variant="contained" color="secondary" onClick={handleCloseEdit}>
+            انصراف
+          </Button>
+        </Box>
+      </Modal>
+
+      {/* Delete Modal */}
+      <Modal open={openDelete} onClose={handleCloseDelete} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
+            آیا از حذف کردن عضو مجاز مطمئن هستید؟
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button variant="contained" color="error" onClick={handleDelete}>
+              حذف
+            </Button>
+            <Button variant="contained" color="secondary" onClick={handleCloseDelete}>
+              انصراف
+            </Button>
           </Box>
-        </Modal>
-      </div>
+        </Box>
+      </Modal>
     </>
   );
 }
+
+

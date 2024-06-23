@@ -19,7 +19,7 @@ const formBoxStyle = {
   boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.4)',
   height: 'fit-content',
   marginTop: '10px',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
 };
 
 const labelStyle = {
@@ -31,16 +31,6 @@ const requiredLabelStyle = {
   '& .MuiInputLabel-asterisk': {
     color: 'red'
   }
-};
-
-const legendStyle = {
-  textAlign: 'right',
-  color: '#fff',
-  fontSize: '1.1rem',
-  backgroundColor: '#1890ff',
-  borderRadius: '5px',
-  padding: '5px',
-  marginRight: '5px'
 };
 
 const AddNewMember = () => {
@@ -84,13 +74,25 @@ const AddNewMember = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <fieldset style={formBoxStyle}>
-        <legend style={legendStyle}>ثبت عضو مجاز جدید</legend>
+    <Grid xs={12} sm={7} style={formBoxStyle}>
+      <Paper elevation={3}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            color: 'primary.main', // Use theme colors
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            textAlign: 'right',
+            padding: '10px'
+          }}
+        >
+          ثبت عضو مجاز جدید
+        </Typography>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={7}>
-              <Item sx={{ height: '85%' }}>
+          <Grid container spacing={2} pr={2} pl={2}>
+            <Grid item xs={12} sm={7}>
+              <Item>
                 <TextField
                   label="نام"
                   name="name"
@@ -162,7 +164,7 @@ const AddNewMember = () => {
                   }}
                 />
 
-                <Grid item xs={10}>
+                <Grid item xs={12} sm={10}>
                   <Item>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <legend>تصویر مالک</legend>
@@ -208,8 +210,8 @@ const AddNewMember = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={5}>
-              <Item sx={{ height: '85%' }}>
+            <Grid item xs={12} sm={5}>
+              <Item>
                 <legend>پلاک های مجاز</legend>
                 <AuthorizedPlates />
               </Item>
@@ -219,17 +221,17 @@ const AddNewMember = () => {
               <Item>table of plate</Item>
             </Grid>
           </Grid>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', gap: '20px' }}>
+          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', gap: '20px' }}>
             <Button type="submit" variant="contained" color="primary">
               ثبت
             </Button>
             <Button type="button" variant="contained" color="primary" onClick={() => navigate(-1)}>
               بازگشت
             </Button>
-          </Box>
+          </Grid>
         </form>
-      </fieldset>
-    </Box>
+      </Paper>
+    </Grid>
   );
 };
 
