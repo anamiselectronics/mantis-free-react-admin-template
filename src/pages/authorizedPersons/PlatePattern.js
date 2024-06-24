@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import { FormControl, FormLabel} from '@mui/material';
 import MaskedInput from 'react-text-mask';
 // import plate from '../../assets/images/pages/plate.png';
 //asset
@@ -44,7 +44,7 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   paddingLeft: '4vw',
-  width: '16.5rem',
+  width: '15.5rem',
   caretColor: 'transparent' // disable cursor
 };
 
@@ -102,8 +102,8 @@ const convertToPersian = (input, isShiftHeld) => {
   });
 };
 
-export default function Cartag() {
-  const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0 }]);
+export default function PlatePattern({ value, onChange }) {
+  const [inputs, setInputs] = React.useState([{ value: value, cursorPosition: 0 }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const inputRefs = React.useRef([]);
 
@@ -130,7 +130,7 @@ export default function Cartag() {
   }, []);
 
   const handleInputChange = (index, e) => {
-    const nullValue = '_ _  _  _ _ _    _ _   ';
+    // const nullValue = '_ _  _  _ _ _    _ _   ';
     const newValue = e.target.value;
     const newPosition = e.target.selectionStart;
 
@@ -139,15 +139,8 @@ export default function Cartag() {
     const newInputs = [...inputs];
     newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
 
-    if (index === newInputs.length - 1 && convertedValue.length > 0) {
-      newInputs.push({ value: '', cursorPosition: 0 });
-    }
-
-    if (convertedValue === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
-      newInputs.splice(index, 1);
-    }
-
     setInputs(newInputs);
+    onChange(e);
   };
 
   // Determine background color based on the presence of 'D' in the input value
@@ -223,10 +216,6 @@ export default function Cartag() {
               }}
             />
           </FormControl>
-          <FormControlLabel
-            control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
-            label={<Typography>مخالف</Typography>}
-          />
         </Box>
       ))}
     </Box>

@@ -12,13 +12,14 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import EnhancedSearch from './PlateSearch';
+import EnhancedSearch from './PlateSearch'; // Replace with your search component path
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import PlatePattern from './PlatePattern';
 
 // Style
 const style = {
@@ -62,15 +63,20 @@ export default function AuthorizedPlates() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('id'); // Change default orderBy to 'id'
   const [rows, setRows] = useState(rowsData);
   const [filteredRows, setFilteredRows] = useState(rowsData);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false); // State for add modal
   const [editRow, setEditRow] = useState(null);
   const [deleteRow, setDeleteRow] = useState(null);
   const [newPlateNumber, setNewPlateNumber] = useState('');
+  const [newPlate, setNewPlate] = useState('');
   const theme = useTheme();
+
+  // const handleOpenAdd = () => setOpenAdd(true);
+  // const handleCloseAdd = () => setOpenAdd(false);
 
   const handleOpenEdit = (row) => {
     setEditRow(row);
@@ -124,6 +130,34 @@ export default function AuthorizedPlates() {
     handleCloseDelete();
   };
 
+  const handleOpenAdd = () => {
+    setOpenAdd(true);
+  };
+
+  const handleCloseAdd = () => {
+    setOpenAdd(false);
+  };
+
+  // const handleAddPlateNumber = () => {
+  //   const id = (rows.length + 1).toString();
+  //   const newPlate = createData(id, newPlateNumber, 'فعال'); // Assuming default description is 'فعال'
+  //   const updatedRows = [...rows, newPlate];
+  //   setRows(updatedRows);
+  //   setFilteredRows(updatedRows);
+  //   setNewPlateNumber('');
+  //   handleCloseAdd();
+  // };
+
+  const handlePlateChange = (event) => setNewPlate(event.target.value);
+
+  const handleAddPlate = () => {
+    const id = (rows.length + 1).toString();
+    const newPlateEntry = { id, plateNumber: newPlate, description: 'فعال' };
+    setRows([...rows, newPlateEntry]);
+    setNewPlate('');
+    handleCloseAdd();
+  };
+
   const sortComparator = (a, b, orderBy) => {
     if (a[orderBy] < b[orderBy]) {
       return -1;
@@ -148,7 +182,7 @@ export default function AuthorizedPlates() {
           setPage={setPage}
           sx={{ width: '200px' }}
         />
-        <Button variant="contained" size="small" endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }}>
+        <Button variant="contained" size="small" endIcon={<AddIcon sx={{ mr: 1 }} />} sx={{ mr: 2 }} onClick={handleOpenAdd}>
           پلاک جدید
         </Button>
       </Box>
@@ -160,7 +194,7 @@ export default function AuthorizedPlates() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth, ...headStyle(theme) }}
+                  style={{ minWidth: '2vw', ...headStyle(theme) }}
                   sortDirection={orderBy === column.id ? order : false}
                 >
                   <TableSortLabel
@@ -227,6 +261,33 @@ export default function AuthorizedPlates() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
+      {/* Add Modal */}
+      <Modal open={openAdd} onClose={handleCloseAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
+            اضافه کردن شماره پلاک جدید
+          </Typography>
+          {/* <TextField
+            id="add-plate-number"
+            label="شماره پلاک"
+            variant="outlined"
+            value={newPlateNumber}
+            onChange={(e) => setNewPlateNumber(e.target.value)}
+            fullWidth
+            sx={{ mt: 2, mb: 2 }}
+          /> */}
+          <PlatePattern value={newPlate} onChange={handlePlateChange} />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button variant="contained" color="primary" onClick={handleAddPlate}>
+              افزودن
+            </Button>
+            <Button variant="outlined" color="secondary" onClick={handleCloseAdd}>
+              لغو
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+
       {/* Edit Modal */}
       <Modal open={openEdit} onClose={handleCloseEdit} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
@@ -270,5 +331,3 @@ export default function AuthorizedPlates() {
     </>
   );
 }
-
-

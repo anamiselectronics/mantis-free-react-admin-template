@@ -91,7 +91,7 @@ const AddNewMember = () => {
         </Typography>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} pr={2} pl={2}>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={5}>
               <Item>
                 <TextField
                   label="نام"
@@ -164,7 +164,7 @@ const AddNewMember = () => {
                   }}
                 />
 
-                <Grid item xs={12} sm={10}>
+                <Grid item xs={12} sm={12}>
                   <Item>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <legend>تصویر مالک</legend>
@@ -194,7 +194,7 @@ const AddNewMember = () => {
                           }}
                         />
                       )}
-                      <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <Button variant="contained" component="label" size="small">
                           انتخاب تصویر
                           <input type="file" accept="image/*" hidden onChange={handleImageChange} />
@@ -210,7 +210,7 @@ const AddNewMember = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} sm={7}>
               <Item>
                 <legend>پلاک های مجاز</legend>
                 <AuthorizedPlates />
