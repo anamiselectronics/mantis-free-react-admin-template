@@ -45,7 +45,7 @@ const styleMask = {
   textAlign: 'center',
   paddingLeft: '4vw',
   width: '15.5rem',
-  caretColor: 'transparent' // disable cursor
+  caretColor: 'transparent' , // disable cursor
 };
 
 const charMap = {
@@ -81,7 +81,17 @@ const charMap = {
   '\\': 'پ',
   ';': 'ک',
   "'": 'گ',
-  ',': 'و'
+  ',': 'و',
+  '0': '۰',
+  '1': '۱',
+  '2': '۲',
+  '3': '۳',
+  '4': '۴',
+  '5': '۵',
+  '6': '۶',
+  '7': '۷',
+  '8': '۸',
+  '9': '۹',
 };
 
 const shiftCharMap = {
@@ -89,13 +99,16 @@ const shiftCharMap = {
 };
 
 const convertToPersian = (input, isShiftHeld) => {
-  return input.replace(/[a-z[\]\\;',]/gi, (match) => {
+  return input.replace(/[a-zA-Z0-9[\]\\;',]/gi, (match) => {
     if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
       return match.toUpperCase();
     } else if (isShiftHeld && shiftCharMap[match]) {
       return shiftCharMap[match];
     } else if (match === 'D' || match === 'S') {
       return match; // Keep 'D' and 'S' as they are if previously typed with Shift
+    } else if (/[0-9]/.test(match)) {
+      // Convert numbers to Persian numerals
+      return match;
     } else {
       return charMap[match.toLowerCase()] || match;
     }
@@ -135,12 +148,13 @@ export default function PlatePattern({ value, onChange }) {
     const newPosition = e.target.selectionStart;
 
     const convertedValue = convertToPersian(newValue, isShiftHeld);
-
+    console.log(convertedValue);
     const newInputs = [...inputs];
     newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
 
     setInputs(newInputs);
-    onChange(e);
+    console.log(convertedValue);
+    onChange({ target: { value: convertedValue } });
   };
 
   // Determine background color based on the presence of 'D' in the input value
@@ -204,7 +218,7 @@ export default function PlatePattern({ value, onChange }) {
               ]}
               style={styleMaskWithCondition} // Use dynamic style
               showMask
-              value={input.value}
+              value={inputs[index].value}
               onChange={(e) => handleInputChange(index, e)}
               inputRef={(inputElement) => {
                 inputRefs.current[index] = inputElement;

@@ -153,7 +153,11 @@ export default function AuthorizedPlates() {
   const handleAddPlate = () => {
     const id = (rows.length + 1).toString();
     const newPlateEntry = { id, plateNumber: newPlate, description: 'فعال' };
-    setRows([...rows, newPlateEntry]);
+    console.log('New plate entry:', newPlateEntry);
+    // setFilteredRows([...rows, newPlateEntry]); // Update filteredRows if necessary
+    setFilteredRows((prevFilteredRows) => [...prevFilteredRows, newPlateEntry]);
+    // setRows([...rows, newPlateEntry]);
+    setRows((prevRows) => [...prevRows, newPlateEntry]);
     setNewPlate('');
     handleCloseAdd();
   };
