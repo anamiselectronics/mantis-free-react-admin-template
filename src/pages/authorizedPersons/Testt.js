@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { FormControl, FormLabel } from '@mui/material';
-import InputMask from 'react-input-mask';
+import { FormControl, FormLabel, Typography, Checkbox, FormControlLabel } from '@mui/material';
+import MaskedInput from 'react-text-mask';
 import A from 'assets/images/pages/A.png';
 import D from 'assets/images/pages/D.png';
 import F from 'assets/images/pages/F.png';
@@ -30,7 +30,7 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontSize: '1.5rem',
-  backgroundColor: '#fff',
+  backgroundImage: `url(${plate})`,
   objectFit: 'fill',
   backgroundSize: '102% 110%',
   backgroundRepeat: 'no-repeat',
@@ -41,7 +41,7 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   paddingLeft: '4vw',
-  width: '15.5rem',
+  width: '16.5rem',
   caretColor: 'transparent'
 };
 
@@ -78,56 +78,31 @@ const charMap = {
   '\\': 'پ',
   ';': 'ک',
   "'": 'گ',
-  ',': 'و',
-  0: '۰',
-  1: '۱',
-  2: '۲',
-  3: '۳',
-  4: '۴',
-  5: '۵',
-  6: '۶',
-  7: '۷',
-  8: '۸',
-  9: '۹'
+  ',': 'و'
 };
 
 const shiftCharMap = {
-  D: 'د',
-  S: 'ص',
   C: 'ژ' // Shift+c
 };
 
-// const shiftCharMap = {
-//   C: 'ژ' // Shift+c
-// };
-
 const convertToPersian = (input, isShiftHeld) => {
-  // return input.replace(/[a-zA-Z0-9[\]\\;',]/gi, (match) => {
-  //   if (isShiftHeld && shiftCharMap[match.toUpperCase()]) {
-  //     return shiftCharMap[match.toUpperCase()];
-  //   } else {
-  //     return charMap[match.toLowerCase()] || match;
-  //   }
-  // });
-
-  return input.replace(/[a-zA-Z0-9[\]\\;',]/gi, (match) => {
-    console.log('Match:', match);
+  return input.replace(/[a-z[\]\\;',]/gi, (match) => {
     if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
       return match.toUpperCase();
     } else if (isShiftHeld && shiftCharMap[match]) {
       return shiftCharMap[match];
     } else if (match === 'D' || match === 'S') {
-      return match; // Keep 'D' and 'S' as they are if previously typed with Shift
+      return match;
     } else {
       return charMap[match.toLowerCase()] || match;
     }
   });
 };
 
-// };
-
-export default function PlatePattern({ value, onChange }) {
-  const [inputs, setInputs] = React.useState([{ value: value, cursorPosition: 0 }]);
+export default function Cartag() {
+  const [inputs, setInputs] = React.useState([
+    { value: '', cursorPosition: 0, backgroundImage: `url(${plate})` }
+  ]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const inputRefs = React.useRef([]);
 
@@ -154,38 +129,58 @@ export default function PlatePattern({ value, onChange }) {
   }, []);
 
   const handleInputChange = (index, e) => {
+    const nullValue = '_ _  _  _ _ _    _ _   ';
     const newValue = e.target.value;
     const newPosition = e.target.selectionStart;
 
     const convertedValue = convertToPersian(newValue, isShiftHeld);
+
     const newInputs = [...inputs];
-    newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
+    newInputs[index] = {
+      ...newInputs[index],
+      value: convertedValue,
+      cursorPosition: newPosition,
+      backgroundImage: getBackgroundImage(convertedValue)
+    };
+
+    if (index === newInputs.length - 1 && convertedValue.length > 0) {
+      newInputs.push({ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` });
+    }
+
+    if (convertedValue === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
+      newInputs.splice(index, 1);
+    }
 
     setInputs(newInputs);
-    onChange({ target: { value: convertedValue } });
   };
 
-  const getBackgroundImage = () => {
-    const currentInput = inputs[0]?.value.trim();
-    if ((currentInput && currentInput.includes('D')) || currentInput.includes('S')) {
+  const handleClickNextInput = (index) => {
+    if (index < inputs.length - 1) {
+      setInputs((prevInputs) =>
+        prevInputs.map((input, idx) =>
+          idx === index + 1 ? { ...input, backgroundImage: getBackgroundImage(input.value) } : input
+        )
+      );
+    }
+  };
+  
+
+  const getBackgroundImage = (value) => {
+    value = value.trim();
+    if (value.includes('D')) {
       return `url(${D})`;
-    } else if ((currentInput && currentInput.includes('ع')) || currentInput.includes('ک') || currentInput.includes('ت')) {
+    } else if (value.includes('ع') || value.includes('ک') || value.includes('ت')) {
       return `url(${general})`;
-    } else if (currentInput && currentInput.includes('ا')) {
+    } else if (value.includes('ا')) {
       return `url(${A})`;
-    } else if (currentInput && currentInput.includes('ش')) {
+    } else if (value.includes('ش')) {
       return `url(${Sh})`;
-    } else if ((currentInput && currentInput.includes('ف')) || currentInput.includes('ز')) {
+    } else if (value.includes('ف') || value.includes('ز')) {
       return `url(${F})`;
-    } else if ((currentInput && currentInput.includes('ث')) || currentInput.includes('پ')) {
+    } else if (value.includes('ث') || value.includes('پ')) {
       return `url(${S})`;
     }
-    return `url(${plate})`; // Default background color
-  };
-
-  const styleMaskWithCondition = {
-    ...styleMask,
-    backgroundImage: getBackgroundImage() // Use dynamic style
+    return `url(${plate})`; // Default background image
   };
 
   return (
@@ -197,7 +192,8 @@ export default function PlatePattern({ value, onChange }) {
               پلاک ملی
             </FormLabel>
 
-            <InputMask
+            <MaskedInput
+              guide={true}
               mask={[
                 /\d/,
                 ' ',
@@ -223,12 +219,11 @@ export default function PlatePattern({ value, onChange }) {
                 ' ',
                 ' '
               ]}
-              placeholder="_ _ _ _ _ _ _ _"
-              maskChar="_"
-              alwaysShowMask
-              style={styleMaskWithCondition}
-              value={inputs[index].value}
+              style={{ ...styleMask, backgroundImage: input.backgroundImage }}
+              showMask
+              value={input.value}
               onChange={(e) => handleInputChange(index, e)}
+              onClick={() => handleClickNextInput(index)}
               inputRef={(inputElement) => {
                 inputRefs.current[index] = inputElement;
                 if (index === inputs.length - 1 && inputElement) {
@@ -239,6 +234,10 @@ export default function PlatePattern({ value, onChange }) {
               }}
             />
           </FormControl>
+          <FormControlLabel
+            control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 20 }, color: 'secondary.dark' }} />}
+            label={<Typography>مخالف</Typography>}
+          />
         </Box>
       ))}
     </Box>

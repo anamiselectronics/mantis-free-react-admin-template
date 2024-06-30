@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Paper, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import AuthorizedPlates from './AuthorizedPlates';
+// import AuthorizedPlates from './AuthorizedPlates';
+import Testt from './Testt';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -72,6 +73,14 @@ const AddNewMember = () => {
     // Handle form submission here, e.g., send data to server
     console.log(formData);
   };
+
+ 
+    // const [plateValue, setPlateValue] = useState('');
+  
+    // const handlePlateChange = (newValue) => {
+    //   setPlateValue(newValue);
+    //   // Handle other logic as needed
+    // };
 
   return (
     <Grid xs={12} sm={7} style={formBoxStyle}>
@@ -213,7 +222,8 @@ const AddNewMember = () => {
             <Grid item xs={12} sm={7}>
               <Item>
                 <legend>پلاک های مجاز</legend>
-                <AuthorizedPlates />
+                {/* <AuthorizedPlates /> */}
+                <Testt/>
               </Item>
             </Grid>
 
