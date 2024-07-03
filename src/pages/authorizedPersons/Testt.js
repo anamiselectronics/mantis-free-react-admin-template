@@ -586,7 +586,7 @@ const convertToPersian = (input, isShiftHeld) => {
     .join('');
 };
 
-export default function Cartag() {
+export default function Testt() {
   const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const inputRefs = React.useRef([]);
@@ -635,7 +635,7 @@ export default function Cartag() {
     if (convertedValue === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
       newInputs.splice(index, 1);
     }
-
+    console.log(newInputs)
     setInputs(newInputs);
   };
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { FormControl, FormLabel } from '@mui/material';
-import InputMask from 'react-input-mask';
+import { FormControl, FormLabel, Typography } from '@mui/material';
+import MaskedInput from 'react-text-mask';
 import A from 'assets/images/pages/A.png';
 import D from 'assets/images/pages/D.png';
 import F from 'assets/images/pages/F.png';
@@ -30,7 +30,7 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontSize: '1.5rem',
-  backgroundColor: '#fff',
+  backgroundImage: `url(${plate})`,
   objectFit: 'fill',
   backgroundSize: '102% 110%',
   backgroundRepeat: 'no-repeat',
@@ -41,8 +41,8 @@ const styleMask = {
   direction: 'ltr',
   textAlign: 'center',
   paddingLeft: '4vw',
-  width: '15.5rem',
-  caretColor: 'transparent'
+  width: '16.5rem'
+  // caretColor: 'transparent'
 };
 
 const charMap = {
@@ -78,7 +78,14 @@ const charMap = {
   '\\': 'پ',
   ';': 'ک',
   "'": 'گ',
-  ',': 'و',
+  ',': 'و'
+};
+
+const shiftCharMap = {
+  C: 'ژ' // Shift+c
+};
+
+const persianNumbers = {
   0: '۰',
   1: '۱',
   2: '۲',
@@ -91,45 +98,39 @@ const charMap = {
   9: '۹'
 };
 
-const shiftCharMap = {
-  D: 'د',
-  S: 'ص',
-  C: 'ژ' // Shift+c
-};
-
-// const shiftCharMap = {
-//   C: 'ژ' // Shift+c
-// };
-
 const convertToPersian = (input, isShiftHeld) => {
-  // return input.replace(/[a-zA-Z0-9[\]\\;',]/gi, (match) => {
-  //   if (isShiftHeld && shiftCharMap[match.toUpperCase()]) {
-  //     return shiftCharMap[match.toUpperCase()];
-  //   } else {
-  //     return charMap[match.toLowerCase()] || match;
-  //   }
-  // });
-
-  return input.replace(/[a-zA-Z0-9[\]\\;',]/gi, (match) => {
-    console.log('Match:', match);
-    if (isShiftHeld && (match.toLowerCase() === 'd' || match.toLowerCase() === 's')) {
-      return match.toUpperCase();
-    } else if (isShiftHeld && shiftCharMap[match]) {
-      return shiftCharMap[match];
-    } else if (match === 'D' || match === 'S') {
-      return match; // Keep 'D' and 'S' as they are if previously typed with Shift
-    } else {
-      return charMap[match.toLowerCase()] || match;
-    }
-  });
+  return input
+    .split('')
+    .map((char) => {
+      if (isShiftHeld && (char.toLowerCase() === 'd' || char.toLowerCase() === 's')) {
+        return char.toUpperCase();
+      } else if (isShiftHeld && shiftCharMap[char]) {
+        return shiftCharMap[char];
+      } else if (char === 'D' || char === 'S') {
+        return char;
+      } else if (charMap[char.toLowerCase()]) {
+        return charMap[char.toLowerCase()];
+      } else if (persianNumbers[char]) {
+        return persianNumbers[char];
+      } else {
+        return char;
+      }
+    })
+    .join('');
 };
 
-// };
-
-export default function PlatePattern({ value, onChange }) {
-  const [inputs, setInputs] = React.useState([{ value: value, cursorPosition: 0 }]);
+export default function Testt() {
+  const maxInputs = 5; // Maximum number of inputs allowed
+  const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
+  const [isLastInputDisabled, setIsLastInputDisabled] = React.useState(false); // State to track if last input should be disabled
   const inputRefs = React.useRef([]);
+
+  React.useEffect(() => {
+    inputRefs.current = Array(inputs.length)
+      .fill()
+      .map((_, i) => inputRefs.current[i] || React.createRef());
+  }, [inputs]);
 
   React.useEffect(() => {
     const handleKeyDown = (e) => {
@@ -154,38 +155,95 @@ export default function PlatePattern({ value, onChange }) {
   }, []);
 
   const handleInputChange = (index, e) => {
-    const newValue = e.target.value;
+    const nullValue = '_ _  _  _ _ _    _ _   ';
+    const rawValue = e.target.value;
     const newPosition = e.target.selectionStart;
 
-    const convertedValue = convertToPersian(newValue, isShiftHeld);
+    console.log(`Raw Input Value: ${rawValue}`);
+    console.log(`Cursor Position Before Conversion: ${newPosition}`);
+
+    const convertedValue = convertToPersian(rawValue, isShiftHeld);
+    console.log(`Converted Value: ${convertedValue}`);
+
     const newInputs = [...inputs];
-    newInputs[index] = { value: convertedValue, cursorPosition: newPosition };
+    newInputs[index] = {
+      ...newInputs[index],
+      value: convertedValue,
+      cursorPosition: newPosition,
+      backgroundImage: getBackgroundImage(convertedValue)
+    };
+    // // Check if the limit is reached
+    // if (newInputs.length === maxInputs - 1 && index === maxInputs - 1 && convertedValue.length > 0) {
+    //   console.log('Reached maximum inputs');
+    //   setIsLastInputDisabled(true); // Disable the last input
+    //   setInputs(newInputs); // Update state to reflect the message
+    //   return;
+    // } else {
+    //   setIsLastInputDisabled(false); // Enable the last input if conditions are not met
+    // }
+
+    //     // Check if a new input box needs to be added
+    //     if (index === newInputs.length - 1 && convertedValue.length > 0) {
+    //       if (newInputs.length < maxInputs) {
+    //         newInputs.push({ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` });
+    //       } else {
+    //         newInputs[index].disabled = true;
+    //       }
+    //     }
+
+    // Check if the limit is reached
+    if (newInputs.length === maxInputs - 1 && index === maxInputs - 1 && convertedValue.length > 0) {
+      console.log('Reached maximum inputs');
+      setIsLastInputDisabled(true); // Disable the last input
+      setInputs(newInputs); // Update state to reflect the message
+      return;
+    } else {
+      setIsLastInputDisabled(false); // Enable the last input if conditions are not met
+    }
+
+    // Check if a new input box needs to be added
+    if (index === newInputs.length - 1 && convertedValue.length > 0) {
+      if (newInputs.length < maxInputs) {
+        newInputs.push({ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` });
+      } else {
+        console.log('Limit reached, disable input');
+        // Disable the last input
+        newInputs[index].disabled = true;
+      }
+    }
+
+    // Remove the input box if necessary
+    if (convertedValue === nullValue || (newInputs[1]?.value === '' && newInputs.length > 1 && index !== 0)) {
+      newInputs.splice(index, 1);
+    }
 
     setInputs(newInputs);
-    onChange({ target: { value: convertedValue } });
   };
 
-  const getBackgroundImage = () => {
-    const currentInput = inputs[0]?.value.trim();
-    if ((currentInput && currentInput.includes('D')) || currentInput.includes('S')) {
+  const handleClickNextInput = (index) => {
+    if (index < inputs.length - 1) {
+      setInputs((prevInputs) =>
+        prevInputs.map((input, idx) => (idx === index + 1 ? { ...input, backgroundImage: getBackgroundImage(input.value) } : input))
+      );
+    }
+  };
+
+  const getBackgroundImage = (value) => {
+    value = value.trim();
+    if (value.includes('D')) {
       return `url(${D})`;
-    } else if ((currentInput && currentInput.includes('ع')) || currentInput.includes('ک') || currentInput.includes('ت')) {
+    } else if (value.includes('ع') || value.includes('ک') || value.includes('ت')) {
       return `url(${general})`;
-    } else if (currentInput && currentInput.includes('ا')) {
+    } else if (value.includes('ا')) {
       return `url(${A})`;
-    } else if (currentInput && currentInput.includes('ش')) {
+    } else if (value.includes('ش')) {
       return `url(${Sh})`;
-    } else if ((currentInput && currentInput.includes('ف')) || currentInput.includes('ز')) {
+    } else if (value.includes('ف') || value.includes('ز')) {
       return `url(${F})`;
-    } else if ((currentInput && currentInput.includes('ث')) || currentInput.includes('پ')) {
+    } else if (value.includes('ث') || value.includes('پ')) {
       return `url(${S})`;
     }
-    return `url(${plate})`; // Default background color
-  };
-
-  const styleMaskWithCondition = {
-    ...styleMask,
-    backgroundImage: getBackgroundImage() // Use dynamic style
+    return `url(${plate})`; // Default background image
   };
 
   return (
@@ -197,38 +255,38 @@ export default function PlatePattern({ value, onChange }) {
               پلاک ملی
             </FormLabel>
 
-            <InputMask
+            <MaskedInput
+              guide={true}
               mask={[
-                /\d/,
+                /[۰-۹0-9]/,
                 ' ',
-                /\d/,
+                /[۰-۹0-9]/,
                 ' ',
                 ' ',
                 /[ا-یa-zA-Z[\]\\;',]/,
                 ' ',
                 ' ',
-                /\d/,
+                /[۰-۹0-9]/,
                 ' ',
-                /\d/,
+                /[۰-۹0-9]/,
                 ' ',
-                /\d/,
-                ' ',
-                ' ',
+                /[۰-۹0-9]/,
                 ' ',
                 ' ',
-                /\d/,
                 ' ',
-                /\d/,
+                ' ',
+                /[۰-۹0-9]/,
+                ' ',
+                /[۰-۹0-9]/,
                 ' ',
                 ' ',
                 ' '
               ]}
-              placeholder="_ _ _ _ _ _ _ _"
-              maskChar="_"
-              alwaysShowMask
-              style={styleMaskWithCondition}
-              value={inputs[index].value}
+              style={{ ...styleMask, backgroundImage: input.backgroundImage, direction: 'ltr' }}
+              showMask
+              value={input.value}
               onChange={(e) => handleInputChange(index, e)}
+              onClick={() => handleClickNextInput(index)}
               inputRef={(inputElement) => {
                 inputRefs.current[index] = inputElement;
                 if (index === inputs.length - 1 && inputElement) {
@@ -237,10 +295,35 @@ export default function PlatePattern({ value, onChange }) {
                   inputElement.focus();
                 }
               }}
+              disabled={isLastInputDisabled && index === inputs.length - 1}
             />
+            {index === maxInputs && inputs.length === maxInputs - 1 && (
+              <span style={{ color: 'red' }}>Maximum inputs reached</span>
+            )} 
           </FormControl>
         </Box>
       ))}
+      {/* 
+disabled={isLastInputDisabled && index === inputs.length - 1}
+            />
+            {index === maxInputs - 1 && inputs.length === maxInputs -1 && (
+              <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Maximum inputs reached</Typography>
+            )} */}
+
+      {/* disabled={isLastInputDisabled && index === inputs.length - 1} // Disable the last input if condition met
+            />
+
+            {index === maxInputs - 1 && inputs.length === maxInputs - 1 && (
+              <span style={{ color: 'red' }}>Maximum inputs reached</span>
+            )} */}
+      <Box>
+        {inputs.map((input, index) => (
+          <div key={index} style={{ direction: 'ltr' }}>
+            <p style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>{`Value: ${input.value}`}</p>
+            <Typography>{`Cursor Position: ${input.cursorPosition}`}</Typography>
+          </div>
+        ))}
+      </Box>
     </Box>
   );
 }

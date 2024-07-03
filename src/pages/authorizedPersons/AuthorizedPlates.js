@@ -72,11 +72,12 @@ export default function AuthorizedPlates() {
   const [editRow, setEditRow] = useState(null);
   const [deleteRow, setDeleteRow] = useState(null);
   const [newPlateNumber, setNewPlateNumber] = useState('');
-  const [newPlate, setNewPlate] = useState('');
+  const [plateNumber, setPlateNumber] = useState(''); // State for new plate number from child component
   const theme = useTheme();
 
-  // const handleOpenAdd = () => setOpenAdd(true);
-  // const handleCloseAdd = () => setOpenAdd(false);
+  const handleInputChange = (newPlateNumber) => {
+    setPlateNumber(newPlateNumber);
+  };
 
   const handleOpenEdit = (row) => {
     setEditRow(row);
@@ -138,27 +139,12 @@ export default function AuthorizedPlates() {
     setOpenAdd(false);
   };
 
-  // const handleAddPlateNumber = () => {
-  //   const id = (rows.length + 1).toString();
-  //   const newPlate = createData(id, newPlateNumber, 'فعال'); // Assuming default description is 'فعال'
-  //   const updatedRows = [...rows, newPlate];
-  //   setRows(updatedRows);
-  //   setFilteredRows(updatedRows);
-  //   setNewPlateNumber('');
-  //   handleCloseAdd();
-  // };
-
-  const handlePlateChange = (event) => setNewPlate(event.target.value);
-
   const handleAddPlate = () => {
     const id = (rows.length + 1).toString();
-    const newPlateEntry = { id, plateNumber: newPlate, description: 'فعال' };
-    console.log('New plate entry:', newPlateEntry);
-    // setFilteredRows([...rows, newPlateEntry]); // Update filteredRows if necessary
-    setFilteredRows((prevFilteredRows) => [...prevFilteredRows, newPlateEntry]);
-    // setRows([...rows, newPlateEntry]);
-    setRows((prevRows) => [...prevRows, newPlateEntry]);
-    setNewPlate('');
+    const newPlateEntry = { id, plateNumber: plateNumber, description: 'فعال' };
+    setFilteredRows([...rows, newPlateEntry]);
+    setRows([...rows, newPlateEntry]);
+    setPlateNumber(''); // Reset the plate number state
     handleCloseAdd();
   };
 
@@ -266,21 +252,12 @@ export default function AuthorizedPlates() {
       />
 
       {/* Add Modal */}
-      <Modal open={openAdd} onClose={handleCloseAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={openAdd} onClose={openAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
             اضافه کردن شماره پلاک جدید
           </Typography>
-          {/* <TextField
-            id="add-plate-number"
-            label="شماره پلاک"
-            variant="outlined"
-            value={newPlateNumber}
-            onChange={(e) => setNewPlateNumber(e.target.value)}
-            fullWidth
-            sx={{ mt: 2, mb: 2 }}
-          /> */}
-          <PlatePattern value={newPlate} onChange={handlePlateChange} />
+          <PlatePattern onInputChange={handleInputChange} />
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <Button variant="contained" color="primary" onClick={handleAddPlate}>
               افزودن
