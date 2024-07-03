@@ -297,25 +297,13 @@ export default function Testt() {
               }}
               disabled={isLastInputDisabled && index === inputs.length - 1}
             />
-            {index === maxInputs && inputs.length === maxInputs - 1 && (
-              <span style={{ color: 'red' }}>Maximum inputs reached</span>
-            )} 
           </FormControl>
         </Box>
       ))}
-      {/* 
-disabled={isLastInputDisabled && index === inputs.length - 1}
-            />
-            {index === maxInputs - 1 && inputs.length === maxInputs -1 && (
-              <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Maximum inputs reached</Typography>
-            )} */}
+        {inputs.length === maxInputs && (
+      <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Maximum inputs reached</Typography>
+    )}
 
-      {/* disabled={isLastInputDisabled && index === inputs.length - 1} // Disable the last input if condition met
-            />
-
-            {index === maxInputs - 1 && inputs.length === maxInputs - 1 && (
-              <span style={{ color: 'red' }}>Maximum inputs reached</span>
-            )} */}
       <Box>
         {inputs.map((input, index) => (
           <div key={index} style={{ direction: 'ltr' }}>
