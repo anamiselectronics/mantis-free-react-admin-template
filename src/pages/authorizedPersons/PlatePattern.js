@@ -119,9 +119,9 @@ const convertToPersian = (input, isShiftHeld) => {
     .join('');
 };
 
-export default function Testt() {
+export default function Testt({value,onChange}) {
   const maxInputs = 5; // Maximum number of inputs allowed
-  const [inputs, setInputs] = React.useState([{ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` }]);
+  const [inputs, setInputs] = React.useState([{ value: value, cursorPosition: 0, backgroundImage: `url(${plate})` }]);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
   const [isLastInputDisabled, setIsLastInputDisabled] = React.useState(false); // State to track if last input should be disabled
   const inputRefs = React.useRef([]);
@@ -172,25 +172,6 @@ export default function Testt() {
       cursorPosition: newPosition,
       backgroundImage: getBackgroundImage(convertedValue)
     };
-    // // Check if the limit is reached
-    // if (newInputs.length === maxInputs - 1 && index === maxInputs - 1 && convertedValue.length > 0) {
-    //   console.log('Reached maximum inputs');
-    //   setIsLastInputDisabled(true); // Disable the last input
-    //   setInputs(newInputs); // Update state to reflect the message
-    //   return;
-    // } else {
-    //   setIsLastInputDisabled(false); // Enable the last input if conditions are not met
-    // }
-
-    //     // Check if a new input box needs to be added
-    //     if (index === newInputs.length - 1 && convertedValue.length > 0) {
-    //       if (newInputs.length < maxInputs) {
-    //         newInputs.push({ value: '', cursorPosition: 0, backgroundImage: `url(${plate})` });
-    //       } else {
-    //         newInputs[index].disabled = true;
-    //       }
-    //     }
-
     // Check if the limit is reached
     if (newInputs.length === maxInputs - 1 && index === maxInputs - 1 && convertedValue.length > 0) {
       console.log('Reached maximum inputs');
@@ -200,7 +181,6 @@ export default function Testt() {
     } else {
       setIsLastInputDisabled(false); // Enable the last input if conditions are not met
     }
-
     // Check if a new input box needs to be added
     if (index === newInputs.length - 1 && convertedValue.length > 0) {
       if (newInputs.length < maxInputs) {
@@ -218,6 +198,8 @@ export default function Testt() {
     }
 
     setInputs(newInputs);
+    // onChange(convertedValue);
+    onChange(newInputs.map((input) => input.value).join(' '));
   };
 
   const handleClickNextInput = (index) => {
@@ -227,7 +209,7 @@ export default function Testt() {
       );
     }
   };
-
+//dynamic backgroundImage according each char alphabet
   const getBackgroundImage = (value) => {
     value = value.trim();
     if (value.includes('D')) {
@@ -295,23 +277,23 @@ export default function Testt() {
                   inputElement.focus();
                 }
               }}
-              disabled={isLastInputDisabled && index === inputs.length - 1}
+              disabled={isLastInputDisabled && index === inputs.length - 1} //disable after create 5 input
             />
           </FormControl>
         </Box>
       ))}
-        {inputs.length === maxInputs && (
-      <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Maximum inputs reached</Typography>
-    )}
+      {inputs.length === maxInputs && (
+        <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Maximum inputs reached</Typography>
+      )}
 
-      <Box>
+      {/* <Box>
         {inputs.map((input, index) => (
           <div key={index} style={{ direction: 'ltr' }}>
             <p style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>{`Value: ${input.value}`}</p>
             <Typography>{`Cursor Position: ${input.cursorPosition}`}</Typography>
           </div>
         ))}
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -73,9 +73,10 @@ export default function AuthorizedPlates() {
   const [deleteRow, setDeleteRow] = useState(null);
   const [newPlateNumber, setNewPlateNumber] = useState('');
   const [plateNumber, setPlateNumber] = useState(''); // State for new plate number from child component
+  
   const theme = useTheme();
 
-  const handleInputChange = (newPlateNumber) => {
+  const handlePlateChange = (newPlateNumber) => {
     setPlateNumber(newPlateNumber);
   };
 
@@ -176,8 +177,8 @@ export default function AuthorizedPlates() {
           پلاک جدید
         </Button>
       </Box>
-      <TableContainer sx={{ maxHeight: 500, maxWidth: 600 }}>
-        <Table stickyHeader aria-label="sticky table">
+      <TableContainer sx={{ maxHeight: 500, maxWidth: 600}}>
+        <Table stickyHeader aria-label="sticky table" >
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -230,7 +231,7 @@ export default function AuthorizedPlates() {
                       );
                     }
                     return (
-                      <TableCell key={column.id} align={column.align}>
+                      <TableCell key={column.id} align={column.align} style={{unicodeBidi: 'bidi-override', direction:'ltr'}}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );
@@ -252,12 +253,12 @@ export default function AuthorizedPlates() {
       />
 
       {/* Add Modal */}
-      <Modal open={openAdd} onClose={openAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={openAdd} onClose={handleCloseAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ direction: 'rtl' }}>
             اضافه کردن شماره پلاک جدید
           </Typography>
-          <PlatePattern onInputChange={handleInputChange} />
+          <PlatePattern value={newPlateNumber} onChange={handlePlateChange} />
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <Button variant="contained" color="primary" onClick={handleAddPlate}>
               افزودن
