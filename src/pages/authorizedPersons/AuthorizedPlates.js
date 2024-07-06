@@ -468,12 +468,16 @@ export default function AuthorizedPlates() {
   };
 
   const handleAddPlate = () => {
-    const id = (rows.length + 1).toString();
+    // Calculate the next available ID by finding the maximum current ID and adding 1
+    const maxId = Math.max(...rows.map(row => parseInt(row.id))) || 0;
+    const newId = (maxId + 1).toString();
+  
     const newPlateEntries = plateNumbers.map((plateNumberPart, index) => ({
-      id: (id + index).toString(),
+      id: (parseInt(newId) + index).toString(), // Ensure the ID is numeric and incremented correctly
       plateNumber: plateNumberPart,
       description: 'فعال'
     }));
+    
     setRows([...rows, ...newPlateEntries]);
     setFilteredRows([...rows, ...newPlateEntries]);
     setPlateNumbers([]); // Reset the plate number state
