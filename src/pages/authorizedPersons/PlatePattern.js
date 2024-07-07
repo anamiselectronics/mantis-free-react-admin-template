@@ -448,6 +448,7 @@ export default function Testt({ value, onChange }) {
   }, []);
 
   const handleInputChange = (index, e) => {
+    const nullValue = '_ _  _  _ _ _    _ _   ';
     const rawValue = e.target.value;
     const convertedValue = convertToPersian(rawValue, isShiftHeld);
 
@@ -463,6 +464,10 @@ export default function Testt({ value, onChange }) {
       filteredPlateNumbers.push('');
     }
 
+    if (convertedValue === nullValue || (filteredPlateNumbers[1]?.value === '' && filteredPlateNumbers.length > 1 && index !== 0)) {
+      filteredPlateNumbers.splice(index, 1);
+    }
+   
     onChange(filteredPlateNumbers.join('*'));
   };
 

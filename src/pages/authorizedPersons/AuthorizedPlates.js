@@ -73,7 +73,7 @@
 //   const [deleteRow, setDeleteRow] = useState(null);
 //   const [newPlateNumber, setNewPlateNumber] = useState('');
 //   const [plateNumber, setPlateNumber] = useState(''); // State for new plate number from child component
-  
+
 //   const theme = useTheme();
 
 //   // const handlePlateChange = (newPlateNumber) => {
@@ -345,6 +345,7 @@ import Switch from '@mui/material/Switch';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import PlatePattern from './PlatePattern'; // Replace with your component path
+import plate from '../../assets/images/pages/plate.png';
 
 const style = {
   position: 'absolute',
@@ -364,11 +365,11 @@ const headStyle = (theme) => ({
 });
 
 const columns = [
-  { id: 'id', label: 'ردیف', minWidth: 90, align: 'center' },
+  { id: 'id', label: 'ردیف', minWidth: 40, align: 'center' },
   { id: 'plateNumber', label: 'شماره پلاک', minWidth: 150, align: 'center' },
-  { id: 'switch', label: 'وضعیت', minWidth: 150, align: 'center' },
-  { id: 'edit', label: 'ویرایش', minWidth: 90, align: 'center' },
-  { id: 'del', label: 'حذف', minWidth: 150, align: 'center' }
+  { id: 'switch', label: 'وضعیت', minWidth: 80, align: 'center' },
+  { id: 'edit', label: 'ویرایش', minWidth: 50, align: 'center' },
+  { id: 'del', label: 'حذف', minWidth: 50, align: 'center' }
 ];
 
 function createData(id, plateNumber, description) {
@@ -376,10 +377,10 @@ function createData(id, plateNumber, description) {
 }
 
 const rowsData = [
-  createData('1', '262656', 'فعال'),
-  createData('2', '895623', 'فعال'),
-  createData('3', '748596', 'غیرفعال'),
-  createData('4', '123652', 'فعال'),
+  // createData('1', '262656', 'فعال'),
+  // createData('2', '895623', 'فعال'),
+  // createData('3', '748596', 'غیرفعال'),
+  // createData('4', '123652', 'فعال'),
   createData('5', '125463', 'غیرفعال')
 ];
 
@@ -397,13 +398,13 @@ export default function AuthorizedPlates() {
   const [deleteRow, setDeleteRow] = useState(null);
   const [newPlateNumber, setNewPlateNumber] = useState('');
   const [plateNumbers, setPlateNumbers] = useState([]); // State for plate numbers as array
-  
+
   const theme = useTheme();
 
   const handlePlateChange = (newPlateNumber) => {
-    console.log("newPlateNumber", newPlateNumber);
+    console.log('newPlateNumber', newPlateNumber);
     const separatedPlateNumbers = newPlateNumber.split('*');
-    console.log("separatedPlateNumbers", separatedPlateNumbers);
+    console.log('separatedPlateNumbers', separatedPlateNumbers);
     setPlateNumbers(separatedPlateNumbers);
   };
 
@@ -469,15 +470,15 @@ export default function AuthorizedPlates() {
 
   const handleAddPlate = () => {
     // Calculate the next available ID by finding the maximum current ID and adding 1
-    const maxId = Math.max(...rows.map(row => parseInt(row.id))) || 0;
+    const maxId = Math.max(...rows.map((row) => parseInt(row.id))) || 0;
     const newId = (maxId + 1).toString();
-  
+
     const newPlateEntries = plateNumbers.map((plateNumberPart, index) => ({
       id: (parseInt(newId) + index).toString(), // Ensure the ID is numeric and incremented correctly
       plateNumber: plateNumberPart,
       description: 'فعال'
     }));
-    
+
     setRows([...rows, ...newPlateEntries]);
     setFilteredRows([...rows, ...newPlateEntries]);
     setPlateNumbers([]); // Reset the plate number state
@@ -566,7 +567,26 @@ export default function AuthorizedPlates() {
                       );
                     }
                     return (
-                      <TableCell key={column.id} align={column.align} style={{ unicodeBidi: 'bidi-override', direction: 'ltr' }}>
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={
+                          column.id === 'plateNumber'
+                            ? {
+                                backgroundImage: `url(${plate})`,
+                                backgroundSize: 'contain',
+                                backgroundPosition: 'right',
+                                backgroundRepeat: 'no-repeat',
+                                unicodeBidi: 'bidi-override',
+                                direction: 'ltr',
+                                textAlign: 'center',
+                                fontSize: '1.rem',
+                                paddingLeft:'2vw',
+                                whiteSpace: 'pre-wrap'
+                              }
+                            : {}
+                        }
+                      >
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );
