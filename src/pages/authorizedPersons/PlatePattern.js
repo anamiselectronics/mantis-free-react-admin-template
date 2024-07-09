@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { FormControl, FormLabel, Typography } from '@mui/material';
+import { FormControl, FormLabel} from '@mui/material';
 import MaskedInput from 'react-text-mask';
 import A from 'assets/images/pages/A.png';
 import D from 'assets/images/pages/D.png';
@@ -121,7 +121,6 @@ const convertToPersian = (input, isShiftHeld) => {
 };
 
 export default function Testt({ value, onChange }) {
-  const maxInputs = 5; // Maximum number of inputs allowed
   const [plateNumbers, setPlateNumbers] = React.useState(value.split(' '));
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
 
@@ -148,26 +147,13 @@ export default function Testt({ value, onChange }) {
   }, []);
 
   const handleInputChange = (index, e) => {
-    const nullValue = '_ _  _  _ _ _    _ _   ';
     const rawValue = e.target.value;
     const convertedValue = convertToPersian(rawValue, isShiftHeld);
-
     const newPlateNumbers = [...plateNumbers];
     newPlateNumbers[index] = convertedValue;
-
     // Remove empty plate numbers
     const filteredPlateNumbers = newPlateNumbers.filter((plate) => plate.trim() !== '');
-
     setPlateNumbers(filteredPlateNumbers);
-
-    if (filteredPlateNumbers.length < maxInputs && !filteredPlateNumbers.includes('')) {
-      filteredPlateNumbers.push('');
-    }
-
-    if (convertedValue === nullValue || (filteredPlateNumbers[1]?.value === '' && filteredPlateNumbers.length > 1 && index !== 0)) {
-      filteredPlateNumbers.splice(index, 1);
-    }
-
     onChange(filteredPlateNumbers.join('*'));
   };
 
@@ -197,7 +183,6 @@ export default function Testt({ value, onChange }) {
             <FormLabel component="legend" sx={{ color: 'primary.dark', fontWeight: 'bold' }}>
               پلاک ملی
             </FormLabel>
-
             <MaskedInput
               guide={true}
               mask={[
@@ -233,9 +218,6 @@ export default function Testt({ value, onChange }) {
           </FormControl>
         </Box>
       ))}
-      {plateNumbers.length === maxInputs && (
-        <Typography style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>Reached maximum inputs</Typography>
-      )}
     </Box>
   );
 }
