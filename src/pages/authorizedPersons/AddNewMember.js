@@ -4,6 +4,7 @@ import { Box, Button, TextField, Paper, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import AuthorizedPlates from './AuthorizedPlates';
+import TimeLimitation from './TimeLimitation';
 // import Testt from './Testt';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -73,14 +74,6 @@ const AddNewMember = () => {
     // Handle form submission here, e.g., send data to server
     console.log(formData);
   };
-
- 
-    // const [plateValue, setPlateValue] = useState('');
-  
-    // const handlePlateChange = (newValue) => {
-    //   setPlateValue(newValue);
-    //   // Handle other logic as needed
-    // };
 
   return (
     <Grid xs={12} sm={7} style={formBoxStyle}>
@@ -227,8 +220,11 @@ const AddNewMember = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={12} mt={-7}>
-              <Item>table of plate</Item>
+            <Grid item xs={12} mt={1}>
+              <Item>
+              {/* <legend>مجوز تردد</legend> */}
+              <TimeLimitation/>
+              </Item>
             </Grid>
           </Grid>
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', gap: '20px' }}>

@@ -58,7 +58,7 @@ const rowsData = [
   // createData('2', '895623', 'فعال'),
   // createData('3', '748596', 'غیرفعال'),
   // createData('4', '123652', 'فعال'),
-  createData('5', '125463', 'غیرفعال')
+  createData('1', '125463', 'غیرفعال')
 ];
 
 export default function AuthorizedPlates() {
@@ -77,12 +77,6 @@ export default function AuthorizedPlates() {
   const [plateNumbers, setPlateNumbers] = useState([]); // State for plate numbers as array
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const theme = useTheme();
-
-  React.useEffect(() => {
-    console.log(newPlateNumber);
-    console.log(isButtonDisabled);
-    console.log(plateNumbers);
-  }, []);
 
   const handlePlateChange = (newPlateNumber) => {
     console.log('newPlateNumber', newPlateNumber);
