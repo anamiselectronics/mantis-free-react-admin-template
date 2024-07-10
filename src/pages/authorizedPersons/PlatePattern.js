@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { FormControl, FormLabel} from '@mui/material';
+import { FormControl, FormLabel } from '@mui/material';
 import MaskedInput from 'react-text-mask';
 import A from 'assets/images/pages/A.png';
 import D from 'assets/images/pages/D.png';
@@ -31,6 +30,7 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontSize: '1.5rem',
+  fontFamily: 'Vazirmatn',
   backgroundImage: `url(${plate})`,
   objectFit: 'fill',
   backgroundSize: '102% 110%',
@@ -41,8 +41,10 @@ const styleMask = {
   minHeight: '9vh',
   direction: 'ltr',
   textAlign: 'center',
-  paddingLeft: '4vw',
-  width: '16.5rem'
+  paddingLeft: '40px',
+  margin: '0 10px', 
+  width: 'calc(100% - 20px)', 
+  letterSpacing: '0.57rem'
   // caretColor: 'transparent'
 };
 
@@ -157,6 +159,12 @@ export default function Testt({ value, onChange }) {
     onChange(filteredPlateNumbers.join('*'));
   };
 
+  const handleKeyPress = (e) => {
+    if (!isShiftHeld && (e.key.toLowerCase() === 'd' || e.key.toLowerCase() === 's' || e.key.toLowerCase() === 'c')) {
+      e.preventDefault();
+    }
+  };
+
   const getBackgroundImage = (value) => {
     value = value.trim();
     if (value.includes('D')) {
@@ -185,35 +193,15 @@ export default function Testt({ value, onChange }) {
             </FormLabel>
             <MaskedInput
               guide={true}
-              mask={[
-                /[۰-۹0-9]/,
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                // ' ',
-                /[ا-یa-zA-Z[\]\\;',]/,
-                // ' ',
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                // ' ',
-                // ' ',
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                /[۰-۹0-9]/,
-                // ' ',
-                // ' ',
-                // ' '
-              ]}
-              style={{ ...styleMask, backgroundImage: getBackgroundImage(plateNumber), direction: 'ltr',whiteSpace:'pre-wrap' }}
+              mask={[/[۰-۹0-9]/, /[۰-۹0-9]/, /[ا-یa-zA-Z[\]\\;',]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/]}
+              style={{
+                ...styleMask,
+                backgroundImage: getBackgroundImage(plateNumber),
+              }}
               showMask
               value={plateNumber}
               onChange={(e) => handleInputChange(index, e)}
+              onKeyPress={handleKeyPress}
             />
           </FormControl>
         </Box>
