@@ -155,7 +155,7 @@ export default function AuthorizedPlates() {
 
   const handleOpenAdd = () => {
     if (filteredRows.length >= 5) {
-      alert("نمی توانید شماره پلاک بیشتری اضافه کنید. به حداکثر حد مجاز رسیده است!");
+      alert('نمی توانید شماره پلاک بیشتری اضافه کنید. به حداکثر حد مجاز رسیده است!');
       return;
     }
     setOpenAdd(true);
@@ -274,11 +274,12 @@ export default function AuthorizedPlates() {
                                 backgroundRepeat: 'no-repeat',
                                 unicodeBidi: 'bidi-override',
                                 direction: 'ltr',
-                                textAlign: 'start',
                                 fontSize: '1.rem',
-                                paddingLeft: '40px',
-                                marginLeft: '30px',
-                                whiteSpace: 'pre-wrap'
+                                textAlign: 'center',
+                                paddingLeft: '30px', 
+                                paddingRight: '0px', 
+                                width: 'calc(70% - 5px)',
+                                letterSpacing: '0.5rem'
                               }
                             : {}
                         }

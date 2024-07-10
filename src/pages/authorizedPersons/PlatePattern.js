@@ -44,7 +44,7 @@ const styleMask = {
   paddingLeft: '40px',
   margin: '0 10px', 
   width: 'calc(100% - 20px)', 
-  letterSpacing: '0.57rem'
+  letterSpacing: '0.55rem'
   // caretColor: 'transparent'
 };
 
