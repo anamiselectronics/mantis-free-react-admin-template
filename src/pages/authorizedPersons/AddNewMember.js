@@ -22,6 +22,7 @@ const formBoxStyle = {
   height: 'fit-content',
   marginTop: '10px',
   backgroundColor: '#fff',
+  
 };
 
 const labelStyle = {
@@ -77,7 +78,7 @@ const AddNewMember = () => {
 
   return (
     <Grid xs={12} sm={7} style={formBoxStyle}>
-      <Paper elevation={3}>
+      <Paper  elevation={0} sx={{ border: 'none', boxShadow: 'none'}}>
         <Typography
           variant="h6"
           component="div"
@@ -91,7 +92,7 @@ const AddNewMember = () => {
         >
           ثبت عضو مجاز جدید
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <Grid container spacing={2} pr={2} pl={2}>
             <Grid item xs={12} sm={5}>
               <Item>
@@ -227,7 +228,7 @@ const AddNewMember = () => {
               </Item>
             </Grid>
           </Grid>
-          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', gap: '20px' }}>
+          <Grid item xs={12} sx={{ display: 'flex',gap:10 , margin:'15px 10px', justifyContent:'end'}}>
             <Button type="submit" variant="contained" color="primary">
               ثبت
             </Button>

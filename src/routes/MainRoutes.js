@@ -37,6 +37,9 @@ const ShowAuthorizedPersons = Loadable(lazy(() => import('pages/AuthorizedPerson
 const AddMember = Loadable(lazy(() => import('pages/AuthorizedPersons/AddNewMember')));
 const EditMember = Loadable(lazy(() => import('pages/AuthorizedPersons/EditMember')));
 
+//render - Live Show
+const LiveShow = Loadable(lazy(() => import('pages/liveShow/LiveShow')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -123,6 +126,10 @@ const MainRoutes = {
           element: <DashboardDefault />
         }
       ]
+    },
+    {
+      path: 'liveShow',
+      element: <LiveShow />
     },
     {
       path: 'sample-page',

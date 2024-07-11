@@ -70,6 +70,13 @@ const utilities = {
       icon: icons.UsergroupAddOutlined
     },
     {
+      id: 'util-liveShow',
+      title: 'نمایش زنده',
+      type: 'item',
+      url: '/liveShow',
+      icon: icons.PlaySquareOutlined
+    },
+    {
       id: 'util-shadow',
       title: 'نمایش زنده',
       type: 'item',
