@@ -9,7 +9,9 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   LineChartOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
+  StopOutlined,
+  CarOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -23,7 +25,9 @@ const icons = {
   UserOutlined,
   VideoCameraOutlined,
   LineChartOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
+  StopOutlined,
+  CarOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -77,19 +81,33 @@ const utilities = {
       icon: icons.PlaySquareOutlined
     },
     {
-      id: 'util-shadow',
-      title: 'نمایش زنده',
+      id: 'util-ShowBlackList',
+      title: 'لیست سیاه',
       type: 'item',
-      url: '/shadow',
-      icon: icons.PlaySquareOutlined
+      url: '/showBlackList',
+      icon: icons.StopOutlined
     },
     {
-      id: 'util-color',
-      title: 'رنگ',
+      id: 'util-ParkingManagment',
+      title: 'مدیریت پارکینگ',
       type: 'item',
-      url: '/color',
-      icon: icons.ProjectOutlined
+      url: '/parkings',
+      icon: icons.CarOutlined
     }
+    // {
+    //   id: 'util-shadow',
+    //   title: 'نمایش زنده',
+    //   type: 'item',
+    //   url: '/shadow',
+    //   icon: icons.PlaySquareOutlined
+    // },
+    // {
+    //   id: 'util-color',
+    //   title: 'رنگ',
+    //   type: 'item',
+    //   url: '/color',
+    //   icon: icons.ProjectOutlined
+    // }
   ]
 };
 

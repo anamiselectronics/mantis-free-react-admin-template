@@ -1,10 +1,11 @@
 // assets
-import { UsergroupAddOutlined, UserOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   UsergroupAddOutlined,
-  UserOutlined
+  UserOutlined,
+  SettingOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -16,14 +17,14 @@ const support = {
   children: [
     {
       id: 'sample-page',
-      title: 'مدیریت کاربران',
+      title: 'تنظیمات',
       type: 'item',
       url: '/sample-page',
-      icon: icons.UsergroupAddOutlined
+      icon: icons.SettingOutlined
     },
     {
       id: 'documentation',
-      title: 'افراد مجاز',
+      title: 'درباره ما',
       type: 'item',
       url: '/sample-page',
       icon: icons.UserOutlined

@@ -3,9 +3,9 @@ import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from '@mu
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import moment from 'moment-jalaali';
-import AvatarImage from 'assets/images/users/AvatarImage.jpg'
+import AvatarImage from 'assets/images/users/AvatarImage.jpg';
 
-const LiveShow = ({ name, additionalInfo1, additionalInfo2}) => {
+const LiveShow = ({ name, additionalInfo1, additionalInfo2 }) => {
   const [jalaliDate, setJalaliDate] = useState(moment().format('jYYYY/jM/jD HH:mm:ss'));
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const LiveShow = ({ name, additionalInfo1, additionalInfo2}) => {
               component="img"
               alt="Personal Image"
               src={AvatarImage} // Replace with actual image URL
-              sx={{ width: 60, height: 60, marginRight: 1 , borderRadius:'100%'}}
+              sx={{ width: 60, height: 60, marginRight: 1, borderRadius: '100%' }}
             />
             <Typography variant="subtitle1">زمان: {jalaliDate}</Typography>
           </Grid>
