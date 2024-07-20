@@ -4,7 +4,6 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
-
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
@@ -42,10 +41,11 @@ const EditMember = Loadable(lazy(() => import('pages/AuthorizedPersons/EditMembe
 const LiveShow = Loadable(lazy(() => import('pages/liveShow/LiveShow')));
 
 //render - Show Black List
-const ShowBlackList = Loadable(lazy(() => import('pages/blackList/ShowBlackList')))
+const ShowBlackList = Loadable(lazy(() => import('pages/blackList/ShowBlackList')));
+const AddNewPlate = Loadable(lazy(() => import('pages/blackList/AddNewPlate')));
 
 //render - show parking managment
-const ParkingManagment = Loadable(lazy(() => import('pages/parking/ParkingMangment')))
+const ParkingManagment = Loadable(lazy(() => import('pages/parking/ParkingMangment')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -140,6 +140,15 @@ const MainRoutes = {
     {
       path: 'showBlackList',
       element: <ShowBlackList />
+    },
+    {
+      path: 'showBlackList',
+      children: [
+        {
+          path: 'newPlate',
+          element: <AddNewPlate />
+        }
+      ]
     },
     {
       path: 'parkings',
