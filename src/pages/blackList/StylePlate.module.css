@@ -48,7 +48,6 @@
     width: 100%; /* Make input take full width */
     /* background-color: #5c5a5a; */
   
-    
   }
   
   .maskedInput {
@@ -59,4 +58,23 @@
     letter-spacing: 0.55rem;
     direction: ltr !important;
     unicode-bidi: bidi-override;
+    text-align: left;
+  }
+
+  .maskedInput::placeholder {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+    color: rgba(134, 133, 133, 0.54); /* Adjust the color if needed */
+    text-align: right;
+    padding-bottom: -10px;
+    letter-spacing: normal;
+  }
+
+  .inputFieldset:focus-within {
+    border-color:#67a6ff;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.25);
+    background-color: #e8f0fe;
+  }
+
+  .maskedInput:focus-within {
+    background-color: #e8f0fe;
   }

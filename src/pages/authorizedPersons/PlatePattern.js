@@ -29,7 +29,7 @@ const styleBox = {
 
 const styleMask = {
   unicodeBidi: 'bidi-override',
-  fontSize: '1.5rem',
+  fontSize: '1.4rem',
   fontFamily: 'Vazirmatn',
   backgroundImage: `url(${plate})`,
   objectFit: 'fill',
@@ -41,7 +41,7 @@ const styleMask = {
   minHeight: '9vh',
   direction: 'ltr',
   textAlign: 'center',
-  paddingLeft: '40px',
+  paddingLeft: '50px',
   margin: '0 10px', 
   width: 'calc(100% - 20px)', 
   letterSpacing: '0.55rem'
@@ -159,12 +159,6 @@ export default function Testt({ value, onChange }) {
     onChange(filteredPlateNumbers.join('*'));
   };
 
-  const handleKeyPress = (e) => {
-    if (!isShiftHeld && (e.key.toLowerCase() === 'd' || e.key.toLowerCase() === 's' || e.key.toLowerCase() === 'c')) {
-      e.preventDefault();
-    }
-  };
-
   const getBackgroundImage = (value) => {
     value = value.trim();
     if (value.includes('D')) {
@@ -201,7 +195,6 @@ export default function Testt({ value, onChange }) {
               showMask
               value={plateNumber}
               onChange={(e) => handleInputChange(index, e)}
-              onKeyPress={handleKeyPress}
             />
           </FormControl>
         </Box>

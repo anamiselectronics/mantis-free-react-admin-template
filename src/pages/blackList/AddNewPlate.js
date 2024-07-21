@@ -95,7 +95,7 @@ const AddNewPlate = ({ handleClose, handleAddPlate }) => {
 
   return (
     <Grid xs={12} sm={7}>
-      <Paper elevation={0} sx={{ border: 'none', boxShadow: 'none' }}>
+      <Paper elevation={0} sx={{ border: 'none', boxShadow: 'none', maxHeight: '80vh', overflowY: 'auto' }}>
         <Typography
           variant="h6"
           component="div"
@@ -125,10 +125,7 @@ const AddNewPlate = ({ handleClose, handleAddPlate }) => {
                 sx: { textAlign: 'right', ...labelStyle, ...requiredLabelStyle }
               }}
             />
-            <Plate
-              value={formData.plate}
-              onChange={handlePlateChange}
-            />
+            <Plate value={formData.plate} onChange={handlePlateChange} style={{ textAlign: 'left', direction: 'ltr' }} />
             <TextField
               label="مدل"
               placeholder="مدل خودرو"
@@ -198,7 +195,7 @@ const AddNewPlate = ({ handleClose, handleAddPlate }) => {
               margin="normal"
               InputLabelProps={{
                 shrink: true,
-                sx: { textAlign: 'right', ...labelStyle }
+                sx: { textAlign: 'center', ...labelStyle }
               }}
             />
           </Item>

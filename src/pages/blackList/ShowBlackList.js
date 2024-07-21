@@ -192,7 +192,20 @@ export default function ShowBlackList() {
                         );
                       }
                       return (
-                        <TableCell key={column.id} align={column.align} style={{ unicodeBidi: 'bidi-override', dir: 'ltr' }}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={
+                            column.id === 'plate'
+                              ? {
+                                  unicodeBidi: 'bidi-override',
+                                  direction: 'ltr',
+                                  fontSize: '1.rem',
+                                  textAlign: 'center'
+                                }
+                              : {}
+                          }
+                        >
                           {column.format && typeof value === 'number' ? column.format(value) : value}
                         </TableCell>
                       );
@@ -214,8 +227,14 @@ export default function ShowBlackList() {
         />
       </Paper>
       {/* modal to add new black plate  */}
-      <div style={{ margin: '25%'}}>
-        <Modal open={openAdd} onClose={handleCloseAdd} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" style={{overFlow:'scroll'}}>
+      <div style={{ margin: '25%' }}>
+        <Modal
+          open={openAdd}
+          onClose={handleCloseAdd}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{ overFlow: 'scroll' }}
+        >
           <Box sx={style}>
             <AddNewPlate handleClose={handleCloseAdd} handleAddPlate={handleAddPlate} />
           </Box>

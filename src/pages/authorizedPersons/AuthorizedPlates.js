@@ -314,7 +314,7 @@ export default function AuthorizedPlates() {
             >
               افزودن
             </Button>
-            <Button variant="outlined" color="secondary" onClick={handleCloseAdd}>
+            <Button variant="contained" onClick={handleCloseAdd}>
               لغو
             </Button>
           </Box>
