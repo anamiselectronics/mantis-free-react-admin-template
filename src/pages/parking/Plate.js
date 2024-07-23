@@ -98,7 +98,7 @@ const convertToPersian = (input, isShiftHeld) => {
     .join('');
 };
 
-export default function Plate({ value, onChange }) {
+export default function Plate({ value='', onChange }) {
   const [plateNumbers, setPlateNumbers] = React.useState(value.split('*').length > 0 ? value.split('*') : ['']);
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
 
@@ -145,7 +145,8 @@ export default function Plate({ value, onChange }) {
         <FormControl variant="outlined" fullWidth key={index}>
           <fieldset  className={style.inputFieldset}>
             <legend className={style.inputLegend}>
-              <span className={style.required}>*</span> شماره پلاک
+              {/* <span className={style.required}>*</span>  */}
+              شماره پلاک
             </legend>
             <MaskedInput
               required

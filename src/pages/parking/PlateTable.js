@@ -4,10 +4,11 @@ import {
   TableRow, Paper, IconButton, Modal, Box, TextField, Button
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { styled } from '@mui/system';
 
 const columns = [
-  'ردیف', 'پلاک', 'عکس', 'تاریخ', 'دوربین', 'ویرایش'
+  'ردیف', 'پلاک', 'عکس', 'تاریخ', 'دوربین', 'ویرایش', 'حذف'
 ];
 
 const initialRows = [
@@ -20,27 +21,28 @@ const initialRows = [
 ];
 
 const StyledTableContainer = styled(TableContainer)({
-  width: '100%',
+  maxWidth: '100%', // Make the table fit within its container
+  overflowX: 'auto',
   fontSize: '0.8rem',
   textAlign: 'center',
-  border: '1px solid #ddd',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-//   borderRadius: '8px',
-  overflow: 'hidden',
 });
 
 const StyledTableCell = styled(TableCell)({
   fontSize: '0.8rem',
-  padding: '5.8px',
+  padding: '6px',
   textAlign: 'center',
-//   border: '1px solid #ddd',
+  '&:last-child td, &:last-child th': {
+    borderColor: 'transparent',
+  },
 });
 
 const StyledTableRow = styled(TableRow)({
   '&:nth-of-type(even)': {
     backgroundColor: '#f9f9f9',
   },
-  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+  '&:last-child td, &:last-child th': {
+    borderColor: 'transparent',
+  },
 });
 
 const App = () => {
@@ -69,11 +71,15 @@ const App = () => {
     setOpenModal(false);
   };
 
+  const handleDeleteClick = (rowId) => {
+    setRows(rows.filter(row => row.id !== rowId));
+  };
+
   return (
     <StyledTableContainer component={Paper}>
       <Table>
         <TableHead>
-          <TableRow sx={{ height: '72px', background: '#91caff' }}>
+          <TableRow sx={{ height: '72px', background: '#91caff', border: 'none' }}>
             {columns.map((column, index) => (
               <StyledTableCell key={index}>{column}</StyledTableCell>
             ))}
@@ -127,13 +133,18 @@ const App = () => {
               <StyledTableCell>
                 {editingRow?.id === row.id ? (
                   <IconButton onClick={handleSave}>
-                    <EditIcon sx={{ color: 'green' }} />
+                    <EditIcon sx={{ color: '#13c2c2' }} />
                   </IconButton>
                 ) : (
                   <IconButton onClick={() => handleEditClick(row)}>
-                    <EditIcon sx={{ color: 'blue' }} />
+                    <EditIcon sx={{ color: '#69b1ff' }} />
                   </IconButton>
                 )}
+              </StyledTableCell>
+              <StyledTableCell>
+                <IconButton onClick={() => handleDeleteClick(row.id)}>
+                  <DeleteIcon sx={{ color: '#f44336' }} />
+                </IconButton>
               </StyledTableCell>
             </StyledTableRow>
           ))}

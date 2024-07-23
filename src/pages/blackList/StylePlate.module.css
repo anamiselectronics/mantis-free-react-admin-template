@@ -1,19 +1,20 @@
 .inputFieldset {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-    position: relative; /* For positioning the legend properly */
-    height: 44px;
-    margin-right: -8px;
-    margin-left: 9px; 
-    text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 44px;
+  margin-right: -9px;
+  margin-left: -10px;
+  text-align: center;
+  padding-top: 12px;
 }
   
   .inputLegend {
     /* font-weight: bold; */
+    height: 5px;
     direction: ltr;
     margin: 0;
     font-size: 12px;
@@ -21,7 +22,7 @@
     padding: 0;
     position: absolute;
     left: 10px;
-    top: -15px; /* Position the legend above the border */
+    top: -19px; /* Position the legend above the border */
     background: white; /* Ensure background covers border for clarity */
   }
   
@@ -32,12 +33,12 @@
   
   .inputFieldset:hover,
   .inputFieldset:focus-within {
-    border-color: #67a6ff;
+    border-color: transparent;
   }
   
   .inputFieldset:focus-within .input-legend,
   .inputFieldset:hover .input-legend {
-    color:  #67a6ff;
+    color:  transparent;
   }
   
   input {
@@ -64,17 +65,18 @@
   .maskedInput::placeholder {
     font-size: 0.9rem; /* Adjust the font size as needed */
     color: rgba(134, 133, 133, 0.54); /* Adjust the color if needed */
-    text-align: right;
+    text-align: center;
     padding-bottom: -10px;
+    /* padding-right: 40px; */
     letter-spacing: normal;
   }
 
   .inputFieldset:focus-within {
-    border-color:#67a6ff;
-    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.25);
-    background-color: #e8f0fe;
+    border-color:transparent;
+    /* box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.25); */
+    /* background-color: #e8f0fe; */
   }
 
   .maskedInput:focus-within {
-    background-color: #e8f0fe;
+    /* background-color: #e8f0fe; */
   }

@@ -1,10 +1,26 @@
 import React from 'react';
-import { Box, Grid, Typography, Button, TextField } from '@mui/material';
+import { Box, Grid, Typography, Button } from '@mui/material';
 import MainCameraCard from './MainCameraCard';
 import PlateTable from './PlateTable';
+import RoadBlock from './RoadBlock';
+import PlateAccounting from './PlateInaccounting';
 
 const ParkingManagment = () => {
-  const [manualPlate, setManualPlate] = React.useState('');
+  // const [manualPlate, setManualPlate] = React.useState('');
+  const [formData, setFormData] = React.useState({
+    source: '',
+    plate: '',
+    model: '',
+    color: '',
+    description: '',
+    phone: ['']
+  });
+  const handlePlateChange = (newPlate) => {
+    setFormData({
+      ...formData,
+      plate: newPlate
+    });
+  };
   return (
     <Grid container spacing={0} style={{ height: '100vh', width: '100%' }}>
       {/* Right Section */}
@@ -37,39 +53,20 @@ const ParkingManagment = () => {
             <MainCameraCard />
           </Box>
         </Box>
-        <Box
-          sx={{
-            height: '30%',
-            pb: 2,
-            pt: 2    
-          }}
-        >
-          <Typography variant="h5" sx={{ pb: 2, mr: 2 }}>
-            کنترل راهبند
-          </Typography>
-          <Button variant="contained" color="error" sx={{ pr: 2, mr: 2 }}>
-            بسته
-          </Button>
-          <Button variant="contained" color="error" sx={{ pr: 2, mr: 2 }}>
-            باز
-          </Button>
-          <Button variant="contained" color="error" sx={{ pr: 2, mr: 2 }}>
-            اتوماتیک
-          </Button>
-        </Box>
+        <RoadBlock />
       </Grid>
 
       {/* Left Section */}
-      <Grid item xs={12} sm={4} md={4} style={{ width: '45%', height: 'fit-content' }}>
+      <Grid item xs={12} sm={4} md={4} style={{ width: '45%' }}>
         <Box
           sx={{
-            height: '100%'
+            height: '80%'
           }}
         >
           <Box
             sx={{
               backgroundColor: '#fff',
-              height: '60%',
+              height: '100%',
               border: '1px solid #ddd', // Adding a border
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Adding a box shadow
               borderRadius: '8px' // Optional: Adding border radius for rounded corners
@@ -84,39 +81,68 @@ const ParkingManagment = () => {
       </Grid>
 
       {/* Footer Section */}
-      <Grid item xs={12}>
+      <Grid item xs={12} spacing={2}>
         <Box
           sx={{
-            backgroundColor: '#91caff',
             height: 'fit-content', // Adjust the height as needed
             p: 2,
-            borderRadius: '4px'
+            mt: 2,
+            borderRadius: '4px',
+            display: 'flex',
+            flexDirection: 'row'
           }}
         >
-          <Typography variant="h5" sx={{ pb: 2 }}>
-            پرداخت هزینه
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1"> میزان توقف: {}</Typography>
+          {/* Automatic Payment Column */}
+          <Grid
+            item
+            xs={6}
+            sm={12}
+            md={12}
+            sx={{
+              backgroundColor: '#91caff',
+              border: '1px solid #ddd',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              p: 2,
+              borderRadius: '4px'
+            }}
+          >
+            <Typography variant="h5" sx={{ pb: 2, color: '#a8071a' }}>
+              پرداخت اتوماتیک
+            </Typography>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle1">میزان توقف: {}</Typography>
             </Grid>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1"> هزینه پارکینگ: {}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                variant="outlined"
-                // fullWidth
-                placeholder="ورود دستی پلاک"
-                value={manualPlate}
-                onChange={(e) => setManualPlate(e.target.value)}
-              />
+            <Grid item xs={12}>
+              <Typography variant="subtitle1">هزینه پارکینگ: {}</Typography>
             </Grid>
           </Grid>
-          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'left' }}>
-            <Button variant="contained" color="primary">
-              ثبت
-            </Button>
+
+          {/* Manual Payment Column */}
+          <Grid
+            item
+            xs={6}
+            sm={12}
+            md={12}
+            sx={{
+              backgroundColor: '#91caff',
+              border: '1px solid #ddd',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              p: 2,
+              borderRadius: '4px'
+            }}
+          >
+            <Typography variant="h5" sx={{ pb: 2, color: '#a8071a' }}>
+              پرداخت دستی
+            </Typography>
+            <Box item xs={12}>
+              <PlateAccounting onChange={handlePlateChange} />
+            </Box>
+            <Box item xs={12}>
+              <Button variant="contained" color="primary">
+                ثبت
+              </Button>
+            </Box>
           </Grid>
         </Box>
       </Grid>

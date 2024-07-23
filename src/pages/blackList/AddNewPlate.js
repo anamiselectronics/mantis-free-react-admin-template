@@ -4,6 +4,7 @@ import { Delete } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import Plate from './Plate'; // Adjust the path as necessary
 
+
 // Utility function to convert English numbers to Persian numbers
 const toPersianNumber = (num) => {
   const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
@@ -111,6 +112,7 @@ const AddNewPlate = ({ handleClose, handleAddPlate }) => {
         </Typography>
         <form onSubmit={handleSubmit}>
           <Item sx={{ border: 'none', boxShadow: 'none', direction: 'rtl', overFlow: 'scroll' }}>
+            <Plate value={formData.plate} onChange={handlePlateChange} style={{ textAlign: 'left', direction: 'ltr' }} />
             <TextField
               label="مرجع دستوردهنده"
               name="source"
@@ -125,7 +127,6 @@ const AddNewPlate = ({ handleClose, handleAddPlate }) => {
                 sx: { textAlign: 'right', ...labelStyle, ...requiredLabelStyle }
               }}
             />
-            <Plate value={formData.plate} onChange={handlePlateChange} style={{ textAlign: 'left', direction: 'ltr' }} />
             <TextField
               label="مدل"
               placeholder="مدل خودرو"

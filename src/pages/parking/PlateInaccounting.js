@@ -2,26 +2,50 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { FormControl } from '@mui/material';
 import MaskedInput from 'react-text-mask';
-import style from './StylePlate.module.css';
-import plate from 'assets/images/pages/plate.png';
+import A from 'assets/images/pages/A.png';
+import D from 'assets/images/pages/D.png';
+import F from 'assets/images/pages/F.png';
+import S from 'assets/images/pages/S.png';
+import Sh from 'assets/images/pages/Sh.png';
+import general from 'assets/images/pages/general.png';
+import plate from '../../assets/images/pages/plate.png';
+import style from '../parking/StylePlate.module.css';
+const styleOuterBox = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '10px'
+};
+
+const styleBox = {
+  height: '150px',
+  width: '350px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '10px'
+};
 
 const styleMask = {
   unicodeBidi: 'bidi-override',
-  fontSize: '0.90rem', // Adjust font size to match TextField
+  fontWeight: 'bold',
+  fontSize: '0.80rem', // Adjust font size to match TextField
   fontFamily: 'Vazirmatn',
   objectFit: 'fill',
-  backgroundImage:`url(${plate})`,
+  backgroundImage: `url(${plate})`,
   backgroundSize: '102% 110%',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  borderRadius: '5px',
+  // borderRadius: '5px',
   border: 'none', // Adjust border to match TextField
-  direction: 'ltr !important',
+  direction: 'ltr',
   textAlign: 'center',
-  width: 'calc(100% - 0px)', // Adjust width to match TextField
-  letterSpacing: '0.55rem',
-  marginRight: '-8px',
-  marginTop: '-10px'
+  width: 'calc(80% - 10px)', // Adjust width to match TextField
+  letterSpacing: '0.50rem',
+  // marginRight: '-100px',
+  marginTop: '-10px',
+  paddingRight: '27px'
 };
 
 const charMap = {
@@ -98,8 +122,8 @@ const convertToPersian = (input, isShiftHeld) => {
     .join('');
 };
 
-export default function Plate({ value, onChange }) {
-  const [plateNumbers, setPlateNumbers] = React.useState(value.split('*').length > 0 ? value.split('*') : ['']);
+export default function PlateAccounting({ value = '', onChange }) {
+  const [plateNumbers, setPlateNumbers] = React.useState(value.split(' '));
   const [isShiftHeld, setIsShiftHeld] = React.useState(false);
 
   React.useEffect(() => {
@@ -133,34 +157,44 @@ export default function Plate({ value, onChange }) {
     onChange(newPlateNumbers.join('*'));
   };
 
-  // const handleKeyPress = (e) => {
-  //   if (!isShiftHeld && (e.key.toLowerCase() === 'd' || e.key.toLowerCase() === 's' || e.key.toLowerCase() === 'c')) {
-  //     e.preventDefault();
-  //   }
-  // };
+  const getBackgroundImage = (value) => {
+    value = value.trim();
+    if (value.includes('D')) {
+      return `url(${D})`;
+    } else if (value.includes('ع') || value.includes('ک') || value.includes('ت')) {
+      return `url(${general})`;
+    } else if (value.includes('ا')) {
+      return `url(${A})`;
+    } else if (value.includes('ش')) {
+      return `url(${Sh})`;
+    } else if (value.includes('ف') || value.includes('ز')) {
+      return `url(${F})`;
+    } else if (value.includes('ث') || value.includes('پ')) {
+      return `url(${S})`;
+    }
+    return `url(${plate})`; // Default background image
+  };
 
   return (
-    <Box sx={{ '& > :not(style)': { m: 1 }, width: '100%' }}>
+    <Box sx={{ '& > :not(style)': { m: 1 } }} style={styleOuterBox}>
       {plateNumbers.map((plateNumber, index) => (
-        <FormControl variant="outlined" fullWidth key={index}>
-          <fieldset  className={style.inputFieldset}>
-            <legend className={style.inputLegend}>
-              <span className={style.required}>*</span> شماره پلاک
-            </legend>
+        <Box key={index} sx={{ ...styleBox, height: 'auto' }}>
+          <FormControl variant="outlined" style={{ width: '16rem' }}>
             <MaskedInput
-              required
               className={style.maskedInput}
               placeholder="شماره پلاک را وارد کنید"
               guide={true}
               mask={[/[۰-۹0-9]/, /[۰-۹0-9]/, /[ا-یa-zA-Z[\]\\;',]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/, /[۰-۹0-9]/]}
-              style={styleMask}
-              // showMask
+              style={{
+                ...styleMask,
+                backgroundImage: getBackgroundImage(plateNumber)
+              }}
+              //   showMask
               value={plateNumber}
               onChange={(e) => handleInputChange(index, e)}
-              // onKeyPress={handleKeyPress}
             />
-          </fieldset>
-        </FormControl>
+          </FormControl>
+        </Box>
       ))}
     </Box>
   );
