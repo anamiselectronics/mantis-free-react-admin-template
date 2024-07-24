@@ -11,7 +11,8 @@ import {
   LineChartOutlined,
   UsergroupAddOutlined,
   StopOutlined,
-  CarOutlined
+  CarOutlined,
+  SnippetsOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -27,7 +28,8 @@ const icons = {
   LineChartOutlined,
   UsergroupAddOutlined,
   StopOutlined,
-  CarOutlined
+  CarOutlined,
+  SnippetsOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -93,6 +95,13 @@ const utilities = {
       type: 'item',
       url: '/parkings',
       icon: icons.CarOutlined
+    },
+    {
+      id: 'util-ParkingReport',
+      title: 'گزارش گیری پارکینگ',
+      type: 'item',
+      url: '/parkingReport',
+      icon: icons.SnippetsOutlined
     }
     // {
     //   id: 'util-shadow',

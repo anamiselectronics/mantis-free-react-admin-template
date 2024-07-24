@@ -46,6 +46,9 @@ const AddNewPlate = Loadable(lazy(() => import('pages/blackList/AddNewPlate')));
 
 //render - show parking managment
 const ParkingManagment = Loadable(lazy(() => import('pages/parking/ParkingMangment')));
+
+//render - parking report
+const ParkingReport = Loadable(lazy(() => import('pages/parkingReport/PrkingReport')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -153,6 +156,10 @@ const MainRoutes = {
     {
       path: 'parkings',
       element: <ParkingManagment />
+    },
+    {
+      path: 'parkingReport',
+      element: <ParkingReport />
     },
     {
       path: 'sample-page',
