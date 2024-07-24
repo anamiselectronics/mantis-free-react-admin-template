@@ -5,8 +5,19 @@ import PlateTable from './PlateTable';
 import RoadBlock from './RoadBlock';
 import PlateAccounting from './PlateInaccounting';
 
+const styleBox = {
+  height: '220px',
+  width: '350px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  borderRadius: '10px',
+  border: '2px solid #f7f7f8',
+  boxShadow: '0px -5px 10px 0px rgba(0, 0, 0, 0.5)',
+  backgroundColor: '#e6f4ff'
+};
+
 const ParkingManagment = () => {
-  // const [manualPlate, setManualPlate] = React.useState('');
   const [formData, setFormData] = React.useState({
     source: '',
     plate: '',
@@ -15,17 +26,18 @@ const ParkingManagment = () => {
     description: '',
     phone: ['']
   });
+
   const handlePlateChange = (newPlate) => {
     setFormData({
       ...formData,
       plate: newPlate
     });
   };
+
   return (
     <Grid container spacing={0} style={{ height: '100vh', width: '100%' }}>
       {/* Right Section */}
-      <Grid item spacing={0} xs={12} sm={8} md={8} style={{ width: '60%' }}>
-        {/* Top larger section divided into two equal columns */}
+      <Grid item xs={12} sm={8} md={8} style={{ width: '60%' }}>
         <Box
           sx={{
             height: 'fit-content',
@@ -58,18 +70,14 @@ const ParkingManagment = () => {
 
       {/* Left Section */}
       <Grid item xs={12} sm={4} md={4} style={{ width: '45%' }}>
-        <Box
-          sx={{
-            height: '80%'
-          }}
-        >
+        <Box sx={{ height: '80%' }}>
           <Box
             sx={{
               backgroundColor: '#fff',
               height: '100%',
-              border: '1px solid #ddd', // Adding a border
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Adding a box shadow
-              borderRadius: '8px' // Optional: Adding border radius for rounded corners
+              border: '1px solid #ddd',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              borderRadius: '8px'
             }}
           >
             <Typography variant="h6" sx={{ p: 2, color: 'red', mb: 1 }}>
@@ -81,57 +89,23 @@ const ParkingManagment = () => {
       </Grid>
 
       {/* Footer Section */}
-      <Grid item xs={12} spacing={2}>
-        <Box
-          sx={{
-            height: 'fit-content', // Adjust the height as needed
-            p: 2,
-            mt: 2,
-            borderRadius: '4px',
-            display: 'flex',
-            flexDirection: 'row'
-          }}
-        >
-          {/* Automatic Payment Column */}
-          <Grid
-            item
-            xs={6}
-            sm={12}
-            md={12}
-            sx={{
-              backgroundColor: '#91caff',
-              border: '1px solid #ddd',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              p: 2,
-              borderRadius: '4px'
-            }}
-          >
+      <Grid container spacing={2} sx={{ mt: 2 }} justifyContent="center" alignItems="center">
+        <Grid item xs={12} sm={6} display="flex" justifyContent="center">
+          <Box my={2} gap={4} p={2} sx={styleBox}>
             <Typography variant="h5" sx={{ pb: 2, color: '#a8071a' }}>
               پرداخت اتوماتیک
             </Typography>
-
             <Grid item xs={12}>
               <Typography variant="subtitle1">میزان توقف: {}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1">هزینه پارکینگ: {}</Typography>
             </Grid>
-          </Grid>
+          </Box>
+        </Grid>
 
-          {/* Manual Payment Column */}
-          <Grid
-            item
-            xs={6}
-            sm={12}
-            md={12}
-            sx={{
-              backgroundColor: '#91caff',
-              border: '1px solid #ddd',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              p: 2,
-              borderRadius: '4px'
-            }}
-          >
+        <Grid item xs={12} sm={6} display="flex" justifyContent="center">
+          <Box my={2} gap={4} p={2} sx={styleBox}>
             <Typography variant="h5" sx={{ pb: 2, color: '#a8071a' }}>
               پرداخت دستی
             </Typography>
@@ -143,8 +117,8 @@ const ParkingManagment = () => {
                 ثبت
               </Button>
             </Box>
-          </Grid>
-        </Box>
+          </Box>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -14,7 +14,8 @@ const styleOuterBox = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  marginBottom: '10px'
+  marginBottom: '10px',
+  marginRight: '42px'
 };
 
 const styleBox = {
@@ -30,20 +31,18 @@ const styleBox = {
 const styleMask = {
   unicodeBidi: 'bidi-override',
   fontWeight: 'bold',
-  fontSize: '0.80rem', // Adjust font size to match TextField
+  fontSize: '0.80rem',
   fontFamily: 'Vazirmatn',
   objectFit: 'fill',
   backgroundImage: `url(${plate})`,
   backgroundSize: '102% 110%',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  // borderRadius: '5px',
-  border: 'none', // Adjust border to match TextField
+  border: 'none',
   direction: 'ltr',
   textAlign: 'center',
-  width: 'calc(80% - 10px)', // Adjust width to match TextField
+  width: 'calc(80% - 10px)',
   letterSpacing: '0.50rem',
-  // marginRight: '-100px',
   marginTop: '-10px',
   paddingRight: '27px'
 };

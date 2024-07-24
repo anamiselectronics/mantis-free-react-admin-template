@@ -37,8 +37,6 @@ import ShowResult from 'pages/reportPages/showResult';
 const Report = () => {
   return (
     <>
-    
-    
       <Tabs defaultValue={1} container>
         <TabsList container xs={12}>
           <Tab value={1}>
